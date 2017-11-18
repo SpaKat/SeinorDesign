@@ -58,7 +58,7 @@ public class GroundStationGUI extends Application {
 		// Create MenuBar
 		menuBar = new MenuBar();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(miMavProx, miClose);
+		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
 		menuCharts.getItems().addAll(miTemp,miHumidity,miPressure,miWindVelocity,new SeparatorMenuItem(), miShowAll, miClearAll);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar

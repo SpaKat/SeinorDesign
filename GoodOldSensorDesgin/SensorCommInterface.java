@@ -28,10 +28,16 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		TextField enterCOMports = new TextField("COM4,COM5");
 		Button enter = new Button("Enter");
 		
+		
+		
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
 		gridpane.addRow(2, enter);
-	//	enter.setOnAction();
+		enter.setOnAction(e -> {
+			sensorCom.enterPORT_NAMES(enterCOMports.getText().split(","));
+			sensorCom.initialize();
+			}
+				);
 		
 	}
 	

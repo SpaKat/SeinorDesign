@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class SensorCommInterface implements EventHandler<ActionEvent> {
 	
 	SensorCom sensorCom = new SensorCom();
+	SensorComData sensorComData= new SensorComData(sensorCom);
 	GridPane gridpane;
 	@Override
 	public void handle(ActionEvent arg0) {
@@ -25,20 +26,25 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 	}
 	private void initGridPane() {
 		Text askCOMports = new Text("Enter the COM ports of the Telemerty");
-		TextField enterCOMports = new TextField("COM4,COM5");
+		TextField enterCOMports = new TextField("COM13,");
 		Button enter = new Button("Enter");
-		
+		Button exit = new Button("Exit");
 		
 		
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
 		gridpane.addRow(2, enter);
-		enter.setOnAction(e -> {
+		gridpane.addRow(2, exit);
+		
+		enter.setOnAction(en -> {
 			sensorCom.enterPORT_NAMES(enterCOMports.getText().split(","));
-			sensorCom.initialize();
+			sensorComData.start();
+
 			}
 				);
-		
+		exit.setOnAction(ex ->{
+			sensorComData.interrupt();
+		});
 	}
 	
 }

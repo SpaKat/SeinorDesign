@@ -47,14 +47,17 @@ public class ShowMarkerMap {
         
         xAxis.setLabel("Time");
         yAxis.setLabel("Value"); // enter via constructor
-        xAxis.setLowerBound(System.currentTimeMillis());
+     
+        
+        
         Series<Number, Number> series = new XYChart.Series<Number, Number>();
         
         series.setName("Trend");
         for (DataPoints dataPoints : dataAverageTime) {
         Date date = new Date(dataPoints.getTime());
-			series.getData().add(new XYChart.Data<>(date.getSeconds(),dataPoints.getSensordata()));
+			series.getData().add(new XYChart.Data<>(date.getSeconds() ,dataPoints.getSensordata()));
 		}
+        xAxis.autosize();
         lineChart.getData().add(series);
         	dataSameTime.clear();
 		return lineChart;

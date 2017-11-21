@@ -41,7 +41,7 @@ public class PressureSensorMap extends SensorMap {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		while(true){
+		while(isRunning()){
 			try{
 			System.out.println(getSensorData().getData().size() + "\t" + getSensorData().getData().get(0)[0] +"\t" + getSensorData().getData().get(0)[1]);
 		//	getSensorData().getData().clear();
@@ -54,7 +54,7 @@ public class PressureSensorMap extends SensorMap {
 					String[] strArray = getSensorData().removeDataLine();
 					String str = strArray[0];
 					for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
-					bw.write(System.currentTimeMillis()+DataFormat.SPLIT);
+					bw.write((startTime() - System.currentTimeMillis())+DataFormat.SPLIT);
 					bw.write(str);
 					bw.newLine();
 					getSensorData().getData().clear();
@@ -67,7 +67,12 @@ public class PressureSensorMap extends SensorMap {
 		}
 	}
 
-
+	
+@Override
+public void interrupt() {
+	System.out.println("Pressure writing thread stopped");
+	super.interrupt();
+}
 }
 
 

@@ -27,5 +27,7 @@ public class DataFormat {
 		sensorMap.put("PRES", new PressureSensorMap(sensorData));
 		sensorMap.put("WIND", new WindVectorSensorMap(sensorData));
 	}
-	
+	public void endMaps(){
+		sensorMap.forEach((string,sensormap) -> sensormap.interrupt());
+	}
 }

@@ -33,7 +33,7 @@ public class PressReadInData{
 							Double.parseDouble(strarray[3]), 
 							Double.parseDouble(strarray[4])
 							);
-					dp.setTime(Long.parseLong(strarray[0]));
+					dp.setTime(Integer.parseInt(strarray[0]));
 					data.add(dp);
 					dataMarkers.add(dp);
 					

@@ -10,7 +10,7 @@ public class SensorCom implements SerialPortEventListener {
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private String PORT_NAMES[] = { 
-			"COM5", // Windows
+			"COM13", // Windows
 	};
 	/** Buffered input stream from the port */
 	private InputStream input;

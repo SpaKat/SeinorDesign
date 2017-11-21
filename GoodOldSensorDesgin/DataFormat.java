@@ -22,10 +22,10 @@ public class DataFormat {
 	
 	private void setMaps() {
 		// adds the key of the Map and object of the map to the hashmap 
-	//	sensorMap.put("TEMP", new TempertureSensorMap(sensorData));
-	//	sensorMap.put("HUM", new HumiditySensorMap(sensorData));
+		sensorMap.put("TEMP", new TempertureSensorMap(sensorData));
+		sensorMap.put("HUM", new HumiditySensorMap(sensorData));
 		sensorMap.put("PRES", new PressureSensorMap(sensorData));
-	//	sensorMap.put("WIND", new WindVectorSensorMap(sensorData));
+		sensorMap.put("WIND", new WindVectorSensorMap(sensorData));
 	}
 	
 }

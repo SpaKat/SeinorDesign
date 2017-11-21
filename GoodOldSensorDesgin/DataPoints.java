@@ -1,11 +1,11 @@
 
-public class DataPoints {
+public class DataPoints{
 	private String ID;
 	private double sensordata;
 	private double GPSLONG;
 	private double GPSLAT;
 	private double elevation; 
-	
+	private long time;
 	public DataPoints(String ID,double sensordata,double GPSLONG,double GPSLAT) {
 		this.ID = ID;
 		this.sensordata = sensordata;
@@ -32,11 +32,14 @@ public class DataPoints {
 	public double getGPSLAT() {
 		return GPSLAT;
 	}
-	
+
 	public double getElevation() {
 		return elevation;
 	}
 
+	public long getTime() {
+		return time;
+	}
 
 	public void setID(String iD) {
 		ID = iD;
@@ -61,6 +64,10 @@ public class DataPoints {
 	public void setElevation(double elevation) {
 		this.elevation = elevation;
 	}
-	
-	
+
+	public void setTime(long time) {
+		this.time = time;
+	}
+
+
 }

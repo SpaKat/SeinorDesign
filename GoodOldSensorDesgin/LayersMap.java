@@ -16,10 +16,10 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 	//change
 	private GoogleMapView mapView;
 	private GoogleMap map;
-	private TempertureMap tempertureMap;// = new TempertureMap();
-	private HumidityMap humidityMap;// = new HumidityMap();
-	private PressureMap pressureMap;// = new PressureMap(map);
-	private WindVectorMap windVectorMap;// = new WindVectorMap();
+	private TempertureMap tempertureMap;
+	private HumidityMap humidityMap;
+	private PressureMap pressureMap;
+	private WindVectorMap windVectorMap;
 	
 	public LayersMap() {
 		mapView = new GoogleMapView();
@@ -94,15 +94,17 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 		//  Rectangle testrc = new Rectangle(new RectangleOptions().bounds(new LatLongBounds(new LatLong(29.2108,-81.0228), new LatLong(29.2109, -81.0229))));
 		map = mapView.createMap(mapOptions);
 		// map.addMapShape(testrc);
-		//Add a marker to the map
+		
+		//Add a marker to the map 
+		/*
 		MarkerOptions markerOptions = new MarkerOptions();
-
 		markerOptions.position( new LatLong(29.2108, -81.0228) )
 		.visible(Boolean.TRUE)
 		.title("My Marker");
 
 		Marker marker = new Marker( markerOptions );
 		map.addMarker(marker);
+		*/
 		tempertureMap = new TempertureMap(map);
 		humidityMap = new HumidityMap(map);
 		pressureMap = new PressureMap(map);

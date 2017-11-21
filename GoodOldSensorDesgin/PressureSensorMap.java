@@ -23,7 +23,7 @@ public class PressureSensorMap extends SensorMap {
 		for (int i = 0; i < messageFormat.length; i++) {
 			message[i] = messageFormat[i];
 		}
-		//
+		// default 
 		message[messageFormat.length] = getGPSLong()+"";
 		message[messageFormat.length+1] = getGPSlat()+"";
 		//
@@ -54,6 +54,7 @@ public class PressureSensorMap extends SensorMap {
 					String[] strArray = getSensorData().removeDataLine();
 					String str = strArray[0];
 					for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
+					bw.write(System.currentTimeMillis()+DataFormat.SPLIT);
 					bw.write(str);
 					bw.newLine();
 					getSensorData().getData().clear();

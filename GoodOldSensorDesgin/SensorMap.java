@@ -4,8 +4,8 @@ import java.util.Vector;
 public class SensorMap extends Thread{
 	
 	
-	private double GPSlat = 29.1;
-	private double GPSLong = -81.03;
+	private double GPSlat = 29.2108;
+	private double GPSLong = -81.0228;
 	private SensorData sensorData;
 	public SensorMap(SensorData sensorData) {
 		this.sensorData = sensorData;

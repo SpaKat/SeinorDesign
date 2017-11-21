@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Vector;
 //TEMP(ID),<Value>,(GPS)<long>,(GPS)<lat>
 public class SensorMap extends Thread{
 	

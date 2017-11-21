@@ -49,7 +49,7 @@ public class SensorMap extends Thread{
 		GPSLong = gPSLong;
 	}
 
-	public void send(String[] messageFormat) {
+	public void send(String messageString) {
 		System.err.println("SENT");
 	}
 	public SensorData getSensorData() {

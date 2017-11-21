@@ -14,7 +14,7 @@ public class DataFormat {
 		String[] messageFormat = messageString.split(SPLIT);
 		try{
 		// find the map that has the same id
-		sensorMap.get(messageFormat[0].toUpperCase()).send(messageFormat);
+		sensorMap.get(messageFormat[0].toUpperCase()).send(messageString);
 		}catch(NullPointerException e){
 			//catch the starting nothing string 
 		}

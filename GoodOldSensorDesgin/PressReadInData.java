@@ -1,23 +1,26 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Vector;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class PressReadInData{
 	private File pressureFile;
-	private Vector<DataPoints> data;
+	private Map<Integer,DataPoints> data; 
 	private Set<DataPoints> dataMarkers;
 	
 	public PressReadInData(File pressureFile) {
 		this.pressureFile = pressureFile;
-		this.data = new Vector<DataPoints>();
+		this.data = new TreeMap<Integer,DataPoints>();
 		this.dataMarkers = new TreeSet<DataPoints>(new DataGPSComp());
 		load();
 	}
-	public Vector<DataPoints> getData() {
+	public Map<Integer, DataPoints> getData() {
 		return data;
 	}
 	public void load() {
@@ -34,14 +37,16 @@ public class PressReadInData{
 							Double.parseDouble(strarray[3]), 
 							Double.parseDouble(strarray[4])
 							);
-					dp.setTime(Integer.parseInt(strarray[0]));
-					data.add(dp);
+					dp.setTime(Math.abs(Integer.parseInt(strarray[0])));
+					data.put(dp.getTime(),dp);
 					
 					System.out.println(count++);
 				}catch(Exception e){
 					System.err.println("FAILIN------------------------------------------------------");
 				}
-				dataMarkers.addAll(data);
+				data.forEach((time,data) -> {
+					dataMarkers.add(data);
+				});
 			}
 			br.close();
 			 

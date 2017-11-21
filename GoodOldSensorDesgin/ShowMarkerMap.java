@@ -1,6 +1,7 @@
 import java.util.Date;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,11 +14,10 @@ import javafx.stage.Stage;
 
 public class ShowMarkerMap {
 
-	Set<DataPoints> dataSameTime = new TreeSet<DataPoints>(new SameTime());
-	Set<DataPoints> dataAverageTime = new TreeSet<DataPoints>(new AverageTime());
+	Map<Integer,DataPoints> dataSameTime = new TreeMap<Integer,DataPoints>();
 	String name;
-	public ShowMarkerMap(Stream<DataPoints> filter, String name) {
-		dataSameTime =  filter.collect(Collectors.toSet());
+	public ShowMarkerMap(Map<Integer, DataPoints> map, String name) {
+		dataSameTime.putAll(map);
 		this.name = name;
 		buildStage();
 	}
@@ -34,8 +34,6 @@ public class ShowMarkerMap {
 
 	private void sortData() {
 		System.out.println(dataSameTime.size());
-		dataAverageTime.addAll(dataSameTime);
-		System.out.println(dataAverageTime.size());	
 	}
 
 	@SuppressWarnings("deprecation")
@@ -53,10 +51,16 @@ public class ShowMarkerMap {
         Series<Number, Number> series = new XYChart.Series<Number, Number>();
         
         series.setName("Trend");
-        for (DataPoints dataPoints : dataAverageTime) {
+        
+        dataSameTime.forEach((time,data) -> {
+			series.getData().add(new XYChart.Data<>(time ,data.getSensordata()));
+        });
+        /*
+        for (DataPoints dataPoints : dataSameTime) {
         Date date = new Date(dataPoints.getTime());
 			series.getData().add(new XYChart.Data<>(date.getSeconds() ,dataPoints.getSensordata()));
 		}
+		*/
         xAxis.autosize();
         lineChart.getData().add(series);
         	dataSameTime.clear();

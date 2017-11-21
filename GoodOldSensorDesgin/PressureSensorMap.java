@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class PressureSensorMap extends SensorMap {
 
@@ -17,17 +19,22 @@ public class PressureSensorMap extends SensorMap {
 	}
 
 	@Override
-	public void send(String[] messageFormat) {
+	public void send(String messageFormat) {
 		//testign the gps
-		String[] message = new String[messageFormat.length+2];
-		for (int i = 0; i < messageFormat.length; i++) {
-			message[i] = messageFormat[i];
+		String[] Format = messageFormat.split(DataFormat.SPLIT);
+		String[] message = new String[Format.length+2];
+		for (int i = 0; i < Format.length; i++) {
+			message[i] = Format[i];
 		}
 		// default 
-		message[messageFormat.length] = getGPSLong()+"";
-		message[messageFormat.length+1] = getGPSlat()+"";
+		message[Format.length] = getGPSLong()+"";
+		message[Format.length+1] = getGPSlat()+"";
 		//
-		getSensorData().addDataLine(message);
+		String str = message[0];
+		for (int i = 1; i < message.length; str += DataFormat.SPLIT + message[i++]);
+
+		getSensorData().addDataLine(str);
+
 	}
 
 	@Override
@@ -35,31 +42,24 @@ public class PressureSensorMap extends SensorMap {
 
 		File pressureData = new File("PRESSURE_DATA.csv");
 		BufferedWriter bw = null;
-		try {
-			bw = new BufferedWriter(new FileWriter(pressureData, true));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		while(isRunning()){
+		while(isRunning()){	
 			try{
-			System.out.println(getSensorData().getData().size() + "\t" + getSensorData().getData().get(0)[0] +"\t" + getSensorData().getData().get(0)[1]);
-		//	getSensorData().getData().clear();
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-			try{
-				if (!getSensorData().getData().isEmpty()) {
-					String[] strArray = getSensorData().removeDataLine();
+				if (getSensorData().getData().size()>0) {
+					bw = new BufferedWriter(new FileWriter(pressureData, true));
+					String string = getSensorData().remove();
+					String[] strArray = string.split(DataFormat.SPLIT);
+
 					String str = strArray[0];
 					for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
-					bw.write((startTime() - System.currentTimeMillis())+DataFormat.SPLIT);
-					bw.write(str);
-					bw.newLine();
-					getSensorData().getData().clear();
+					try {
+						bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+						bw.newLine();
+					//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+						bw.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -67,12 +67,12 @@ public class PressureSensorMap extends SensorMap {
 		}
 	}
 
-	
-@Override
-public void interrupt() {
-	System.out.println("Pressure writing thread stopped");
-	super.interrupt();
-}
+
+	@Override
+	public void interrupt() {
+		System.out.println("Pressure writing thread stopped");
+		super.interrupt();
+	}
 }
 
 

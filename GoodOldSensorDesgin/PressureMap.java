@@ -32,7 +32,7 @@ public class PressureMap {
 			.title(Name);
 
 			Marker marker = new Marker( markerOptions );
-			
+			/*
 			map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> 
 			{
 				new ShowMarkerMap(load.getReadin().getData()
@@ -45,7 +45,11 @@ public class PressureMap {
 						})
 						,Name); 
 			}); 
-
+*/
+			map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> 
+			{
+				new ShowMarkerMap(load.getReadin().getData(), Name);
+			});
 			map.addMarker(marker);
 			dataMarker.add(marker);
 

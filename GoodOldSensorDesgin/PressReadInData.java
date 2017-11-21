@@ -5,14 +5,14 @@ import java.util.Vector;
 
 public class PressReadInData{
 	public File pressureFile;
-	public Vector<PressureDataPoints> data;
+	public Vector<DataPoints> data;
 
 	public PressReadInData(File pressureFile) {
 		this.pressureFile = pressureFile;
-		this.data = new Vector<PressureDataPoints>();
+		this.data = new Vector<DataPoints>();
 		load();
 	}
-	public Vector<PressureDataPoints> getData() {
+	public Vector<DataPoints> getData() {
 		return data;
 	}
 	public void load() {
@@ -23,7 +23,7 @@ public class PressReadInData{
 			while((currentLine = br.readLine()) != null && counter++<10){
 				try{
 					String[] strarray = currentLine.split(DataFormat.SPLIT);
-					data.add(new PressureDataPoints(
+					data.add(new DataPoints(
 							strarray[0], 
 							Double.parseDouble(strarray[1]), 
 							Double.parseDouble(strarray[2]), 

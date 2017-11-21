@@ -28,7 +28,7 @@ public class PressureMap {
 
 	public void loadingShapes() {
 		Random rn = new Random();
-		for (PressureDataPoints PdataPoints : load.getReadin().getData()) {
+		for (DataPoints PdataPoints : load.getReadin().getData()) {
 			LatLong centreC = new LatLong(29.2108, -81.0228);
 			CircleOptions circleOptions =new CircleOptions()
 					.center(centreC) 

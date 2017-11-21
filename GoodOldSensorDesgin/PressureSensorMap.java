@@ -23,6 +23,7 @@ public class PressureSensorMap extends SensorMap {
 		for (int i = 0; i < messageFormat.length; i++) {
 			message[i] = messageFormat[i];
 		}
+		//
 		message[messageFormat.length] = getGPSLong()+"";
 		message[messageFormat.length+1] = getGPSlat()+"";
 		//

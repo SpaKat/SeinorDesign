@@ -24,6 +24,7 @@ public class PressReadInData{
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(pressureFile));
 			String currentLine;
+			int count=0;
 			while((currentLine = br.readLine()) != null ){
 				try{
 					String[] strarray = currentLine.split(DataFormat.SPLIT);
@@ -35,12 +36,12 @@ public class PressReadInData{
 							);
 					dp.setTime(Integer.parseInt(strarray[0]));
 					data.add(dp);
-					dataMarkers.add(dp);
 					
-					
+					System.out.println(count++);
 				}catch(Exception e){
 					System.err.println("FAILIN------------------------------------------------------");
 				}
+				dataMarkers.addAll(data);
 			}
 			br.close();
 			 

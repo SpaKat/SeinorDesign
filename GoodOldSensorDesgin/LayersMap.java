@@ -1,3 +1,4 @@
+
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
@@ -76,7 +77,7 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 	public void setWindVectorMap(WindVectorMap windVectorMap) {
 		this.windVectorMap = windVectorMap;
 	}
-
+	
 	@Override
 	public void mapInitialized() {
 		//Set the initial properties of the map.
@@ -91,20 +92,8 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 		.zoomControl(true)
 		.scrollWheel(false)
 		.zoom(10);
-		//  Rectangle testrc = new Rectangle(new RectangleOptions().bounds(new LatLongBounds(new LatLong(29.2108,-81.0228), new LatLong(29.2109, -81.0229))));
 		map = mapView.createMap(mapOptions);
-		// map.addMapShape(testrc);
 		
-		//Add a marker to the map 
-		/*
-		MarkerOptions markerOptions = new MarkerOptions();
-		markerOptions.position( new LatLong(29.2108, -81.0228) )
-		.visible(Boolean.TRUE)
-		.title("My Marker");
-
-		Marker marker = new Marker( markerOptions );
-		map.addMarker(marker);
-		*/
 		tempertureMap = new TempertureMap(map);
 		humidityMap = new HumidityMap(map);
 		pressureMap = new PressureMap(map);

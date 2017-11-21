@@ -24,6 +24,7 @@ public class GroundStationGUI extends Application {
 	private MenuItem miShowAll, miClearAll;				// Shows/clears all charts
 	private MenuItem miAbout;							// Displays info about the program
 	private MenuItem miSensorComm;
+	private MenuItem miRefresh;
 
 	public GroundStationGUI() {
 		layersMap = new LayersMap();
@@ -32,6 +33,7 @@ public class GroundStationGUI extends Application {
 		/* MENU CREATION */
 		// Create MenuItems
 		miClose = new MenuItem("Close");
+		miRefresh = new MenuItem("Refresh");
 		miMavProx= new MenuItem("MavProxy");
 		miSensorComm = new MenuItem("Sensor Communication");
 		miTemp = new CheckMenuItem("Temperature");
@@ -49,7 +51,7 @@ public class GroundStationGUI extends Application {
 		menuBar = new MenuBar();		
 		// Add menu items to respective menus
 		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
-		menuCharts.getItems().addAll(miTemp,miHumidity,miPressure,miWindVelocity,new SeparatorMenuItem(), miShowAll, miClearAll);
+		menuCharts.getItems().addAll(miRefresh,miTemp,miHumidity,miPressure,miWindVelocity,new SeparatorMenuItem(), miShowAll, miClearAll);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, menuCharts, menuHelp);
@@ -66,7 +68,7 @@ public class GroundStationGUI extends Application {
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
 		miClose.setOnAction(e -> Platform.exit());
-
+		miRefresh.setOnAction(e -> {layersMap = new LayersMap();});
 		/* PUT EVERYTHING TOGETHER */
 		Scene scene = new Scene(borderPane, 450, 400);
 		// Add the menubar and shapes to the borderpane

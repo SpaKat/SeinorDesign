@@ -17,10 +17,10 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 	//change
 	private GoogleMapView mapView;
 	private GoogleMap map;
-	private TempertureMap tempertureMap;
-	private HumidityMap humidityMap;
-	private PressureMap pressureMap;
-	private WindVectorMap windVectorMap;
+	private SensorMapGUI tempertureMap;
+	private SensorMapGUI humidityMap;
+	private SensorMapGUI pressureMap;
+	private SensorMapGUI windVectorMap;
 	
 	public LayersMap() {
 		mapView = new GoogleMapView();
@@ -29,7 +29,11 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 	}
 
 	public void showTempertureMap() {
-		
+		tempertureMap.loadingShapes();
+	}
+
+	public void removeTempertureMap() {
+		tempertureMap.removeShapes();
 	}
 
 	public void showHumidityMap() {
@@ -46,35 +50,35 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 		
 	}
 
-	public TempertureMap getTempertureMap() {
+	public SensorMapGUI getTempertureMap() {
 		return tempertureMap;
 	}
 
-	public HumidityMap getHumidityMap() {
+	public SensorMapGUI getHumidityMap() {
 		return humidityMap;
 	}
 
-	public PressureMap getPressureMap() {
+	public SensorMapGUI getPressureMap() {
 		return pressureMap;
 	}
 
-	public WindVectorMap getWindVectorMap() {
+	public SensorMapGUI getWindVectorMap() {
 		return windVectorMap;
 	}
 
-	public void setTempertureMap(TempertureMap tempertureMap) {
+	public void setTempertureMap(SensorMapGUI tempertureMap) {
 		this.tempertureMap = tempertureMap;
 	}
 
-	public void setHumidityMap(HumidityMap humidityMap) {
+	public void setHumidityMap(SensorMapGUI humidityMap) {
 		this.humidityMap = humidityMap;
 	}
 
-	public void setPressureMap(PressureMap pressureMap) {
+	public void setPressureMap(SensorMapGUI pressureMap) {
 		this.pressureMap = pressureMap;
 	}
 
-	public void setWindVectorMap(WindVectorMap windVectorMap) {
+	public void setWindVectorMap(SensorMapGUI windVectorMap) {
 		this.windVectorMap = windVectorMap;
 	}
 	
@@ -94,10 +98,10 @@ public class LayersMap extends BorderPane  implements MapComponentInitializedLis
 		.zoom(10);
 		map = mapView.createMap(mapOptions);
 		
-		tempertureMap = new TempertureMap(map);
-		humidityMap = new HumidityMap(map);
-		pressureMap = new PressureMap(map);
-		windVectorMap = new WindVectorMap(map);
+		tempertureMap = new SensorMapGUI(map, "TEMPERATURE");
+		humidityMap = new SensorMapGUI(map, "HUMIDITY");
+		pressureMap = new SensorMapGUI(map, "PRESSURE");
+		windVectorMap = new SensorMapGUI(map, "WIND VECTOR");
 	}
 
 	

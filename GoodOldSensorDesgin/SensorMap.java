@@ -1,18 +1,25 @@
 //TEMP(ID),<Value>,(GPS)<long>,(GPS)<lat>
 public class SensorMap extends Thread{
 
-
+	private String mapName;
 	private double GPSlat = 29.2108;
 	private double GPSLong = -81.0228;
 	private SensorData sensorData;
 	private long time = System.currentTimeMillis();
 	private boolean running = true;
 
-	public SensorMap(SensorData sensorData) {
+	public SensorMap(SensorData sensorData, String mapName) {
 		this.sensorData = sensorData;
+		this.mapName = mapName; 
 	}
 
+	public String getMapName() {
+		return mapName;
+	}
 
+	public void setMapName(String name) {
+		this.mapName = mapName;
+	}
 	@Override
 	public void run() {
 		System.out.println("RUNNING");
@@ -43,6 +50,9 @@ public class SensorMap extends Thread{
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
+
+
+
 
 
 	public void setGPSLong(double gPSLong) {

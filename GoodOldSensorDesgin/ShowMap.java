@@ -3,19 +3,19 @@ import javafx.event.EventHandler;
 import javafx.scene.control.CheckMenuItem;
 
 
-public class ShowPressure implements EventHandler<ActionEvent> {
+public class ShowMap implements EventHandler<ActionEvent> {
 	//change
-	CheckMenuItem miPressure;
+	CheckMenuItem miMap;
 	LayersMap layersMap;
 	
-	public ShowPressure(CheckMenuItem miPressure, LayersMap layersMap) {
-		 this.miPressure = miPressure;
+	public ShowMap(CheckMenuItem miMap, LayersMap layersMap) {
+		 this.miMap = miMap;
 		 this.layersMap = layersMap;
 	}
 
 	@Override
 	public void handle(ActionEvent arg0) {
-		if(miPressure.isSelected()){
+		if(miMap.isSelected()){
 			layersMap.showPressureMap();
 		}else{
 			layersMap.removePressureMap();

@@ -36,14 +36,13 @@ public class ShowMarkerMap {
 		System.out.println(dataSameTime.size());
 	}
 
-	@SuppressWarnings("deprecation")
 	private LineChart<Number,Number> setGraph() {
 		
 		final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
         
-        xAxis.setLabel("Time");
+        xAxis.setLabel("Time in Seconds");
         yAxis.setLabel("Value"); // enter via constructor
      
         

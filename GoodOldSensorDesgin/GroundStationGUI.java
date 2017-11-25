@@ -60,9 +60,9 @@ public class GroundStationGUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		miTemp.setOnAction(e -> layersMap.showTempertureMap());
+		miTemp.setOnAction(new ShowMap(miTemp,layersMap));
 		miHumidity.setOnAction(e -> layersMap.showHumidityMap());
-		miPressure.setOnAction(new ShowPressure(miPressure,layersMap));
+		miPressure.setOnAction(new ShowMap(miPressure,layersMap));
 		miWindVelocity.setOnAction(e -> layersMap.showWindVectorMap());
 		miSensorComm.setOnAction(new SensorCommInterface());
 		miAbout.setOnAction(e -> new GUIshowAbout());

@@ -8,8 +8,8 @@ import java.util.TreeSet;
 
 public class PressureSensorMap extends SensorMap {
 
-	public PressureSensorMap(SensorData sensorData) {
-		super(sensorData);
+	public PressureSensorMap(SensorData sensorData, String name) {
+		super(sensorData,name);
 		this.start();
 	}
 
@@ -40,7 +40,7 @@ public class PressureSensorMap extends SensorMap {
 	@Override
 	public void run() {
 
-		File pressureData = new File("PRESSURE_DATA.csv");
+		File pressureData = new File(getName() +"_DATA.csv");
 		BufferedWriter bw = null;
 		while(isRunning()){	
 			try{

@@ -9,16 +9,17 @@ import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 
 import netscape.javascript.JSObject;
 
-public class PressureMap {
+public class SensorMapGUI {
 	//change
-	String Name = "PRESSURE MAP";
+	String name;
 	GoogleMap map;
-	PressureMapLoad load;
+	SensorMapGUILoad load;
 	Vector<Marker> dataMarker = new Vector<Marker>();
 
-	public PressureMap(GoogleMap map) {
-		load = new PressureMapLoad();
+	public SensorMapGUI(GoogleMap map, String name) {
 		this.map =map;
+		this.name = name;
+		load = new SensorMapGUILoad(name);
 	}
 
 	public void loadingShapes() {
@@ -29,26 +30,12 @@ public class PressureMap {
 
 			markerOptions.position( markerPositon )
 			.visible(Boolean.TRUE)
-			.title(Name);
+			.title(name);
 
 			Marker marker = new Marker( markerOptions );
-			/*
 			map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> 
 			{
-				new ShowMarkerMap(load.getReadin().getData()
-						.parallelStream().filter(data -> 
-						{ 
-							if (load.getReadin().getDataMarkers().contains(data)) {
-								return true;
-							}
-							return false;
-						})
-						,Name); 
-			}); 
-*/
-			map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> 
-			{
-				new ShowMarkerMap(load.getReadin().getData(), Name);
+				new ShowMarkerMap(load.getReadin().getData(), name);
 			});
 			map.addMarker(marker);
 			dataMarker.add(marker);

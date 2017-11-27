@@ -14,16 +14,16 @@ import javafx.stage.Stage;
 
 public class ShowMarkerMap {
 
-	Map<Integer,DataPoints> dataSameTime = new TreeMap<Integer,DataPoints>();
-	String name;
+	private Map<Integer,DataPoints> dataSameTime = new TreeMap<Integer,DataPoints>();
+	private String name;
 	public ShowMarkerMap(Map<Integer, DataPoints> map, String name) {
 		dataSameTime.putAll(map);
 		this.name = name;
 		buildStage();
+		System.out.println(name);
 	}
 
 	private void buildStage() {
-		sortData();
 		Scene scene = new Scene(setGraph());
 		
 		Stage stage = new Stage();
@@ -31,11 +31,6 @@ public class ShowMarkerMap {
 		stage.setTitle(name);
 		stage.show();
 	}
-
-	private void sortData() {
-		System.out.println(dataSameTime.size());
-	}
-
 	private LineChart<Number,Number> setGraph() {
 		
 		final NumberAxis xAxis = new NumberAxis();

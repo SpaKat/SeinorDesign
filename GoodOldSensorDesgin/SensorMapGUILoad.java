@@ -4,9 +4,10 @@ import java.io.File;
 public class SensorMapGUILoad extends Thread{
 
 	ReadInData readin;
-	String name;
+	File file;
 	public SensorMapGUILoad(String name) {
-		this.name = name;
+		file = new File(name + "_DATA.csv");
+		System.out.println(name + "_DATA.csv");
 		this.start();
 	}
 	
@@ -15,8 +16,6 @@ public class SensorMapGUILoad extends Thread{
 		load();
 	}
 	private void load(){
-		File file = new File(name + "_DATA.csv");
-		System.out.println(name + "_DATA.csv");
 		readin = new ReadInData(file);
 	}
 	public ReadInData getReadin() {

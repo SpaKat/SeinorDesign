@@ -60,10 +60,10 @@ public class GroundStationGUI extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		miTemp.setOnAction(new ShowMap(miTemp,layersMap));
-		miHumidity.setOnAction(e -> layersMap.showHumidityMap());
-		miPressure.setOnAction(new ShowMap(miPressure,layersMap));
-		miWindVelocity.setOnAction(e -> layersMap.showWindVectorMap());
+		miTemp.setOnAction(new ShowMap(miTemp,layersMap,"Temp"));
+		miHumidity.setOnAction(new ShowMap(miHumidity,layersMap,"Hum"));
+		miPressure.setOnAction(new ShowMap(miPressure,layersMap,"Pres"));
+		miWindVelocity.setOnAction(new ShowMap(miWindVelocity,layersMap,"Wind"));
 		miSensorComm.setOnAction(new SensorCommInterface());
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
@@ -73,7 +73,7 @@ public class GroundStationGUI extends Application {
 		Scene scene = new Scene(borderPane, 450, 400);
 		// Add the menubar and shapes to the borderpane
 		borderPane.setTop(menuBar);
-		borderPane.setCenter(layersMap);
+		borderPane.setCenter(layersMap.getMapView());
 		// Configure and display the stage
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("UAV Weather Tool");

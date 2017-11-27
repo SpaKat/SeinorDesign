@@ -14,6 +14,7 @@ public class ReadInData {
 	
 	public ReadInData(File file) {
 		this.file = file;
+		System.out.println(file.getName());
 		this.data = new TreeMap<Integer,DataPoints>();
 		this.dataMarkers = new TreeSet<DataPoints>(new DataGPSComp());
 		load();

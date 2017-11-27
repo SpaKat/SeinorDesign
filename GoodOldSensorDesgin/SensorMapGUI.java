@@ -17,9 +17,10 @@ public class SensorMapGUI {
 	Vector<Marker> dataMarker = new Vector<Marker>();
 
 	public SensorMapGUI(GoogleMap map, String name) {
-		this.map =map;
+		this.map = map;
 		this.name = name;
 		load = new SensorMapGUILoad(name);
+		
 	}
 
 	public void loadingShapes() {
@@ -31,7 +32,7 @@ public class SensorMapGUI {
 			markerOptions.position( markerPositon )
 			.visible(Boolean.TRUE)
 			.title(name);
-
+			System.out.println("\t" + name );
 			Marker marker = new Marker( markerOptions );
 			map.addUIEventHandler(marker, UIEventType.click, (JSObject obj) -> 
 			{

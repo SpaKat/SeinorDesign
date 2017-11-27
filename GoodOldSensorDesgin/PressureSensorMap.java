@@ -54,7 +54,6 @@ public class PressureSensorMap extends SensorMap {
 					try {
 						bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
 						bw.newLine();
-					//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
 						bw.close();
 					} catch (Exception e) {
 						e.printStackTrace();

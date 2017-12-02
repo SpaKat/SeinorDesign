@@ -6,4 +6,9 @@ public class WindVectorSensorMap extends SensorMap {
 		// TODO Auto-generated constructor stub
 	}
 
+		@Override
+		public void run() {
+			
+		}
+	
 }

@@ -11,20 +11,16 @@ public class SensorMap extends Thread{
 	public SensorMap(SensorData sensorData, String mapName) {
 		this.sensorData = sensorData;
 		this.mapName = mapName; 
+		System.out.println("HELLO From : " +mapName );
 	}
-
+	
 	public String getMapName() {
 		return mapName;
 	}
 
 	public void setMapName(String name) {
-		this.mapName = mapName;
+		this.mapName = name;
 	}
-	@Override
-	public void run() {
-		System.out.println("RUNNING");
-	}
-
 	public void test() {
 		System.out.println("HELLO");
 	}
@@ -62,7 +58,7 @@ public class SensorMap extends Thread{
 	public void send(String messageString) {
 		System.err.println("SENT");
 	}
-	public SensorData getSensorData() {
+	public synchronized SensorData getSensorData() {
 		return sensorData;
 	}
 	public long startTime() {

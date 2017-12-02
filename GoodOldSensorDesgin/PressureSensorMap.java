@@ -1,10 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class PressureSensorMap extends SensorMap {
 
@@ -40,24 +36,29 @@ public class PressureSensorMap extends SensorMap {
 	@Override
 	public void run() {
 
-		File pressureData = new File(getName() +"_DATA.csv");
+		File fileData = new File(getMapName() +"_DATA.csv");
+		System.out.println(getMapName() + "=" + fileData.getName());
 		BufferedWriter bw = null;
 		while(isRunning()){	
 			try{
 				if (getSensorData().getData().size()>0) {
-					bw = new BufferedWriter(new FileWriter(pressureData, true));
+					bw = new BufferedWriter(new FileWriter(fileData, true));
 					String string = getSensorData().remove();
 					String[] strArray = string.split(DataFormat.SPLIT);
-
-					String str = strArray[0];
-					for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
-					try {
-						bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
-						bw.newLine();
-						bw.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					if(strArray[0].toUpperCase().equals("PRES")){
+						String str = strArray[0];
+						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
+						try {
+							bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+							bw.newLine();
+							//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+							bw.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}else{
+					getSensorData().addDataLine(string);
+				}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

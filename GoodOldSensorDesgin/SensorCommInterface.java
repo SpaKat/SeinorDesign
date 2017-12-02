@@ -26,7 +26,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 	}
 	private void initGridPane() {
 		Text askCOMports = new Text("Enter the COM ports of the Telemerty");
-		TextField enterCOMports = new TextField("COM13,");
+		TextField enterCOMports = new TextField("COM5,");
 		Button enter = new Button("Enter");
 		Button exit = new Button("Exit");
 		

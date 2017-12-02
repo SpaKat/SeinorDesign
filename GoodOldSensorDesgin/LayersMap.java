@@ -19,6 +19,9 @@ public class LayersMap  implements MapComponentInitializedListener{
 		mapView.addMapInializedListener(this);
 		
 	}
+	public void reloadMaps() {
+		loadMaps();
+	}
 
 	private void loadMaps() {
 		maps.put("TEMP", new SensorMapGUI(map, "TEMPERATURE"));
@@ -64,5 +67,6 @@ public class LayersMap  implements MapComponentInitializedListener{
 		});
 	}
 
+	
 	
 }

@@ -101,7 +101,7 @@ public class SensorCom implements SerialPortEventListener {
 				}
 				messageString = build;
 			} catch (Exception e) {
-				System.err.println(e.toString());
+			//	System.err.println(e.toString());
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.

@@ -5,7 +5,6 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -51,7 +50,7 @@ public class GroundStationGUI extends Application {
 		menuBar = new MenuBar();		
 		// Add menu items to respective menus
 		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
-		menuCharts.getItems().addAll(miRefresh,miTemp,miHumidity,miPressure,miWindVelocity,new SeparatorMenuItem(), miShowAll, miClearAll);
+		menuCharts.getItems().addAll(miRefresh,miTemp,miHumidity,miPressure,miWindVelocity);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, menuCharts, menuHelp);
@@ -68,7 +67,9 @@ public class GroundStationGUI extends Application {
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
 		miClose.setOnAction(e -> Platform.exit());
-		miRefresh.setOnAction(e -> {layersMap = new LayersMap();});
+		miRefresh.setOnAction(e -> {
+			layersMap.reloadMaps();
+		});
 		/* PUT EVERYTHING TOGETHER */
 		Scene scene = new Scene(borderPane, 450, 400);
 		// Add the menubar and shapes to the borderpane

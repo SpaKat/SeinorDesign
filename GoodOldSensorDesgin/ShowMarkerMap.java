@@ -37,7 +37,7 @@ public class ShowMarkerMap {
         final NumberAxis yAxis = new NumberAxis();
         final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
         
-        xAxis.setLabel("Time in Seconds");
+        xAxis.setLabel("Time in Milliseconds");
         yAxis.setLabel("Value"); // enter via constructor
      
         

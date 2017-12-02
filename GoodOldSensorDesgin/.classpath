@@ -2,14 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="P:/git/jars/RXTXcomm.jar">
+	<classpathentry kind="lib" path="C:/Users/Laga-Sama/git/GMapsFX-2.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laga-Sama/git/gnu.io.rxtx_2.1.7.4_v20071016.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laga-Sama/git/RXTXcomm.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/lagad/Documents/SeinorDesign/dll"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/Laga-Sama/git/dll"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/lagad/Documents/SeinorDesign/jars/gnu.io.rxtx_2.1.7.4_v20071016.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lagad/Documents/SeinorDesign/jars/slf4j-api-1.7.25.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lagad/Documents/SeinorDesign/jars/slf4j-nop-1.7.25.jar"/>
-	<classpathentry kind="lib" path="C:/Users/lagad/Documents/SeinorDesign/jars/GMapsFX-2.12.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laga-Sama/git/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Laga-Sama/git/slf4j-nop-1.7.25.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

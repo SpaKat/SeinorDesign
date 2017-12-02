@@ -4,9 +4,9 @@ import java.io.FileWriter;
 
 
 public class TempertureSensorMap extends SensorMap {
+
 	public TempertureSensorMap(SensorData sensorData,String name) {
 		super(sensorData, name);
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void test() {
@@ -29,31 +29,34 @@ public class TempertureSensorMap extends SensorMap {
 		for (int i = 1; i < message.length; str += DataFormat.SPLIT + message[i++]);
 
 		getSensorData().addDataLine(str); 
-
 	}
 
 	@Override
 	public void run() {
 
-		File pressureData = new File(getName() +"_DATA.csv");
+		File fileData = new File(getMapName() +"_DATA.csv");
+		System.out.println(getMapName() + "=" + fileData.getName());
 		BufferedWriter bw = null;
 		while(isRunning()){	
 			try{
 				if (getSensorData().getData().size()>0) {
-					bw = new BufferedWriter(new FileWriter(pressureData, true));
+					bw = new BufferedWriter(new FileWriter(fileData, true));
 					String string = getSensorData().remove();
 					String[] strArray = string.split(DataFormat.SPLIT);
-
-					String str = strArray[0];
-					for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
-					try {
-						bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
-						bw.newLine();
-					//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
-						bw.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					if(strArray[0].toUpperCase().equals("TEMP")){
+						String str = strArray[0];
+						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
+						try {
+							bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+							bw.newLine();
+							//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+							bw.close();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}else{
+					getSensorData().addDataLine(string);
+				}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -68,5 +71,5 @@ public class TempertureSensorMap extends SensorMap {
 		System.out.println("Temperture writing thread stopped");
 		super.interrupt();
 	}
-	
+
 }

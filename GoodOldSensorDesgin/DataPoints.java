@@ -5,7 +5,7 @@ public class DataPoints{
 	private double GPSLONG;
 	private double GPSLAT;
 	private double elevation; 
-	private int time;
+	private long time;
 	public DataPoints(String ID,double sensordata,double GPSLONG,double GPSLAT) {
 		this.ID = ID;
 		this.sensordata = sensordata;
@@ -37,7 +37,7 @@ public class DataPoints{
 		return elevation;
 	}
 
-	public int getTime() {
+	public long getTime() {
 		return time;
 	}
 
@@ -65,7 +65,7 @@ public class DataPoints{
 		this.elevation = elevation;
 	}
 
-	public void setTime(int time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 

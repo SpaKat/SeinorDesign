@@ -9,17 +9,17 @@ import java.util.TreeSet;
 
 public class ReadInData {
 	private File file;
-	private Map<Integer,DataPoints> data; 
+	private Map<Long, DataPoints> data; 
 	private Set<DataPoints> dataMarkers;
 	
 	public ReadInData(File file) {
 		this.file = file;
 		System.out.println(file.getName());
-		this.data = new TreeMap<Integer,DataPoints>();
+		this.data = new TreeMap<Long,DataPoints>();
 		this.dataMarkers = new TreeSet<DataPoints>(new DataGPSComp());
 		load();
 	}
-	public Map<Integer, DataPoints> getData() {
+	public Map<Long, DataPoints> getData() {
 		return data;
 	}
 	public void load() {
@@ -35,7 +35,7 @@ public class ReadInData {
 							Double.parseDouble(strarray[3]), 
 							Double.parseDouble(strarray[4])
 							);
-					dp.setTime(Math.abs(Integer.parseInt(strarray[0])));
+					dp.setTime(Math.abs(Long.parseLong(strarray[0])));
 					data.put(dp.getTime(),dp);
 				}catch(Exception e){
 					System.err.println("FAILIN------------------------------------------------------");

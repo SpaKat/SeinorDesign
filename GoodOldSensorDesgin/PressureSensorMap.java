@@ -49,7 +49,7 @@ public class PressureSensorMap extends SensorMap {
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
+							bw.write(System.currentTimeMillis() + DataFormat.SPLIT + str);
 							bw.newLine();
 							//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
 							bw.close();

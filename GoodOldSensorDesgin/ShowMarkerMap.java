@@ -17,10 +17,10 @@ import javafx.stage.Stage;
 
 public class ShowMarkerMap {
 
-	private Map<Integer,DataPoints> dataSameTime = new TreeMap<Integer,DataPoints>();
+	private Map<Long,DataPoints> dataSameTime = new TreeMap<Long,DataPoints>();
 	private String name;
 
-	public ShowMarkerMap(Map<Integer, DataPoints> map, String name) {
+	public ShowMarkerMap(Map<Long, DataPoints> map, String name) {
 		dataSameTime.putAll(map);
 		this.name = name;
 		buildStage();

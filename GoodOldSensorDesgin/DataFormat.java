@@ -25,7 +25,7 @@ public class DataFormat {
 	private void setMaps() {
 		// adds the key of the Map and object of the map to the hashmap 
 		sensorMap.put("TEMP", new TempertureSensorMap(sensorData,"TEMPERATURE"));
-		//	sensorMap.put("HUM", new HumiditySensorMap(sensorData, "HUMIDITY"));
+		sensorMap.put("HUM", new HumiditySensorMap(sensorData, "HUMIDITY"));
 		sensorMap.put("PRES", new PressureSensorMap(sensorData,"PRESSURE"));
 		//	sensorMap.put("WIND", new WindVectorSensorMap(sensorData, "WIND_VECTOR"));
 		startMapThreads();

@@ -24,7 +24,8 @@ public class GroundStationGUI extends Application {
 	private MenuItem miAbout;							// Displays info about the program
 	private MenuItem miSensorComm;
 	private MenuItem miRefresh;
-
+	private Scene GmapScene;
+	private Scene MissionSelect;
 	public GroundStationGUI() {
 		layersMap = new LayersMap();
 		// Create the BorderPane
@@ -54,11 +55,9 @@ public class GroundStationGUI extends Application {
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, menuCharts, menuHelp);
-
-	}
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-
+		
+		
+		
 		miTemp.setOnAction(new ShowMap(miTemp,layersMap,"Temp"));
 		miHumidity.setOnAction(new ShowMap(miHumidity,layersMap,"Hum"));
 		miPressure.setOnAction(new ShowMap(miPressure,layersMap,"Pres"));
@@ -71,12 +70,20 @@ public class GroundStationGUI extends Application {
 			layersMap.reloadMaps();
 		});
 		/* PUT EVERYTHING TOGETHER */
-		Scene scene = new Scene(borderPane, 450, 400);
+		 GmapScene = new Scene(borderPane, 450, 400);
+		MissionSelect = new Scene(new MissionSelect());
+		
 		// Add the menubar and shapes to the borderpane
 		borderPane.setTop(menuBar);
 		borderPane.setCenter(layersMap.getMapView());
+
+	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		
 		// Configure and display the stage
-		primaryStage.setScene(scene);
+		primaryStage.setScene(GmapScene);
 		primaryStage.setTitle("UAV Weather Tool");
 		primaryStage.show();
 		

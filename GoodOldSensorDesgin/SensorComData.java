@@ -17,7 +17,7 @@ public class SensorComData extends Thread{
 	@Override
 	public void run() {
 		while(running ){
-			//	System.out.printf("%s \t %d \n",sensorComm.getMessageString(), (System.currentTimeMillis()/1000));
+			//System.out.printf("%s \n",sensorComm.getMessageString() );
 			data.enterMessage(sensorComm.getMessageString());
 		}
 	}

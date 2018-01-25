@@ -83,7 +83,7 @@ public class GroundStationGUI extends Application {
 
 		
 		// Configure and display the stage
-		primaryStage.setScene(GmapScene);
+		primaryStage.setScene(MissionSelect);
 		primaryStage.setTitle("UAV Weather Tool");
 		primaryStage.show();
 		

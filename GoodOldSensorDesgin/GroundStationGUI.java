@@ -24,8 +24,9 @@ public class GroundStationGUI extends Application {
 	private MenuItem miAbout;							// Displays info about the program
 	private MenuItem miSensorComm;
 	private MenuItem miRefresh;
+	private MenuItem miSelectMision;
 	private Scene GmapScene;
-	private Scene MissionSelect;
+	private MissionSelect MissionSelect;
 	public GroundStationGUI() {
 		layersMap = new LayersMap();
 		// Create the BorderPane
@@ -42,7 +43,8 @@ public class GroundStationGUI extends Application {
 		miWindVelocity = new CheckMenuItem("Wind Vector");
 		miShowAll = new MenuItem("Show all");
 		miClearAll = new MenuItem("Clear all");
-		miAbout = new MenuItem("About...");		
+		miAbout = new MenuItem("About...");	
+		miSelectMision = new MenuItem("Mission Select");
 		// Create Menus
 		menuFile = new Menu("File");
 		menuCharts = new Menu("Charts/Graphs");
@@ -50,7 +52,7 @@ public class GroundStationGUI extends Application {
 		// Create MenuBar
 		menuBar = new MenuBar();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
+		menuFile.getItems().addAll(miSelectMision,miSensorComm,miMavProx, miClose);
 		menuCharts.getItems().addAll(miRefresh,miTemp,miHumidity,miPressure,miWindVelocity);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
@@ -71,7 +73,7 @@ public class GroundStationGUI extends Application {
 		});
 		/* PUT EVERYTHING TOGETHER */
 		 GmapScene = new Scene(borderPane, 450, 400);
-		MissionSelect = new Scene(new MissionSelect());
+		MissionSelect =new MissionSelect();
 		
 		// Add the menubar and shapes to the borderpane
 		borderPane.setTop(menuBar);
@@ -83,7 +85,7 @@ public class GroundStationGUI extends Application {
 
 		
 		// Configure and display the stage
-		primaryStage.setScene(MissionSelect);
+		primaryStage.setScene(GmapScene);
 		primaryStage.setTitle("UAV Weather Tool");
 		primaryStage.show();
 		

@@ -27,7 +27,7 @@ public class DataFormat {
 		sensorMap.put("TEMP", new TempertureSensorMap(sensorData,"TEMPERATURE"));
 		sensorMap.put("HUM", new HumiditySensorMap(sensorData, "HUMIDITY"));
 		sensorMap.put("PRES", new PressureSensorMap(sensorData,"PRESSURE"));
-		//	sensorMap.put("WIND", new WindVectorSensorMap(sensorData, "WIND_VECTOR"));
+		sensorMap.put("WIND", new WindVectorSensorMap(sensorData, "WIND_VECTOR"));
 		startMapThreads();
 	}
 	public void endMaps(){

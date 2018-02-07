@@ -1,11 +1,12 @@
 
 
-public class uavMission {
+public class UavMission {
 
 	
 	String name;
 	String ID;
-	public uavMission(String name) {
+	GPSLocation GpsLocation = new GPSLocation();
+	public UavMission(String name) {
 		String[] nameArray = name.split(",");
 		setName(nameArray[0]);
 		setID(nameArray[1]);
@@ -29,5 +30,7 @@ public class uavMission {
 	public String getID() {
 		return ID;
 	}
-	
+	public GPSLocation getGpsLocation() {
+		return GpsLocation;
+	}
 }

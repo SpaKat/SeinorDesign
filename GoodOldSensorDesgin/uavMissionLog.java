@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class uavMissionLog {
 	final String fileMissionLogName = "uavMissions.txt";
 	
-	ArrayList<uavMission> missions = new ArrayList<>();
+	ArrayList<UavMission> missions = new ArrayList<>();
 	
 	
 	public uavMissionLog() {
@@ -15,7 +15,7 @@ public class uavMissionLog {
 			BufferedReader br = new BufferedReader(new FileReader(new File(fileMissionLogName)));
 			String currentLine;
 			while ((currentLine = br.readLine()) != null) {
-				missions.add(new uavMission(currentLine));
+				missions.add(new UavMission(currentLine));
 			}
 			br.close();
 		} catch (Exception e) {

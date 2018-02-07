@@ -13,7 +13,7 @@ public class WindVectorSensorMap extends SensorMap {
 	public void test() {
 		System.out.println("WIND Hello");
 	}
-
+/*
 	@Override
 	public void send(String messageFormat) {
 		//testign the gps
@@ -32,11 +32,11 @@ public class WindVectorSensorMap extends SensorMap {
 		getSensorData().addDataLine(str);
 
 	}
-
+*/
 	@Override
 	public void run() {
 
-		File fileData = new File(getMapName() +"_DATA.csv");
+		File fileData = new File(MissionStats.missionID  + "_" +getMapName() +"_DATA.csv");
 		System.out.println(getMapName() + "=" + fileData.getName());
 		BufferedWriter bw = null;
 		while(isRunning()){	

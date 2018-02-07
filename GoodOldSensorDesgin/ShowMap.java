@@ -6,20 +6,20 @@ import javafx.scene.control.CheckMenuItem;
 public class ShowMap implements EventHandler<ActionEvent> {
 	//change
 	CheckMenuItem miMap;
-	LayersMap layersMap;
+	GoogleMapGUI googleMapGUI;
 	String mapName;
-	public ShowMap(CheckMenuItem miMap, LayersMap layersMap,String mapName) {
+	public ShowMap(CheckMenuItem miMap, GoogleMapGUI googleMapGUI,String mapName) {
 		 this.miMap = miMap;
-		 this.layersMap = layersMap;
+		 this.googleMapGUI = googleMapGUI;
 		 this.mapName = mapName;
 	}
 
 	@Override
 	public void handle(ActionEvent arg0) {
 		if(miMap.isSelected()){
-			layersMap.showMap(mapName);
+			googleMapGUI.showMap(mapName);
 		}else{
-			layersMap.removeMap(mapName);
+			googleMapGUI.removeMap(mapName);
 		}
 		
 	}

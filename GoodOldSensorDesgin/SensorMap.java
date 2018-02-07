@@ -56,7 +56,7 @@ public class SensorMap extends Thread{
 	}
 
 	public void send(String messageString) {
-		System.err.println("SENT");
+		getSensorData().addDataLine(messageString);
 	}
 	public synchronized SensorData getSensorData() {
 		return sensorData;

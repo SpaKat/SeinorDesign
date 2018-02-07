@@ -14,9 +14,9 @@ public class ReadInData {
 	
 	public ReadInData(File file) {
 		this.file = file;
-		System.out.println(file.getName());
+		System.out.println("READ IN DATA: " +file.getName());
 		this.data = new TreeMap<Long,DataPoints>();
-		this.dataMarkers = new TreeSet<DataPoints>(new DataGPSComp());
+		this.dataMarkers = new TreeSet<DataPoints>(new SameTime());
 		load();
 	}
 	public Map<Long, DataPoints> getData() {
@@ -30,12 +30,11 @@ public class ReadInData {
 				try{
 					String[] strarray = currentLine.split(DataFormat.SPLIT);
 					DataPoints dp = new DataPoints(
-							strarray[1], 
-							Double.parseDouble(strarray[2]), 
-							Double.parseDouble(strarray[3]), 
-							Double.parseDouble(strarray[4])
+							strarray[0], 
+							strarray[2], 
+							Double.parseDouble(strarray[3])
 							);
-					dp.setTime(Math.abs(Long.parseLong(strarray[0])));
+					dp.setTime(Math.abs(Long.parseLong(strarray[1])));
 					data.put(dp.getTime(),dp);
 				}catch(Exception e){
 					System.err.println("FAILIN------------------------------------------------------");

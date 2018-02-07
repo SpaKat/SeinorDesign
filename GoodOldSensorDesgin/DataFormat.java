@@ -8,7 +8,6 @@ public class DataFormat {
 	public static final String SPLIT = ",";
 	private SensorData sensorData = new SensorData();
 	private Map<String,SensorMap> sensorMap = new TreeMap<String,SensorMap>();
-
 	public DataFormat() {
 		setMaps();
 	}
@@ -21,25 +20,22 @@ public class DataFormat {
 			//catch the starting nothing string 
 		}
 	}
-
 	private void setMaps() {
 		// adds the key of the Map and object of the map to the hashmap 
-		sensorMap.put("TEMP", new TempertureSensorMap(sensorData,"TEMPERATURE"));
-		sensorMap.put("HUM", new HumiditySensorMap(sensorData, "HUMIDITY"));
-		sensorMap.put("PRES", new PressureSensorMap(sensorData,"PRESSURE"));
-		sensorMap.put("WIND", new WindVectorSensorMap(sensorData, "WIND_VECTOR"));
+		sensorMap.put(Names.tempertureMapname, new TempertureSensorMap(sensorData,Names.temperture));
+		sensorMap.put(Names.HumdityMapname, new HumiditySensorMap(sensorData, Names.Humdity));
+		sensorMap.put(Names.pressureMapname, new PressureSensorMap(sensorData,Names.pressure));
+		sensorMap.put(Names.windVectorMapname, new WindVectorSensorMap(sensorData, Names.windVector));
 		startMapThreads();
 	}
 	public void endMaps(){
 		sensorMap.forEach((string,sensormap) -> sensormap.interrupt());
 	}
 	private void startMapThreads() {
-		sensorMap.forEach((string,sensormap) -> 
-		{
+		sensorMap.forEach((string,sensormap) -> {
 			if(!sensormap.isAlive()){
 				sensormap.start();
 			}
-		}
-				);
+		});
 	}
 }

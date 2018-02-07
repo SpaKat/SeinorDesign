@@ -19,38 +19,31 @@ public class ShowMarkerMap {
 
 	private Map<Long,DataPoints> dataSameTime = new TreeMap<Long,DataPoints>();
 	private String name;
-
+	
 	public ShowMarkerMap(Map<Long, DataPoints> map, String name) {
 		dataSameTime.putAll(map);
 		this.name = name;
 		buildStage();
 		System.out.println(name);
 	}
-
+	
 	private void buildStage() {
 		Scene scene = new Scene(setGraph());
-
 		Stage stage = new Stage();
 		stage.setScene(scene);
 		stage.setTitle(name);
 		stage.show();
 	}
+	
 	private LineChart<String, Number> setGraph() {
 		final CategoryAxis xAxis = new CategoryAxis();
 		final NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Date");
 		final LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
-		
-		
 		xAxis.setLabel("Time in Milliseconds");
 		yAxis.setLabel("Value"); // enter via constructor
-
-
-
 		Series<String, Number> series = new XYChart.Series<String, Number>();
-
 		series.setName("Trend");
-
 		dataSameTime.forEach((time,data) -> {
 			series.getData().add(new XYChart.Data<>((new Date(time)).toString() ,data.getSensordata()));
 		});
@@ -61,7 +54,6 @@ public class ShowMarkerMap {
 		}
 		 */
 		xAxis.autosize();
-
 		lineChart.getData().add(series);
 		dataSameTime.clear();
 		return lineChart;

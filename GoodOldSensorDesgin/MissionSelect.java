@@ -3,27 +3,34 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
-public class MissionSelect extends VBox {
-
-	
-
-	File missionsFile;
-	String missionFileName = "missionsInfo.txt" ;
-	ComboBox<uavMission> selectThemission = new ComboBox<>();
+public class MissionSelect extends Menu {
+	private File missionsFile;
+	private String missionFileName = "missionsInfo.txt" ;
+	private ArrayList<UavMission> selectThemission = new ArrayList<>();
+	private Menu pastMissions = new Menu("Past Missions"); 
+	private UavMission uavMission;
 	
 	public MissionSelect() {
-		
 		missionsFile = new File(missionFileName);
-		
+		loadMissionFile();
+		setUpMissionSelectWindow();
+	}
+	private void loadMissionFile() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(missionsFile));
 			String missionName;
 			while ((missionName = br.readLine()) != null) {
-				selectThemission.getItems().add(new uavMission(missionName));
+				selectThemission.add(new UavMission(missionName));
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -31,17 +38,21 @@ public class MissionSelect extends VBox {
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		setUpMissionSelectWindow();
 	}
-
 	private void setUpMissionSelectWindow() {
-		getChildren().add(selectThemission);
+		String selectMissionsText = "Select Mission";
+		setText(selectMissionsText);
+		selectThemission.forEach(mission ->{
+			MenuItem menuItem = new MenuItem(mission.getName());
+			menuItem.setOnAction(e ->{
+				uavMission = mission;
+				fire();
+			});
+			pastMissions.getItems().add(menuItem);
+		});
+		getItems().add(pastMissions);
 	}
-
-	
-	
-	
-	
-	
-	
+	public UavMission getUavMission() {
+		return uavMission;
+	}
 }

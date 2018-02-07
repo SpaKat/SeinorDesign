@@ -13,7 +13,7 @@ public class PressureSensorMap extends SensorMap {
 	public void test() {
 		System.out.println("PRES Hello");
 	}
-
+/*
 	@Override
 	public void send(String messageFormat) {
 		//testign the gps
@@ -32,11 +32,11 @@ public class PressureSensorMap extends SensorMap {
 		getSensorData().addDataLine(str);
 
 	}
-
+*/
 	@Override
 	public void run() {
 
-		File fileData = new File(getMapName() +"_DATA.csv");
+		File fileData = new File(MissionStats.missionID  + "_" +getMapName() +"_DATA.csv");
 		System.out.println(getMapName() + "=" + fileData.getName());
 		BufferedWriter bw = null;
 		while(isRunning()){	
@@ -49,9 +49,8 @@ public class PressureSensorMap extends SensorMap {
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(System.currentTimeMillis() + DataFormat.SPLIT + str);
+							bw.write(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
 							bw.newLine();
-							//	System.out.println(Math.abs((startTime() - System.currentTimeMillis())) + DataFormat.SPLIT + str);
 							bw.close();
 						} catch (Exception e) {
 							e.printStackTrace();

@@ -21,14 +21,13 @@ public class GroundStationGUI extends Application {
 	/** Menu item for showing/hiding charts */			// Shows/clears all charts
 	private MenuItem miAbout;							// Displays info about the program
 	private MenuItem miSensorComm;
-	private MenuItem miSelectMision;
 	private Scene GmapScene;
 	private MissionSelect missionCharts;
 	private UavMission TheCurrentMission;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(miSelectMision,miSensorComm,miMavProx, miClose);
+		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);
@@ -37,19 +36,12 @@ public class GroundStationGUI extends Application {
 		GmapScene = new Scene(borderPane, 450, 400);
 		// Add the menubar and shapes to the borderpane
 		borderPane.setTop(menuBar);
-		//borderPane.setCenter(layersMap.getMapView());
-
 	}
 	private void setTheOnAct() {
-		//	miTemp.setOnAction(new ShowMap(miTemp,layersMap,"Temp"));
-		//	miHumidity.setOnAction(new ShowMap(miHumidity,layersMap,"Hum"));
-		//	miPressure.setOnAction(new ShowMap(miPressure,layersMap,"Pres"));
-		//	miWindVelocity.setOnAction(new ShowMap(miWindVelocity,layersMap,"Wind"));
 		miSensorComm.setOnAction(new SensorCommInterface());
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
 		miClose.setOnAction(e -> Platform.exit());
-		//	miRefresh.setOnAction(e -> {layersMap.reloadMaps();});
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
@@ -66,7 +58,6 @@ public class GroundStationGUI extends Application {
 		miMavProx= new MenuItem("MavProxy");
 		miSensorComm = new MenuItem("Sensor Communication");
 		miAbout = new MenuItem("About...");	
-		miSelectMision = new MenuItem("Mission Select");
 		// Create Menus
 		menuFile = new Menu("File");
 		missionCharts = new MissionSelect();

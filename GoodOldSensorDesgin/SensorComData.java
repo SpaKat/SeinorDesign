@@ -5,20 +5,22 @@ public class SensorComData extends Thread{
 	private boolean running = true;
 	public SensorComData() {
 		sensorComm = new SensorCom();
+		sensorComm.initialize();
 		data = new DataFormat();
 	}
 
-	public SensorComData(SensorCom sensorComm) {
-		this.sensorComm = sensorComm;
+	public SensorComData(SensorCom sensorCom) {
+		this.sensorComm = sensorCom;
+		sensorComm.initialize();
 		data = new DataFormat();
 	}
+
 	@Override
 	public void run() {
-		sensorComm.open();
 		while(running ){
 			try {
-			System.out.printf("%s \n",sensorComm.getMessageString() );
 			data.enterMessage(sensorComm.getMessageString());
+			//System.out.println(sensorComm.getMessageString());
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -31,7 +33,7 @@ public class SensorComData extends Thread{
 		System.out.println("SensorComData Stoped");
 	}
 	public static void main(String[] args) {
-		SensorComData test= new SensorComData(new SensorCom("COM12"));
+		SensorComData test= new SensorComData();
 		test.start();
 	}	
 }

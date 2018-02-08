@@ -10,6 +10,10 @@ public class DataPoints{
 		this.sensorID = sensorID;
 		this.sensordata = sensordata;
 	}
+	public DataPoints(String missionID,String sensorID) {
+		this.missionID = missionID;
+		this.sensorID = sensorID;
+	}
 	public String getSensorID() {
 		return sensorID;
 	}

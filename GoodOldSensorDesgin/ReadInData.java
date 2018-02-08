@@ -9,17 +9,15 @@ import java.util.TreeSet;
 
 public class ReadInData {
 	private File file;
-	private Map<Long, DataPoints> data; 
-	private Set<DataPoints> dataMarkers;
+	private Set<DataPoints> data; 
 	
 	public ReadInData(File file) {
 		this.file = file;
 		System.out.println("READ IN DATA: " +file.getName());
-		this.data = new TreeMap<Long,DataPoints>();
-		this.dataMarkers = new TreeSet<DataPoints>(new SameTime());
+		this.data = new TreeSet<DataPoints>(new SameTime());
 		load();
 	}
-	public Map<Long, DataPoints> getData() {
+	public Set<DataPoints> getData() {
 		return data;
 	}
 	public void load() {
@@ -35,24 +33,25 @@ public class ReadInData {
 							Double.parseDouble(strarray[3])
 							);
 					dp.setTime(Math.abs(Long.parseLong(strarray[1])));
-					data.put(dp.getTime(),dp);
+					data.add(dp);
 				}catch(Exception e){
-					System.err.println("FAILIN------------------------------------------------------");
+					System.err.println("FAILIN------------------------------------------------------" + file.getName());
 				}
-				data.forEach((time,data) -> {
-					dataMarkers.add(data);
-				});
 			}
 			br.close();
-			 
-
-			System.out.println(dataMarkers.size());
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-	public Set<DataPoints> getDataMarkers() {
-		return dataMarkers;
+	public File getFile() {
+		return file;
+	}
+	public void setFile(File file) {
+		this.file = file;
+	}
+	public void setData(Set<DataPoints> data) {
+		this.data = data;
 	}
 }

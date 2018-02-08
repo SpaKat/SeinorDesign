@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Vector;
 
 public class DataFormat {
 	public static final String SPLIT = ",";

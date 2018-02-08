@@ -1,11 +1,6 @@
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.transaction.xa.XAResource;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;

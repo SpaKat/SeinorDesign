@@ -1,7 +1,5 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -51,7 +49,6 @@ public class GroundStationGUI extends Application {
 		});
 	}
 	private void makeVariables() {
-		//		layersMap = new LayersMap();
 		// Create the BorderPane
 		borderPane = new BorderPane();
 		/* MENU CREATION */
@@ -74,7 +71,6 @@ public class GroundStationGUI extends Application {
 		primaryStage.setScene(GmapScene);
 		primaryStage.setTitle("UAV Weather Tool");
 		primaryStage.show();
-
 	}
 	public static void main(String[] args) {
 		GroundStationGUI.launch(args);
@@ -82,6 +78,4 @@ public class GroundStationGUI extends Application {
 	public void setTheCurrentMission(UavMission theCurrentMission) {
 		TheCurrentMission = theCurrentMission;
 	}
-
 }
-

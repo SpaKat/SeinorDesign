@@ -1,7 +1,5 @@
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
-import java.util.stream.Stream;
 
 public class SensorData {
 	//private Set<String> dataCheck = new TreeSet<String>();

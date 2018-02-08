@@ -1,10 +1,10 @@
 import java.io.InputStream;
-import java.io.OutputStream;
-import gnu.io.CommPortIdentifier; 
-import gnu.io.SerialPort;
-import gnu.io.SerialPortEvent; 
-import gnu.io.SerialPortEventListener; 
 import java.util.Enumeration;
+
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 
 public class SensorCom implements SerialPortEventListener {
 	SerialPort serialPort;
@@ -15,7 +15,7 @@ public class SensorCom implements SerialPortEventListener {
 	/** Buffered input stream from the port */
 	private InputStream input;
 	/** The output stream to the port */
-	private OutputStream output;
+//	private OutputStream output;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
@@ -67,7 +67,7 @@ public class SensorCom implements SerialPortEventListener {
 
 			// open the streams
 			input = serialPort.getInputStream();
-			output = serialPort.getOutputStream();
+//			output = serialPort.getOutputStream();
 
 			// add event listeners
 			serialPort.addEventListener(this);

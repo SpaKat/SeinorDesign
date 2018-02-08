@@ -26,6 +26,9 @@ public class MissionSelect extends Menu {
 		loadMissionFile();
 		setUpMissionSelectWindow();
 	}
+	public MissionSelect(Boolean load) {
+		loadMissionFile();
+	}
 	private void loadMissionFile() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(missionsFile));

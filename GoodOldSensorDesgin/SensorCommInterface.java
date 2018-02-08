@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -14,16 +17,20 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 	SensorComData sensorComData;
 	GridPane gridpane;
 	Stage stage = new Stage();
+	ComboBox<UavMission> TheUAVMissions = new ComboBox<UavMission>();
 	@Override
 	public void handle(ActionEvent arg0) {
-			
-		
 		gridpane = new GridPane();
+		//TheUAVMissions.getItems().addAll(getAllMissions());
 		initGridPane();
 		Scene scene = new Scene(gridpane);
 		
 		stage.setScene(scene);
 		stage.show();
+	}
+	private ArrayList<UavMission> getAllMissions() {
+		MissionSelect selectMision = new MissionSelect(true);
+		return selectMision.getSelectThemission();
 	}
 	private void initGridPane() {
 		Text askCOMports = new Text("Enter the COM ports of the Telemerty");
@@ -34,10 +41,12 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		stop.setDisable(true);
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
-		gridpane.addRow(2, start);
-		gridpane.addRow(2, stop);
-		gridpane.addRow(2, exit);
+		gridpane.addRow(2, TheUAVMissions);
+		gridpane.addRow(3, start);
+		gridpane.addRow(3, stop);
+		gridpane.addRow(3, exit);
 		start.setOnAction(en -> {
+			//MissionStats.missionID 
 			sensorCom = new SensorCom(enterCOMports.getText().trim());
 			sensorComData= new SensorComData(sensorCom);
 			sensorComData.start();

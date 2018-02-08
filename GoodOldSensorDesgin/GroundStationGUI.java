@@ -24,10 +24,11 @@ public class GroundStationGUI extends Application {
 	private Scene GmapScene;
 	private MissionSelect missionCharts;
 	private UavMission TheCurrentMission;
+	private CreateNewMission createNewMission;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(miSensorComm,miMavProx, miClose);
+		menuFile.getItems().addAll(createNewMission,miSensorComm,miMavProx, miClose);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);
@@ -44,6 +45,7 @@ public class GroundStationGUI extends Application {
 		miClose.setOnAction(e -> Platform.exit());
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
+			MissionStats.missionID =missionCharts.getUavMission().getID();
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 		});
@@ -64,6 +66,7 @@ public class GroundStationGUI extends Application {
 		menuHelp = new Menu("Help");		
 		// Create MenuBar
 		menuBar = new MenuBar();
+		createNewMission = new CreateNewMission(missionCharts);
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {

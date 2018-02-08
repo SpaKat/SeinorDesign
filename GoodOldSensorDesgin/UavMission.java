@@ -11,7 +11,10 @@ public class UavMission {
 		setName(nameArray[0]);
 		setID(nameArray[1]);
 	}
-	
+	public UavMission(String missionName, String ID) {
+		this.name = missionName;
+		this.ID = ID;
+	}
 	
 	@Override
 	public String toString() {

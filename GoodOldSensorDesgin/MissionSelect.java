@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,9 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class MissionSelect extends Menu {
 	private File missionsFile;
@@ -21,6 +20,8 @@ public class MissionSelect extends Menu {
 	private UavMission uavMission;
 	
 	public MissionSelect() {
+		String selectMissionsText = "Select Mission";
+		setText(selectMissionsText);
 		missionsFile = new File(missionFileName);
 		loadMissionFile();
 		setUpMissionSelectWindow();
@@ -39,9 +40,24 @@ public class MissionSelect extends Menu {
 			e.printStackTrace();
 		}
 	}
+	private void SaveMissionFile() {
+		try {
+			BufferedWriter wr = new BufferedWriter(new FileWriter(missionsFile));
+			selectThemission.forEach(mission ->{
+				try {
+					wr.write(mission.getName() +","+mission.getID());
+					wr.newLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+			wr.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	private void setUpMissionSelectWindow() {
-		String selectMissionsText = "Select Mission";
-		setText(selectMissionsText);
 		selectThemission.forEach(mission ->{
 			MenuItem menuItem = new MenuItem(mission.getName());
 			menuItem.setOnAction(e ->{
@@ -52,7 +68,20 @@ public class MissionSelect extends Menu {
 		});
 		getItems().add(pastMissions);
 	}
+	
 	public UavMission getUavMission() {
 		return uavMission;
+	}
+	public ArrayList<UavMission> getSelectThemission() {
+		return selectThemission;
+	}
+	public void refresh() {
+		getItems().clear();
+		pastMissions.getItems().clear();
+		setUpMissionSelectWindow();
+		SaveMissionFile();
+	}
+	public void setUavMission(UavMission uavMission) {
+		this.uavMission = uavMission;
 	}
 }

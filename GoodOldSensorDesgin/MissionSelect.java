@@ -27,6 +27,7 @@ public class MissionSelect extends Menu {
 		setUpMissionSelectWindow();
 	}
 	public MissionSelect(Boolean load) {
+		missionsFile = new File(missionFileName);
 		loadMissionFile();
 	}
 	private void loadMissionFile() {

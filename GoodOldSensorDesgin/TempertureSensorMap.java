@@ -24,11 +24,12 @@ public class TempertureSensorMap extends SensorMap {
 					bw = new BufferedWriter(new FileWriter(fileData, true));
 					String string = getSensorData().remove();
 					String[] strArray = string.split(DataFormat.SPLIT);
-					if(strArray[0].toUpperCase().equals("TEMP")){
+					if(strArray[0].toUpperCase().equals(Names.tempertureMapname)){
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
 						try {
 							bw.write(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
+							System.out.println(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
 							bw.newLine();
 							bw.close();
 						} catch (Exception e) {

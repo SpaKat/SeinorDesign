@@ -28,6 +28,7 @@ public class HumiditySensorMap extends SensorMap {
 						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
 						try {
 							bw.write(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
+							System.out.println(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
 							bw.newLine();
 							bw.close();
 						} catch (Exception e) {

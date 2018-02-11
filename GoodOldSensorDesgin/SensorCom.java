@@ -10,7 +10,7 @@ public class SensorCom implements SerialPortEventListener {
 	SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private String PORT_NAMES[] = { 
-			"COM12", // Windows
+			"COM14", // Windows
 	};
 	/** Buffered input stream from the port */
 	private InputStream input;
@@ -19,7 +19,7 @@ public class SensorCom implements SerialPortEventListener {
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
-	private static final int DATA_RATE = 56700;
+	private static final int DATA_RATE = 57600;
 	/** The Return massage string **/
 	String messageString = "nothing";
 	private static final char START_MESSAGE = '[';
@@ -108,6 +108,7 @@ public class SensorCom implements SerialPortEventListener {
 					}
 				}
 				messageString = build;
+			//	System.out.println(build);
 			} catch (Exception e) {
 			//	System.err.println(e.toString());
 			}

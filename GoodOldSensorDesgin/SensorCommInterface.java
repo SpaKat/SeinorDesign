@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -9,8 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
 public class SensorCommInterface implements EventHandler<ActionEvent> {
 	
 	SensorCom sensorCom ;
@@ -18,10 +15,11 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 	GridPane gridpane;
 	Stage stage = new Stage();
 	ComboBox<UavMission> TheUAVMissions = new ComboBox<UavMission>();
+	ComboBox<String> ComPorts = new ComboBox<String>();
 	@Override
 	public void handle(ActionEvent arg0) {
 		gridpane = new GridPane();
-		//TheUAVMissions.getItems().addAll(getAllMissions());
+		TheUAVMissions.getItems().addAll(getAllMissions());
 		initGridPane();
 		Scene scene = new Scene(gridpane);
 		
@@ -42,11 +40,12 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
 		gridpane.addRow(2, TheUAVMissions);
-		gridpane.addRow(3, start);
-		gridpane.addRow(3, stop);
+		gridpane.addRow(3, ComPorts);
+		gridpane.addRow(1, start);
+		gridpane.addRow(2, stop);
 		gridpane.addRow(3, exit);
 		start.setOnAction(en -> {
-			//MissionStats.missionID 
+			MissionStats.missionID = TheUAVMissions.getValue().getID();
 			sensorCom = new SensorCom(enterCOMports.getText().trim());
 			sensorComData= new SensorComData(sensorCom);
 			sensorComData.start();
@@ -59,7 +58,11 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 			stop.setDisable(true);
 		});
 		exit.setOnAction(ex ->{
+			try {
 			sensorComData.interrupt();
+			}catch(Exception e) {
+				
+			}
 			stage.close();
 		});
 	}

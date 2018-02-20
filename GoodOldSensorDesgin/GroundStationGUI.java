@@ -23,10 +23,12 @@ public class GroundStationGUI extends Application {
 	private MissionSelect missionCharts;
 	private UavMission TheCurrentMission;
 	private CreateNewMission createNewMission;
+	private MenuItem miUAVtoMissionData;
+	private Stage primaryStage;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(createNewMission,miSensorComm,miMavProx, miClose);
+		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miMavProx, miClose);
 		menuHelp.getItems().add(miAbout);
 		// Add menus to menuBar
 		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);
@@ -47,6 +49,9 @@ public class GroundStationGUI extends Application {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 		});
+		miUAVtoMissionData.setOnAction(e->{
+			((UAVtoMissionData) miUAVtoMissionData).runMissionData();
+		});
 	}
 	private void makeVariables() {
 		// Create the BorderPane
@@ -64,9 +69,11 @@ public class GroundStationGUI extends Application {
 		// Create MenuBar
 		menuBar = new MenuBar();
 		createNewMission = new CreateNewMission(missionCharts);
+		primaryStage = new Stage();
+		miUAVtoMissionData = new UAVtoMissionData();
 	}
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage stage) throws Exception {
 		// Configure and display the stage
 		primaryStage.setScene(GmapScene);
 		primaryStage.setTitle("UAV Weather Tool");

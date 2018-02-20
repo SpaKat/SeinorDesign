@@ -18,4 +18,8 @@ public class GPSLocation {
 	public void setLatitude(double latitude) {
 		Latitude = latitude;
 	}
+	@Override
+	public String toString() {
+		return  Latitude +","+ Lonitude;
+	}
 }

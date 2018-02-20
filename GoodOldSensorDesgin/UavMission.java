@@ -1,8 +1,6 @@
 
 
 public class UavMission {
-
-	
 	String name;
 	String ID;
 	GPSLocation GpsLocation = new GPSLocation();

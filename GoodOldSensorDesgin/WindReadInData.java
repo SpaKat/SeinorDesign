@@ -30,7 +30,7 @@ public class WindReadInData extends ReadInData {
 			}
 			br.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 

@@ -13,5 +13,6 @@ public class Names {
 	static String windVector = "WIND VECTOR";
 	static String windVectorMapname = "WIND";
 	
+	static String mavlinkcommadposition = "mavlink_global_position_int_t";
 	
 }

@@ -61,24 +61,4 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 		addMission(currentMission);
 		loadMaps();
 	}
-
-	public void showMap(String mapName) {
-		/*	maps.forEach((name,map) -> {
-			if (name.toUpperCase().equals(mapName.toUpperCase())) {
-				map.loadingShapes();
-			}
-		});*/
-	}
-
-	public void removeMap(String mapName) {
-		/*	maps.forEach((name,map) -> {
-			if (name.toUpperCase().equals(mapName.toUpperCase())) {
-				map.removeShapes();
-			}
-		});
-		 */
-	}
-
-
-
 }

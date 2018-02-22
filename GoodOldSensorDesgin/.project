@@ -14,4 +14,10 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>DLL</name>
+			<value>file:/C:/jars/dll</value>
+		</variable>
+	</variableList>
 </projectDescription>

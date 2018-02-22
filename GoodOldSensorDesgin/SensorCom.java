@@ -28,12 +28,10 @@ public class SensorCom implements SerialPortEventListener {
 
 
 	public SensorCom(String trim) {
-		PORT_NAMES = new String[]{trim};
-
+		PORT_NAMES = new String[]{trim};	
 	}
-
 	public SensorCom() {
-
+		
 	}
 	public ArrayList<String> getAllavaiablePorts() {
 		ArrayList<String> comports = new ArrayList<>(); 

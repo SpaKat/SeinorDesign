@@ -25,6 +25,8 @@ public class GroundStationGUI extends Application {
 	private CreateNewMission createNewMission;
 	private MenuItem miUAVtoMissionData;
 	private Stage primaryStage;
+	private boolean online = false;
+	private OfflineMapGUI offlineMapGUI;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
@@ -46,8 +48,14 @@ public class GroundStationGUI extends Application {
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
 			MissionStats.missionID =missionCharts.getUavMission().getID();
-			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
-			borderPane.setCenter(googleMapGUI.getMapView());
+			System.out.println("Gucci");
+			if(online) {
+				googleMapGUI = new GoogleMapGUI(TheCurrentMission);
+				borderPane.setCenter(googleMapGUI.getMapView());
+			}else {
+				offlineMapGUI = new OfflineMapGUI();
+				borderPane.setCenter(offlineMapGUI);
+			}
 		});
 		miUAVtoMissionData.setOnAction(e->{
 			((UAVtoMissionData) miUAVtoMissionData).runMissionData();

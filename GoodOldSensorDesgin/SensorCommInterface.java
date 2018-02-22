@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -8,8 +11,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 public class SensorCommInterface implements EventHandler<ActionEvent> {
-	
+
 	SensorCom sensorCom ;
 	SensorComData sensorComData;
 	GridPane gridpane;
@@ -22,7 +26,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		TheUAVMissions.getItems().addAll(getAllMissions());
 		initGridPane();
 		Scene scene = new Scene(gridpane);
-		
+
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -44,6 +48,20 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		gridpane.addRow(1, start);
 		gridpane.addRow(2, stop);
 		gridpane.addRow(3, exit);
+		sensorCom = new SensorCom();
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(.1), e -> {
+			ComPorts.getItems().clear();
+			sensorCom.getAllavaiablePorts().forEach(portName ->{
+				ComPorts.getItems().add(portName);
+			});
+
+		}));
+		timeline.play();
+		ComPorts.setOnAction(selectedPort ->{
+			enterCOMports.setText(ComPorts.getValue());
+		});
 		start.setOnAction(en -> {
 			MissionStats.missionID = TheUAVMissions.getValue().getID();
 			sensorCom = new SensorCom(enterCOMports.getText().trim());
@@ -51,7 +69,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 			sensorComData.start();
 			start.setDisable(true);
 			stop.setDisable(false);
-			});
+		});
 		stop.setOnAction(st ->{
 			sensorComData.interrupt();
 			start.setDisable(false);
@@ -59,12 +77,10 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		});
 		exit.setOnAction(ex ->{
 			try {
-			sensorComData.interrupt();
-			}catch(Exception e) {
-				
-			}
+				sensorComData.interrupt();
+			}catch(Exception e) {}
 			stage.close();
 		});
 	}
-	
+
 }

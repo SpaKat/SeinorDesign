@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import javafx.concurrent.Task;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -40,6 +42,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		Button start = new Button("Start");
 		Button stop = new Button("Stop");
 		Button exit = new Button("Exit");
+		Button findcoms = new Button("Find COM Ports");
 		stop.setDisable(true);
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
@@ -47,20 +50,19 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		gridpane.addRow(3, ComPorts);
 		gridpane.addRow(1, start);
 		gridpane.addRow(2, stop);
-		gridpane.addRow(3, exit);
+		gridpane.addRow(3, findcoms);
+		gridpane.addRow(4, exit);
 		sensorCom = new SensorCom();
-		Timeline timeline = new Timeline();
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(.1), e -> {
+
+		ComPorts.setOnAction(selectedPort -> {
+			enterCOMports.setText(ComPorts.getValue());
+		});
+		findcoms.setOnAction(find ->{
 			ComPorts.getItems().clear();
 			sensorCom.getAllavaiablePorts().forEach(portName ->{
 				ComPorts.getItems().add(portName);
 			});
 
-		}));
-		timeline.play();
-		ComPorts.setOnAction(selectedPort ->{
-			enterCOMports.setText(ComPorts.getValue());
 		});
 		start.setOnAction(en -> {
 			MissionStats.missionID = TheUAVMissions.getValue().getID();
@@ -72,6 +74,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		});
 		stop.setOnAction(st ->{
 			sensorComData.interrupt();
+
 			start.setDisable(false);
 			stop.setDisable(true);
 		});
@@ -80,6 +83,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 				sensorComData.interrupt();
 			}catch(Exception e) {}
 			stage.close();
+
 		});
 	}
 

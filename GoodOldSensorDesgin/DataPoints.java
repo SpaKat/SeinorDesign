@@ -1,10 +1,11 @@
-
+/*Creates data variables and returns them*/
 public class DataPoints{
 	private String sensorID;
 	private String missionID;
 	private double sensordata;
 	private double elevation; 
 	private long time;
+	
 	public DataPoints(String missionID,String sensorID,double sensordata) {
 		this.missionID = missionID;
 		this.sensorID = sensorID;

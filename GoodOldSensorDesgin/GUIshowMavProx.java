@@ -1,3 +1,4 @@
+/*Creates/shows the MavProxy so you can type commands in*/
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,42 +11,32 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GUIshowMavProx extends Stage {
-	//pane
 	GridPane grid = new GridPane();
 	private BorderPane pane; 
 	
 	public GUIshowMavProx() {
-	// Add StackPane
 			pane = new BorderPane();
-			
-	//define text field
-			final TextField commandText = new TextField();
+			final TextField commandText = new TextField();	//define text fields
 			Label label = new Label ("Enter command:");
 			commandText.setPromptText("What're you waiting for?");
 			commandText.setPrefColumnCount(20);
 			commandText.getText();
 			GridPane.setConstraints(commandText, 2, 0);
 			GridPane.setConstraints(label, 1, 0);
-			 
-	//Defining the enter button
-			Button enter = new Button("Enter");
-			enter.setStyle("-fx-font: 20 Times New Roman;"); //change button color
-			GridPane.setConstraints(enter, 3, 0);
+			Button enter = new Button("Enter");					//define enter button
+			enter.setStyle("-fx-font: 20 Times New Roman;"); 	//change button color
+			GridPane.setConstraints(enter, 3, 0);				//place button on pane
+			Button clear = new Button("Clear");					//Defining the Clear button
+			clear.setStyle("-fx-font: 20 Times New Roman;"); 	//change button color
+			GridPane.setConstraints(clear, 4, 0);				//place button on pane
 			
-			//Defining the Clear button
-			Button clear = new Button("Clear");
-			clear.setStyle("-fx-font: 20 Times New Roman;"); //change button color
-			GridPane.setConstraints(clear, 4, 0);
-			
-			//add it all
-			grid.getChildren().addAll(clear, enter, label, commandText);
+			grid.getChildren().addAll(clear, enter, label, commandText);	//add it all
 			
 			//Setting an action for the Clear button
 			clear.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			    public void handle(ActionEvent e) {
 			        commandText.clear();
-			      
 			    }
 			});
 			
@@ -55,18 +46,10 @@ public class GUIshowMavProx extends Stage {
 			setTitle("MavProxy");
 			setResizable(false);
 			show();
-			//GridPane things
+			
 			grid.setPadding(new Insets(20, 20, 20, 20));
 			grid.setVgap(5);
 			grid.setHgap(5);
-			pane.setCenter(grid);
-			
+			pane.setCenter(grid);		
 	}
-	//once user presses enter, call openPython class
-	/*public void actionPerformed(ActionEvent e) {     
-                 
-         }
-	    }*/
-	
-	 
 }

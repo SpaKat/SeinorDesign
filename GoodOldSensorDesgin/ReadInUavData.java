@@ -1,3 +1,4 @@
+/*Reads the data from a file (from uav)*/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

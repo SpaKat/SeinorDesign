@@ -1,9 +1,9 @@
+/*Reads in all of the data from different files*/
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Set;
 import java.util.TreeSet;
-
 
 public class ReadInData {
 	private File file;

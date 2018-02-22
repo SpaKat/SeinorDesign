@@ -8,13 +8,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class GroundStationGUI extends Application {
-	//change
 	private GoogleMapGUI googleMapGUI;
-	// Pane
 	private BorderPane borderPane;
-	// Menu stuff
 	private MenuBar menuBar;							// MenuBar
-	private Menu menuFile, menuHelp;		// Menus
+	private Menu menuFile, menuHelp;					// Menus
 	private MenuItem miClose, miMavProx;				// Close MenuItem or open window for mavproxy
 	/** Menu item for showing/hiding charts */			// Shows/clears all charts
 	private MenuItem miAbout;							// Displays info about the program
@@ -25,19 +22,18 @@ public class GroundStationGUI extends Application {
 	private CreateNewMission createNewMission;
 	private MenuItem miUAVtoMissionData;
 	private Stage primaryStage;
+	
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
 		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miMavProx, miClose);
 		menuHelp.getItems().add(miAbout);
-		// Add menus to menuBar
-		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);
+		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);		// Add menus to menuBar
 		setTheOnAct();
-		/* PUT EVERYTHING TOGETHER */
-		GmapScene = new Scene(borderPane, 450, 400);
-		// Add the menubar and shapes to the borderpane
-		borderPane.setTop(menuBar);
+		GmapScene = new Scene(borderPane, 450, 400);						/* PUT EVERYTHING TOGETHER */
+		borderPane.setTop(menuBar);											// Add the menubar and shapes to the borderpane
 	}
+	/*Tells buttons to do things*/
 	private void setTheOnAct() {
 		miSensorComm.setOnAction(new SensorCommInterface());
 		miAbout.setOnAction(e -> new GUIshowAbout());
@@ -54,27 +50,23 @@ public class GroundStationGUI extends Application {
 		});
 	}
 	private void makeVariables() {
-		// Create the BorderPane
 		borderPane = new BorderPane();
 		/* MENU CREATION */
-		// Create MenuItems
 		miClose = new MenuItem("Close");
 		miMavProx= new MenuItem("MavProxy");
 		miSensorComm = new MenuItem("Sensor Communication");
-		miAbout = new MenuItem("About...");	
-		// Create Menus
+		miAbout = new MenuItem("About...");
 		menuFile = new Menu("File");
 		missionCharts = new MissionSelect();
 		menuHelp = new Menu("Help");		
-		// Create MenuBar
 		menuBar = new MenuBar();
 		createNewMission = new CreateNewMission(missionCharts);
 		primaryStage = new Stage();
 		miUAVtoMissionData = new UAVtoMissionData();
 	}
 	@Override
+	// Configure and display stage
 	public void start(Stage stage) throws Exception {
-		// Configure and display the stage
 		primaryStage.setScene(GmapScene);
 		primaryStage.setTitle("UAV Weather Tool");
 		primaryStage.show();

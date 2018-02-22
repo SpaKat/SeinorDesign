@@ -1,4 +1,4 @@
-
+/*Pulls data from the sensor */
 public class SensorComData extends Thread{
 	SensorCom sensorComm;
 	DataFormat data;

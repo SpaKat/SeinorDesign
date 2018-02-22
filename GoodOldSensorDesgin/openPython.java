@@ -21,7 +21,6 @@ private static void executeCommand(final String command){
                     p.getOutputStream().write(bytes);
                     p.getOutputStream().flush();
                 }
-
                 System.out.println("bindIn ended");
             }catch(Exception e){
                 e.printStackTrace();
@@ -38,7 +37,6 @@ private static void executeCommand(final String command){
                     p.getInputStream().read(bytes);
                     System.out.write(bytes);
                 }
-
                 System.out.println("bindOut ended");
             }catch(Exception e){
                 e.printStackTrace();
@@ -48,13 +46,10 @@ private static void executeCommand(final String command){
 
         bindIn.start();
         bindOut.start();
-
         p.waitFor();
-
         bindIn.interrupt();
         bindOut.interrupt();
     }catch(Exception e){
         e.printStackTrace();
     }
-}
-}
+}}

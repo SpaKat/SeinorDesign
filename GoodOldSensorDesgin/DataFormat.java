@@ -1,3 +1,4 @@
+/*Formats the data and puts the data onto the hashmap*/
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,7 +12,7 @@ public class DataFormat {
 	public void enterMessage(String messageString) {
 		String[] messageFormat = messageString.split(SPLIT);
 		try{
-			// find the map that has the same id
+			// finds map that has the same id
 			sensorMap.get(messageFormat[0].toUpperCase()).send(messageString);
 		}catch(NullPointerException e){
 			//catch the starting nothing string 

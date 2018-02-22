@@ -1,5 +1,5 @@
+/*The CreateNewMission file asks the user for a mission name and ID and creates and saves the user input*/
 import java.util.ArrayList;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;

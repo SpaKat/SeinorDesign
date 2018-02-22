@@ -1,3 +1,4 @@
+/*The Pressure Sensor Map, it gets the correct data from a specific file and outputs the data on a map*/
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,7 +9,6 @@ public class PressureSensorMap extends SensorMap {
 		super(sensorData,name);
 		this.start();
 	}
-
 	@Override
 	public void test() {
 		System.out.println("PRES Hello");

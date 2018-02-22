@@ -1,4 +1,4 @@
-
+/*declares names of data variables and their respective maps*/
 public class Names {
 	
 	static String temperture = "TEMPERATURE";

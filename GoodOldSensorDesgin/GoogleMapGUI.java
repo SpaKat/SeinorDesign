@@ -1,7 +1,7 @@
+/*We use the Google library for Google Maps to show where missions are conducted*/
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
@@ -9,16 +9,15 @@ import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
-
 import netscape.javascript.JSObject;
 
 
 public class GoogleMapGUI  implements MapComponentInitializedListener{
-	//change
 	private GoogleMapView mapView;
 	private GoogleMap map;
 	private ArrayList<UAVMissionGUI> missions = new ArrayList<UAVMissionGUI>();
 	UavMission currentMission;
+	
 	public GoogleMapGUI(UavMission theCurrentMission) {
 		currentMission = theCurrentMission; 
 		mapView = new GoogleMapView();
@@ -30,7 +29,6 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 	public void addMission(UavMission uavmission) {
 		missions.add(new UAVMissionGUI(uavmission));
 	}
-
 	private void loadMaps() {
 		missions.forEach(mission ->{
 			map.addUIEventHandler(mission.getMarker(), UIEventType.click, (JSObject obj) ->{
@@ -45,7 +43,7 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 	}
 	@Override
 	public void mapInitialized() {
-		//Set the initial properties of the map.
+		//Set the initial properties of the map
 		MapOptions mapOptions = new MapOptions();
 		mapOptions.center(new LatLong(29.2108, -81.0228))
 		.mapType(MapTypeIdEnum.ROADMAP)
@@ -75,10 +73,6 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 			if (name.toUpperCase().equals(mapName.toUpperCase())) {
 				map.removeShapes();
 			}
-		});
-		 */
+		});*/
 	}
-
-
-
 }

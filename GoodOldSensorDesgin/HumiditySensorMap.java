@@ -1,3 +1,4 @@
+/*Calls humidity data and prints it onto the humidity map*/
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -41,7 +42,6 @@ public class HumiditySensorMap extends SensorMap {
 			} catch (Exception e) {
 			//	e.printStackTrace();
 			}
-
 		}
 	}
 	@Override

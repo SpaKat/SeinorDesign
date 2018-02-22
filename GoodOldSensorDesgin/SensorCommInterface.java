@@ -31,8 +31,8 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		return selectMision.getSelectThemission();
 	}
 	private void initGridPane() {
-		Text askCOMports = new Text("Enter the COM ports of the Telemerty");
-		TextField enterCOMports = new TextField("COM12");
+		Text askCOMports = new Text("Enter the COM ports of the Telemetry");
+		TextField enterCOMports = new TextField("COM");
 		Button start = new Button("Start");
 		Button stop = new Button("Stop");
 		Button exit = new Button("Exit");
@@ -40,7 +40,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
 		gridpane.addRow(2, TheUAVMissions);
-		gridpane.addRow(3, ComPorts);
+		//gridpane.addRow(3, ComPorts);
 		gridpane.addRow(1, start);
 		gridpane.addRow(2, stop);
 		gridpane.addRow(3, exit);

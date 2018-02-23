@@ -16,6 +16,7 @@ public class UAVMissionGUI {
 		readyGraphs();	
 	}
 	private void makeMarker() {
+		uavMission.loadNewGPSLocation();
 		LatLong markerPositon = new LatLong(
 				uavMission.getGpsLocation().getLonitude(),
 				uavMission.getGpsLocation().getLatitude() 
@@ -46,7 +47,6 @@ public class UAVMissionGUI {
 	}
 	public Marker getMarker() {
 		return marker;
-
 	}
 	public void showGraphs() {
 		graphs.forEach(graph ->{

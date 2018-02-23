@@ -1,7 +1,7 @@
-/*We use the Google library for Google Maps to show where missions are conducted*/
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.event.UIEventType;
@@ -9,15 +9,16 @@ import com.lynden.gmapsfx.javascript.object.GoogleMap;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+
 import netscape.javascript.JSObject;
 
 
 public class GoogleMapGUI  implements MapComponentInitializedListener{
+	//change
 	private GoogleMapView mapView;
 	private GoogleMap map;
 	private ArrayList<UAVMissionGUI> missions = new ArrayList<UAVMissionGUI>();
 	UavMission currentMission;
-	
 	public GoogleMapGUI(UavMission theCurrentMission) {
 		currentMission = theCurrentMission; 
 		mapView = new GoogleMapView();
@@ -29,6 +30,7 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 	public void addMission(UavMission uavmission) {
 		missions.add(new UAVMissionGUI(uavmission));
 	}
+
 	private void loadMaps() {
 		missions.forEach(mission ->{
 			map.addUIEventHandler(mission.getMarker(), UIEventType.click, (JSObject obj) ->{
@@ -58,21 +60,5 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 		map = mapView.createMap(mapOptions);
 		addMission(currentMission);
 		loadMaps();
-	}
-
-	public void showMap(String mapName) {
-		/*	maps.forEach((name,map) -> {
-			if (name.toUpperCase().equals(mapName.toUpperCase())) {
-				map.loadingShapes();
-			}
-		});*/
-	}
-
-	public void removeMap(String mapName) {
-		/*	maps.forEach((name,map) -> {
-			if (name.toUpperCase().equals(mapName.toUpperCase())) {
-				map.removeShapes();
-			}
-		});*/
 	}
 }

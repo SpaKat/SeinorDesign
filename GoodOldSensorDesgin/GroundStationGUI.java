@@ -23,6 +23,8 @@ public class GroundStationGUI extends Application {
 	private MenuItem miUAVtoMissionData;
 	private Stage primaryStage;
 	
+	private boolean online = false;
+	private OfflineMapGUI offlineMapGUI;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus

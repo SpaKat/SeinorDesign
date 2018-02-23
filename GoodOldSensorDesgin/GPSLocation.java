@@ -4,7 +4,7 @@ public class GPSLocation {
 	private double Lonitude = 29.2108;
 	private double Latitude = -81.0228;
 	public GPSLocation() {
-	
+		
 	}
 	public double getLonitude() {
 		return Lonitude;

@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import gnu.io.CommPortIdentifier;
@@ -15,7 +16,7 @@ public class SensorCom implements SerialPortEventListener {
 	/** Buffered input stream from the port */
 	private InputStream input;
 	/** The output stream to the port */
-//	private OutputStream output;
+	//	private OutputStream output;
 	/** Milliseconds to block while waiting for port open */
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
@@ -25,21 +26,33 @@ public class SensorCom implements SerialPortEventListener {
 	private static final char START_MESSAGE = '[';
 	private static final char END_MESSAGE = ']';
 
-	
+
 	public SensorCom(String trim) {
+<<<<<<< HEAD
 		PORT_NAMES = new String[]{trim};
+=======
+		PORT_NAMES = new String[]{trim};	
+>>>>>>> branch 'Dean' of https://github.com/SpaKat/SeinorDesign.git
 	}
-
 	public SensorCom() {
-
+		
 	}
-
+	public ArrayList<String> getAllavaiablePorts() {
+		ArrayList<String> comports = new ArrayList<>(); 
+		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
+		while (portEnum.hasMoreElements()) {
+			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
+			comports.add(currPortId.getName());
+		}
+		return comports;
+	}
 	public void initialize() {
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 		// iterate through, looking for the port
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
+			System.out.println(currPortId.getName());
 			for (String portName : PORT_NAMES) {
 				if (currPortId.getName().equals(portName)) {
 					portId = currPortId;
@@ -66,7 +79,7 @@ public class SensorCom implements SerialPortEventListener {
 
 			// open the streams
 			input = serialPort.getInputStream();
-//			output = serialPort.getOutputStream();
+			//			output = serialPort.getOutputStream();
 
 			// add event listeners
 			serialPort.addEventListener(this);
@@ -107,9 +120,9 @@ public class SensorCom implements SerialPortEventListener {
 					}
 				}
 				messageString = build;
-			//	System.out.println(build);
+				//	System.out.println(build);
 			} catch (Exception e) {
-			//	System.err.println(e.toString());
+				//	System.err.println(e.toString());
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.

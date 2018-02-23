@@ -20,7 +20,7 @@ public class SensorComData extends Thread{
 		while(running ){
 			try {
 			data.enterMessage(sensorComm.getMessageString());
-			//System.out.println(sensorComm.getMessageString());
+		//	System.out.println(sensorComm.getMessageString());
 			}catch (Exception e) {
 				e.printStackTrace();
 			}

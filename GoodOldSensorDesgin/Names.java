@@ -1,17 +1,18 @@
 /*declares names of data variables and their respective maps*/
 public class Names {
 	
-	static String temperture = "TEMPERATURE";
-	static String tempertureMapname = "TEMP";
+	public static final String mavlinkcommadposition = "mavlink_global_position_int_t";
+	public static final String temperture = "TEMPERATURE";
+	public static final String tempertureMapname = "TEMP";
 	
-	static String Humdity = "HUMIDITY";
-	static String HumdityMapname = "HUM";
+	public static final String Humdity = "HUMIDITY";
+	public static final String HumdityMapname = "HUM";
 	
-	static String pressure = "PRESSURE";
-	static String pressureMapname = "PRES";
+	public static final String pressure = "PRESSURE";
+	public static final String pressureMapname = "PRES";
 	
-	static String windVector = "WIND VECTOR";
-	static String windVectorMapname = "WIND";
+	public static final String windVector = "WIND VECTOR";
+	public static final String windVectorMapname = "WIND";
 	
 	
 }

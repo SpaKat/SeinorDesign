@@ -28,11 +28,7 @@ public class SensorCom implements SerialPortEventListener {
 
 
 	public SensorCom(String trim) {
-<<<<<<< HEAD
-		PORT_NAMES = new String[]{trim};
-=======
 		PORT_NAMES = new String[]{trim};	
->>>>>>> branch 'Dean' of https://github.com/SpaKat/SeinorDesign.git
 	}
 	public SensorCom() {
 		

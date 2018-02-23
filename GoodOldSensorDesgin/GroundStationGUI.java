@@ -44,8 +44,12 @@ public class GroundStationGUI extends Application {
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
 			MissionStats.missionID =missionCharts.getUavMission().getID();
+			if(online) {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
+			}else {
+				borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
+			}
 		});
 		miUAVtoMissionData.setOnAction(e->{
 			((UAVtoMissionData) miUAVtoMissionData).runMissionData();

@@ -59,7 +59,7 @@ public class UavMission {
 			System.out.println(avgLat +"_______" + avgLong);
 			br.close();
 		}catch(Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			GpsLocation = new GPSLocation();
 		}
 		

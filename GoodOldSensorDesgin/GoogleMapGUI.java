@@ -28,7 +28,7 @@ public class GoogleMapGUI  implements MapComponentInitializedListener{
 		loadMaps();
 	}
 	public void addMission(UavMission uavmission) {
-		missions.add(new UAVMissionGUI(uavmission));
+		missions.add(new UAVMissionGUI(uavmission,false));
 	}
 
 	private void loadMaps() {

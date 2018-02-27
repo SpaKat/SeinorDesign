@@ -9,9 +9,11 @@ public class UAVMissionGUI {
 	UavMission uavMission;
 	private ArrayList<SensorGraphGUI> graphs = new ArrayList<>();
 	private Marker marker;
-	public UAVMissionGUI(UavMission uavmission) {
+	public UAVMissionGUI(UavMission uavmission, boolean offline) {
 		uavMission = uavmission;
-		makeMarker();
+		if(!offline) {
+			makeMarker();
+		}
 		loadGraphs();
 		readyGraphs();	
 	}

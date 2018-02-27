@@ -54,6 +54,7 @@ public class GroundStationGUI extends Application {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 			}else {
+				System.out.println(TheCurrentMission);
 				borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
 			}
 		});

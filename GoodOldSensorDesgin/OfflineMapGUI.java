@@ -29,11 +29,11 @@ public class OfflineMapGUI extends BorderPane{
 		presMap.setText("Pressure");
 		windMap.setText("Wind");
 		humidMap.setText("Humidity");
+		
 		tempMap.setOnAction(e ->{
 			missionGUI.showGraph(Names.temperture);
 		});
-		
-		gridPane.getChildren().addAll(tempMap, presMap, windMap, humidMap, label);	
+		gridPane.getChildren().addAll(tempMap, presMap, windMap, humidMap, label);
 		setCenter(gridPane);
 	}
 	

@@ -54,7 +54,7 @@ public class GroundStationGUI extends Application {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 			}else {
-		//		borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
+				borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
 			}
 		});
 		miUAVtoMissionData.setOnAction(e->{

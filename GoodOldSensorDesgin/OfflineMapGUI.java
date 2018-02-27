@@ -13,7 +13,7 @@ public class OfflineMapGUI extends BorderPane{
 	//public OfflineMapGUI(UavMission theCurrentMission) {
 		//this.theCurrentMission = theCurrentMission;
 	//}
-	public OfflineMapGUI() {
+	public OfflineMapGUI(UavMission theCurrentMission) {
 		
 		Label label = new Label("You are in Offline mode, click below to view your desire");
 		GridPane.setConstraints(label, 1, 0);

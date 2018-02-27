@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -22,13 +23,14 @@ public class GroundStationGUI extends Application {
 	private CreateNewMission createNewMission;
 	private MenuItem miUAVtoMissionData;
 	private Stage primaryStage;
+	private CheckMenuItem offlineMapGUI;
 	
-	private boolean online = false;
-	private OfflineMapGUI offlineMapGUI;
+	private boolean online = true;
+	//private OfflineMapGUI offlineMapGUI;
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miMavProx, miClose);
+		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miMavProx, offlineMapGUI, miClose);
 		menuHelp.getItems().add(miAbout);
 		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);		// Add menus to menuBar
 		setTheOnAct();
@@ -41,6 +43,7 @@ public class GroundStationGUI extends Application {
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
 		miClose.setOnAction(e -> Platform.exit());
+		offlineMapGUI.setOnAction(e -> online= !online);
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
 			MissionStats.missionID =missionCharts.getUavMission().getID();
@@ -48,7 +51,7 @@ public class GroundStationGUI extends Application {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 			}else {
-				borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
+				//borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
 			}
 		});
 		miUAVtoMissionData.setOnAction(e->{
@@ -66,6 +69,7 @@ public class GroundStationGUI extends Application {
 		missionCharts = new MissionSelect();
 		menuHelp = new Menu("Help");		
 		menuBar = new MenuBar();
+		offlineMapGUI= new CheckMenuItem("Offline Mode");
 		createNewMission = new CreateNewMission(missionCharts);
 		primaryStage = new Stage();
 		miUAVtoMissionData = new UAVtoMissionData();

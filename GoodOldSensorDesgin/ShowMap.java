@@ -17,9 +17,9 @@ public class ShowMap implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent arg0) {
 		if(miMap.isSelected()){
-			googleMapGUI.showMap(mapName);
+			//googleMapGUI.showMap(mapName);
 		}else{
-			googleMapGUI.removeMap(mapName);
+			//googleMapGUI.removeMap(mapName);
 		}
 		
 	}

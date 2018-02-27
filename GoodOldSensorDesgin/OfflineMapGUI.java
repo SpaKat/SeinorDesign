@@ -6,15 +6,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class OfflineMapGUI extends Stage{
+public class OfflineMapGUI extends BorderPane{
 	GridPane gridPane = new GridPane();
-	private BorderPane borderPane;
+	
 	//UavMission theCurrentMission;
 	//public OfflineMapGUI(UavMission theCurrentMission) {
 		//this.theCurrentMission = theCurrentMission;
 	//}
 	public OfflineMapGUI() {
-		borderPane = new BorderPane();
+		
 		Label label = new Label("You are in Offline mode, click below to view your desire");
 		GridPane.setConstraints(label, 1, 0);
 		
@@ -39,7 +39,7 @@ public class OfflineMapGUI extends Stage{
         }
     });
 	}*/
-	public void start (Stage stage) throws Exception{
+	/*public void start (Stage stage) throws Exception{
 		
 		Scene scene = new Scene(borderPane, 500, 500);
 		stage.setScene(scene);
@@ -50,6 +50,6 @@ public class OfflineMapGUI extends Stage{
 		gridPane.setHgap(5);
 		borderPane.setCenter(gridPane);	
 		
-	}
+	}*/
 }
 

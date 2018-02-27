@@ -57,6 +57,7 @@ public class SensorGraphGUI {
 		data.clear();
 		return lineChart;
 	}
+
 	public String getSensorFileName() {
 		return sensorFileName;
 	}

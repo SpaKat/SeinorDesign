@@ -25,12 +25,12 @@ public class UAVMissionGUI {
 				);
 		MarkerOptions markerOptions = new MarkerOptions();
 		markerOptions.position( markerPositon )
-					.visible(Boolean.TRUE)
-					.label(uavMission.getName())
-					.title(uavMission.getName());
+		.visible(Boolean.TRUE)
+		.label(uavMission.getName())
+		.title(uavMission.getName());
 		System.out.println("\t" + uavMission.getName() );
 		marker = new Marker( markerOptions );
-		
+
 	}
 
 	private void loadGraphs() {
@@ -53,6 +53,13 @@ public class UAVMissionGUI {
 	public void showGraphs() {
 		graphs.forEach(graph ->{
 			graph.show();
+		});
+	}
+	public void showGraph(String graphName) {
+		graphs.forEach(graph ->{
+			if(graph.getSensorFileName() == graphName) {
+				graph.show();
+			}
 		});
 	}
 }

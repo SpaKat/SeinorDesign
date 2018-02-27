@@ -25,7 +25,7 @@ public class GroundStationGUI extends Application {
 	private Stage primaryStage;
 	private CheckMenuItem offlineMapGUI;
 	
-	private boolean online = true;
+	private boolean offline = true;
 	//private OfflineMapGUI offlineMapGUI;
 	public GroundStationGUI() {
 		makeVariables();		
@@ -43,15 +43,18 @@ public class GroundStationGUI extends Application {
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
 		miClose.setOnAction(e -> Platform.exit());
-		offlineMapGUI.setOnAction(e -> online= !online);
+		offlineMapGUI.setOnAction(e -> {
+			offline= !offline;
+			offlineMapGUI.setSelected(offline);
+		});
 		missionCharts.setOnAction(e -> {
 			setTheCurrentMission(missionCharts.getUavMission());
 			MissionStats.missionID =missionCharts.getUavMission().getID();
-			if(online) {
+			if(!offline) {
 			googleMapGUI = new GoogleMapGUI(TheCurrentMission);
 			borderPane.setCenter(googleMapGUI.getMapView());
 			}else {
-				//borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
+		//		borderPane.setCenter(new OfflineMapGUI(TheCurrentMission));
 			}
 		});
 		miUAVtoMissionData.setOnAction(e->{
@@ -70,6 +73,7 @@ public class GroundStationGUI extends Application {
 		menuHelp = new Menu("Help");		
 		menuBar = new MenuBar();
 		offlineMapGUI= new CheckMenuItem("Offline Mode");
+		offlineMapGUI.setSelected(offline);
 		createNewMission = new CreateNewMission(missionCharts);
 		primaryStage = new Stage();
 		miUAVtoMissionData = new UAVtoMissionData();

@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -43,6 +44,9 @@ public class SensorCom implements SerialPortEventListener {
 		return comports;
 	}
 	public void initialize() {
+		File rxtxfile = new File("jars//rxtxSerial.dll");
+		System.out.println(rxtxfile.getAbsolutePath());
+		System.load(rxtxfile.getAbsolutePath());
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 		// iterate through, looking for the port

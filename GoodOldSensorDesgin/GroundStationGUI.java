@@ -22,6 +22,7 @@ public class GroundStationGUI extends Application {
 	private UavMission TheCurrentMission;
 	private CreateNewMission createNewMission;
 	private MenuItem miUAVtoMissionData;
+	private MenuItem miRecoverDatafromSensorsPackage;
 	private Stage primaryStage;
 	private CheckMenuItem offlineMapGUI;
 	
@@ -42,7 +43,10 @@ public class GroundStationGUI extends Application {
 		miSensorComm.setOnAction(new SensorCommInterface());
 		miAbout.setOnAction(e -> new GUIshowAbout());
 		miMavProx.setOnAction(e -> new GUIshowMavProx());
-		miClose.setOnAction(e -> Platform.exit());
+		miClose.setOnAction(e -> {
+			primaryStage.close();
+			Platform.exit();
+		});
 		offlineMapGUI.setOnAction(e -> {
 			offline= !offline;
 			offlineMapGUI.setSelected(offline);
@@ -61,6 +65,9 @@ public class GroundStationGUI extends Application {
 		miUAVtoMissionData.setOnAction(e->{
 			((UAVtoMissionData) miUAVtoMissionData).runMissionData();
 		});
+		miRecoverDatafromSensorsPackage.setOnAction(e->{
+			LoadSensorDataFromFile recoverData = new LoadSensorDataFromFile();
+		});
 	}
 	private void makeVariables() {
 		borderPane = new BorderPane();
@@ -78,6 +85,7 @@ public class GroundStationGUI extends Application {
 		createNewMission = new CreateNewMission(missionCharts);
 		primaryStage = new Stage();
 		miUAVtoMissionData = new UAVtoMissionData();
+		miRecoverDatafromSensorsPackage = new MenuItem("Load from a Sd card");
 	}
 	@Override
 	// Configure and display stage

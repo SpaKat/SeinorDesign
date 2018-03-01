@@ -3,37 +3,25 @@ import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
-public class UAVtoMissionData extends MenuItem {
+public class LoadSensorDataFromFile {
 	File selectedFile;
 	uavMissionLog missionLog;
-	Stage stage; 
-	MavLinkComLog comLog;
+	Stage stage;
 	ComboBox<UavMission> TheUAVMissions;
-	public UAVtoMissionData() {
-		missionLog = new uavMissionLog();
-		setText("UAV data to Mission");
-	}
-	public void runMissionData() {
+
+	public LoadSensorDataFromFile() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open UAV Telemetry Log");
-		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("CSV", "*.csv"),
-				new ExtensionFilter("TLog", "*.tlog"));
+		fileChooser.setTitle("Open Sensor Package Data");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("CSV", "*.csv"));
 				
 		selectedFile = fileChooser.showOpenDialog(stage);
-		try {
-			comLog = new MavLinkComLog(selectedFile);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	
-		
+
 		TheUAVMissions = new ComboBox<UavMission>();
 		VBox vbox = new VBox();
 		missionLog.getMissions().forEach(mission ->{
@@ -41,7 +29,7 @@ public class UAVtoMissionData extends MenuItem {
 		});
 		Button enter = new Button("Enter");
 		enter.setOnAction(e-> {
-			SaveMavLinkToUavMission saveMavlinkUav = new SaveMavLinkToUavMission(TheUAVMissions.getValue(),comLog);
+			SensorPackageDataSave saveMavlinkUav = new SensorPackageDataSave(TheUAVMissions.getValue(),selectedFile);
 			stage.close();
 		});
 		vbox.getChildren().addAll(TheUAVMissions,enter);
@@ -50,4 +38,5 @@ public class UAVtoMissionData extends MenuItem {
 		stage.setScene(scene);
 		stage.show();
 	}
+		
 }

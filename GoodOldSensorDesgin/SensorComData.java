@@ -30,6 +30,7 @@ public class SensorComData extends Thread{
 	@Override
 	public void interrupt() {
 		running = false;
+		data.endMaps();
 		System.out.println("SensorComData Stoped");
 	}
 	public static void main(String[] args) {

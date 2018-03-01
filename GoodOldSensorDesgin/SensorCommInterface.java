@@ -22,13 +22,13 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 	Stage stage = new Stage();
 	ComboBox<UavMission> TheUAVMissions = new ComboBox<UavMission>();
 	ComboBox<String> ComPorts = new ComboBox<String>();
+	Stage primaryStage;
 	@Override
 	public void handle(ActionEvent arg0) {
 		gridpane = new GridPane();
 		TheUAVMissions.getItems().addAll(getAllMissions());
 		initGridPane();
 		Scene scene = new Scene(gridpane);
-
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -83,7 +83,6 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 				sensorComData.interrupt();
 			}catch(Exception e) {}
 			stage.close();
-
 		});
 	}
 

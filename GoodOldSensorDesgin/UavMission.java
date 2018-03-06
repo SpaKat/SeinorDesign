@@ -40,7 +40,7 @@ public class UavMission {
 			double avgLat =0;
 			double avgLong =0;
 			try {
-			BufferedReader br = new BufferedReader(new FileReader(new File(ID+"_"+Names.mavlinkcommadposition+".csv")));
+			BufferedReader br = new BufferedReader(new FileReader(new File(ID+"_"+Names.mavlinkGlobalPosition+".csv")));
 			String currentLine;
 			
 			int count = 0;

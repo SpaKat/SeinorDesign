@@ -14,7 +14,7 @@ public class MavLinkComLog {
 	}
 	private void mavlinkCommand() {
 		mavLinkComs = new TreeMap<>();
-		mavLinkComs.put(Names.mavlinkcommadposition,new MavLinkCommadPostion());
+		mavLinkComs.put(Names.mavlinkcommadposition,new MavLinkCommadPostion(Names.mavlinkGlobalPosition));
 	}
 	private void ParseData() {
 		readinData.getReadinStrings().forEach(str ->{

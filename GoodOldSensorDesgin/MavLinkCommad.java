@@ -4,6 +4,11 @@ public class MavLinkCommad extends Thread{
 	private String spilt = ",";
 	private String CommandName;
 	private ArrayList<UavDataPoint> uavData = new ArrayList();
+	private String saveId;
+	
+	public MavLinkCommad(String SaveID) {
+		saveId = SaveID;
+	}
 	public String getSpilt() {
 		return spilt;
 	}
@@ -17,6 +22,9 @@ public class MavLinkCommad extends Thread{
 	public void add(String str) {
 		String[] strArray = str.split(",");
 		CommandName =strArray[9];
+	}
+	public String getSaveId() {
+		return saveId;
 	}
 	
 	

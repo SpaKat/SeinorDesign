@@ -24,6 +24,7 @@ public class DataFormat {
 		sensorMap.put(Names.HumdityMapname, new HumiditySensorMap(sensorData, Names.Humdity));
 		sensorMap.put(Names.pressureMapname, new PressureSensorMap(sensorData,Names.pressure));
 		sensorMap.put(Names.windVectorMapname, new WindVectorSensorMap(sensorData, Names.windVector));
+		sensorMap.put(Names.mavlinkGlobalPositionMapName, new MavLinkgpsSensorMap(sensorData, Names.mavlinkGlobalPosition));
 		startMapThreads();
 	}
 	public void endMaps(){

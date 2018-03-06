@@ -13,6 +13,8 @@ public class Names {
 	
 	public static final String windVector = "WIND VECTOR";
 	public static final String windVectorMapname = "WIND";
+	public static final String mavlinkGlobalPosition = "Global Position";
+	public static final String mavlinkGlobalPositionMapName = "GP";
 	
 	
 }

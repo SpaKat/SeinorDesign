@@ -44,9 +44,9 @@ public class SensorCom implements SerialPortEventListener {
 		return comports;
 	}
 	public void initialize() {
-		File rxtxfile = new File("jars//rxtxSerial.dll");
-		System.out.println(rxtxfile.getAbsolutePath());
-		System.load(rxtxfile.getAbsolutePath());
+		//File rxtxfile = new File("jars//rxtxSerial.dll");
+		//System.out.println(rxtxfile.getAbsolutePath());
+		//System.load(rxtxfile.getAbsolutePath());
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 		// iterate through, looking for the port

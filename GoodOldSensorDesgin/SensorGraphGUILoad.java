@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 public class SensorGraphGUILoad extends Thread{
@@ -22,8 +23,10 @@ public class SensorGraphGUILoad extends Thread{
 	public void load(){
 		readin = new ReadInData(file);
 	}
-	public Set<DataPoints> getData() {
-		return readin.getData();
+	public TreeSet<DataPoints> getData() {
+		TreeSet<DataPoints> tempTreeSet = new TreeSet<DataPoints>(new AverageTime());
+		tempTreeSet.addAll(readin.getData());
+		return tempTreeSet;
 	}
 	public ReadInData getReadin() {
 		return readin;

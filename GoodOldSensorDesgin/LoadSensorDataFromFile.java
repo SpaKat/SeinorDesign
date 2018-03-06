@@ -7,7 +7,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class LoadSensorDataFromFile {
 	File selectedFile;
@@ -23,13 +22,14 @@ public class LoadSensorDataFromFile {
 		selectedFile = fileChooser.showOpenDialog(stage);
 
 		TheUAVMissions = new ComboBox<UavMission>();
+		missionLog = new uavMissionLog();
 		VBox vbox = new VBox();
 		missionLog.getMissions().forEach(mission ->{
 			TheUAVMissions.getItems().add(mission);
 		});
 		Button enter = new Button("Enter");
 		enter.setOnAction(e-> {
-			SensorPackageDataSave saveMavlinkUav = new SensorPackageDataSave(TheUAVMissions.getValue(),selectedFile);
+			new SensorPackageDataSave(TheUAVMissions.getValue(),selectedFile);
 			stage.close();
 		});
 		vbox.getChildren().addAll(TheUAVMissions,enter);

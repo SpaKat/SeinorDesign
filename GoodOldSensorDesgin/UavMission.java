@@ -40,26 +40,26 @@ public class UavMission {
 			double avgLat =0;
 			double avgLong =0;
 			try {
-			BufferedReader br = new BufferedReader(new FileReader(new File(ID+"_"+Names.mavlinkGlobalPosition+".csv")));
+			BufferedReader br = new BufferedReader(new FileReader(new File(ID+"_"+Names.mavlinkGlobalPosition+"_DATA.csv")));
 			String currentLine;
 			
 			int count = 0;
 			while((currentLine = br.readLine())!= null) {
 				String[] splitline = currentLine.split(",");
 				if(Double.parseDouble(splitline[0]) != 0 || Double.parseDouble(splitline[1]) != 0) {
-					avgLat +=Double.parseDouble(splitline[0]);
-					avgLong +=Double.parseDouble(splitline[1]);
+					avgLong +=Double.parseDouble(splitline[0]);
+					avgLat +=Double.parseDouble(splitline[1]);
 					count++;
 				}
 			}
 			avgLat/=count;
 			avgLong/=count;
-			GpsLocation.setLatitude(avgLong);
-			GpsLocation.setLonitude(avgLat);
+			GpsLocation.setLatitude(avgLat);
+			GpsLocation.setLonitude(avgLong);
 			System.out.println(avgLat +"_______" + avgLong);
 			br.close();
 		}catch(Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			GpsLocation = new GPSLocation();
 		}
 		

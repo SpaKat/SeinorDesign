@@ -11,11 +11,11 @@ public class Names {
 	public static final String pressure = "PRESSURE";
 	public static final String pressureMapname = "PRES";
 	
-	public static final String windVector = "WIND VECTOR";
+	public static final String windVector = "WIND_VECTOR";
 	public static final String windVectorMapname = "WIND";
 	
-		public static final String mavlinkcommadposition = "mavlink_global_position_int_t";
-	public static final String mavlinkGlobalPosition = "Global Position";
+	public static final String mavlinkcommadposition = "mavlink_global_position_int_t";
+	public static final String mavlinkGlobalPosition = "Global_Position";
 	public static final String mavlinkGlobalPositionMapName = "GP";
 	
 	

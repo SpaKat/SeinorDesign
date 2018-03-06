@@ -135,6 +135,7 @@ public class OfflineMapGUI extends BorderPane{
 		windMap.setMaxWidth(Double.MAX_VALUE);
 		gridPane.setPadding(new Insets(20, 0, 20, 20));
 
-		//OfflineMapGUI.DataLog.setText(String.format("GPS location is: %d\n%d\n, GpsLocation"));
+		theCurrentMission.loadNewGPSLocation();
+		OfflineMapGUI.DataLog.setText(String.format("GPS location is: Latitude %f\n Longitude%f\n",theCurrentMission.getGpsLocation().getLatitude(),theCurrentMission.getGpsLocation().getLonitude()));;
 	}
 }

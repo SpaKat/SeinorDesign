@@ -9,7 +9,7 @@ public class SaveMavLinkToUavMission {
 		
 		comLog.getMavLinkComs().forEach( (commandName,commandObject) ->{
 			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(mission.getID()+"_"+commandObject.getSaveId()+".csv")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(mission.getID()+"_"+commandObject.getSaveId()+"_DATA.csv")));
 				commandObject.getUavData().forEach(commandData ->{
 					try {
 						bw.write(commandData.toString());

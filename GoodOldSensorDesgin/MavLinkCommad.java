@@ -26,6 +26,4 @@ public class MavLinkCommad extends Thread{
 	public String getSaveId() {
 		return saveId;
 	}
-	
-	
 }

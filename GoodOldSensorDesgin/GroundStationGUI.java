@@ -31,7 +31,7 @@ public class GroundStationGUI extends Application {
 	public GroundStationGUI() {
 		makeVariables();		
 		// Add menu items to respective menus
-		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miMavProx, offlineMapGUI, miClose);
+		menuFile.getItems().addAll(createNewMission,miSensorComm,miUAVtoMissionData,miRecoverDatafromSensorsPackage,miMavProx, offlineMapGUI, miClose);
 		menuHelp.getItems().add(miAbout);
 		menuBar.getMenus().addAll(menuFile, missionCharts, menuHelp);		// Add menus to menuBar
 		setTheOnAct();

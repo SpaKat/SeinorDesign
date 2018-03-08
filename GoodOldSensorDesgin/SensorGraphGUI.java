@@ -47,6 +47,8 @@ public class SensorGraphGUI {
 		final LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		xAxis.setLabel("Time");
 		yAxis.setLabel("Value"); // enter via constructor
+		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
+				"  -fx-font-size: 14;");
 		Series<String, Number> series = new XYChart.Series<String, Number>();
 		series.setName("Trend");
 		data.forEach((data) -> {

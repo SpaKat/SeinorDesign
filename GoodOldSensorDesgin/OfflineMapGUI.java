@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 //DISPLAY TEXTBOX for gps location
 public class OfflineMapGUI extends BorderPane{
 	GridPane gridPane = new GridPane();
-	public static Text DataLog = new Text("GPS Location:");
+	public static Text DataLog = new Text("");
 	DropShadow shadow = new DropShadow();
 	
 	public OfflineMapGUI(UavMission theCurrentMission) {
@@ -133,9 +133,9 @@ public class OfflineMapGUI extends BorderPane{
 		tempMap.setMaxWidth(Double.MAX_VALUE);
 		presMap.setMaxWidth(Double.MAX_VALUE);
 		windMap.setMaxWidth(Double.MAX_VALUE);
-		gridPane.setPadding(new Insets(20, 0, 20, 20));
+		gridPane.setPadding(new Insets(20, 20, 20, 20));
 
 		theCurrentMission.loadNewGPSLocation();
-		OfflineMapGUI.DataLog.setText(String.format("GPS location is: Latitude %f\n Longitude%f\n",theCurrentMission.getGpsLocation().getLatitude(),theCurrentMission.getGpsLocation().getLonitude()));;
+		OfflineMapGUI.DataLog.setText(String.format("GPS Latitude: %f\n GPS Longitude: %f\n",theCurrentMission.getGpsLocation().getLatitude(),theCurrentMission.getGpsLocation().getLonitude()));;
 	}
 }

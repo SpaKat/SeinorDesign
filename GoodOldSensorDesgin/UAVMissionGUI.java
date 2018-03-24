@@ -4,7 +4,10 @@ import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.Marker;
 import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 
-public class UAVMissionGUI {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class UAVMissionGUI{
 
 	UavMission uavMission;
 	private ArrayList<SensorGraphGUI> graphs = new ArrayList<>();

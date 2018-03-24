@@ -47,13 +47,20 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
 		gridpane.addRow(2, TheUAVMissions);
-		//gridpane.addRow(3, ComPorts);
+		gridpane.addRow(3, ComPorts);
 		gridpane.addRow(1, start);
 		gridpane.addRow(2, stop);
 		gridpane.addRow(3, findcoms);
 		gridpane.addRow(4, exit);
 		sensorCom = new SensorCom();
-
+		
+		ComPorts.minWidthProperty().bind(TheUAVMissions.minWidthProperty());
+		findcoms.setOnAction(getPorts ->{
+			ComPorts.getItems().clear();
+			sensorCom.getAllavaiablePorts().forEach(port ->{
+				ComPorts.getItems().add(port);
+			});
+		});
 		ComPorts.setOnAction(selectedPort -> {
 			enterCOMports.setText(ComPorts.getValue());
 		});

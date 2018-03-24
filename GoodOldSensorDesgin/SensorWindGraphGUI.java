@@ -11,20 +11,24 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 	public SensorWindGraphGUI(String sensorFileName) {
 		super();
 		setSensorFileName(sensorFileName);
+		setSensorFileName(sensorFileName);
 		setSensorFileLoad(new WindGraphGUILoad(sensorFileName));
+	}
+	@Override
+	protected void makeSensorFileLoad() {
+		setSensorFileLoad(new WindGraphGUILoad(getSensorFileName()));
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public LineChart<String, Number> setGraph() {
-		final CategoryAxis xAxis = new CategoryAxis();
-		final NumberAxis yAxis = new NumberAxis();
+		CategoryAxis xAxis = new CategoryAxis();
+		NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Date");
 		yAxis.setLabel("Value"); 
-		final LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
+		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		xAxis.autosize();
 		yAxis.autosize();
 		lineChart.getData().addAll(setXseries(),setYseries(),setZseries());
-		getData().clear();
 		return lineChart;
 	}
 	private Series<String, Number> setXseries() {
@@ -47,8 +51,9 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 		Series<String, Number> series = new XYChart.Series<String, Number>();
 		series.setName("Z vector");
 		getData().forEach((data) -> {
-			series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString() ,((WindDataPoints) data).getZ()));
+			series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString(),((WindDataPoints) data).getZ()));
 		});
 		return series;
 	}
+	
 }

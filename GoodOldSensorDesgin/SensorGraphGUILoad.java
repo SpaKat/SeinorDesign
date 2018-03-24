@@ -23,8 +23,8 @@ public class SensorGraphGUILoad extends Thread{
 	public void load(){
 		readin = new ReadInData(file);
 	}
-	public TreeSet<DataPoints> getData() {
-		TreeSet<DataPoints> tempTreeSet = new TreeSet<DataPoints>(new AverageTime());
+	public TreeSet<DataPoints> getData(int limit) {
+		TreeSet<DataPoints> tempTreeSet = new TreeSet<DataPoints>(new AverageTime(limit));
 		tempTreeSet.addAll(readin.getData());
 		return tempTreeSet;
 	}

@@ -25,7 +25,7 @@ public class WindReadInData extends ReadInData {
 					dp.setTime(Math.abs(Long.parseLong(strarray[1])));
 					getData().add(dp);
 				}catch(Exception e){
-					System.err.println("FAILIN------------------------------------------------------" + getFile().getName());
+					//System.err.println("FAILIN------------------------------------------------------" + getFile().getName());
 				}
 			}
 			br.close();

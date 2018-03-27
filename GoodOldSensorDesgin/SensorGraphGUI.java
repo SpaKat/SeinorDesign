@@ -39,7 +39,7 @@ public class SensorGraphGUI{
 		this.uavMission = uavMission;
 		sensorFileLoad = new ArrayList<>();
 		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
-			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i));
+			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i,limit));
 		}
 		AllUavData = new ArrayList<Set<DataPoints>>();
 	}
@@ -53,18 +53,18 @@ public class SensorGraphGUI{
 		});
 
 		sensorFileLoad.forEach(data ->{
-			AllUavData.add(data.getData(limit));
+			AllUavData.add(data.getData());
 		});
 	}
 	protected void makeSensorFileLoad() {
 		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
-			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i));
+			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i,limit));
 		}
 	}
 	public void show() {
 		VBox vbox = new VBox();
-
-		Slider scrollwheel = new Slider(0, 10, limit/1000);
+		borderPane = new BorderPane();
+		Slider scrollwheel = new Slider(0, 30, limit/1000);
 		scrollwheel.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -72,7 +72,7 @@ public class SensorGraphGUI{
 				makeSensorFileLoad();
 				ready();
 				borderPane.setCenter(setGraph());
-				System.out.println(limit);
+				//System.out.println(limit);
 			}
 		});
 		scrollwheel.setSnapToTicks(true);
@@ -80,7 +80,19 @@ public class SensorGraphGUI{
 		scrollwheel.setShowTickLabels(true);
 		scrollwheel.setMajorTickUnit(1);
 		scrollwheel.setBlockIncrement(1);
-
+		VBox control = ControlPanel(scrollwheel);
+		vbox.getChildren().addAll(scrollwheel,control);
+		
+		borderPane.setBottom(vbox);
+		borderPane.setCenter(setGraph());
+		Scene scene = new Scene(borderPane);
+		scrollwheel.setValue(limit/1000+100);
+		stage.setScene(scene);
+		stage.setTitle(sensorFileName);
+		stage.show();
+	}
+	protected VBox ControlPanel(Slider scrollwheel) {
+		VBox control = new VBox();
 		CheckBox toggleAVG = new CheckBox("Toggle Average");
 		toggleAVG.selectedProperty().addListener((obs,oldval, newval)->{
 			average = newval;
@@ -90,13 +102,8 @@ public class SensorGraphGUI{
 			borderPane.setCenter(setGraph());
 			System.out.println(limit);
 		});
-		vbox.getChildren().addAll(scrollwheel,toggleAVG);
-		borderPane.setBottom(vbox);
-		borderPane.setCenter(setGraph());
-		Scene scene = new Scene(borderPane);
-		stage.setScene(scene);
-		stage.setTitle(sensorFileName);
-		stage.show();
+		control.getChildren().add(toggleAVG);
+		return control;
 	}
 
 	public LineChart<String, Number> setGraph() {
@@ -135,8 +142,6 @@ public class SensorGraphGUI{
 				System.out.println(datapoint.getTime() + "_"+ datapoint.getSensordata());
 				series.getData().add(new XYChart.Data<>(new Date(datapoint.getTime()).toString(),datapoint.getSensordata()));
 			});
-
-
 			avgData.clear();
 			lineChart.getData().add(series);
 		}else {

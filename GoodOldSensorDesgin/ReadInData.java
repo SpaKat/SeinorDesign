@@ -11,7 +11,7 @@ public class ReadInData {
 	
 	public ReadInData(File file) {
 		this.file = file;
-		System.out.println("READ IN DATA: " +file.getName());
+		//System.out.println("READ IN DATA: " +file.getName());
 		this.data = new TreeSet<DataPoints>(new SameTime());
 		load();
 	}
@@ -34,7 +34,7 @@ public class ReadInData {
 					data.add(dp);
 				}catch(Exception e){
 					//e.printStackTrace();
-					System.err.println("FAILIN------------------------------------------------------" + file.getName());
+				//	System.err.println("FAILIN------------------------------------------------------" + file.getName());
 				}
 			}
 			br.close();
@@ -53,4 +53,5 @@ public class ReadInData {
 	public void setData(Set<DataPoints> data) {
 		this.data = data;
 	}
+	
 }

@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CreateNewMission extends MenuItem {
-	
+
 	MissionSelect missionCharts;
 
 	public CreateNewMission(MissionSelect missionCharts) {
@@ -23,26 +23,29 @@ public class CreateNewMission extends MenuItem {
 		Stage stage = new Stage();
 		stage.setTitle("Create Mission");
 		VBox vbox = new VBox();
-		
+
 		Text askForMissionName = new Text("Enter the Mission Name");
 		Text askForMissionID = new Text("Enter the Mission ID");
 		Text askForNumUAV = new Text("Enter the Number of UAVs");
-		
+
 		TextField enterMissionName = new TextField();
 		TextField enterMissionID = new TextField();
 		TextField enterNumUAV = new TextField();
-		
+
 		enterNumUAV.textProperty().addListener(wholeNumbers->{
 			try {
 				if(!enterNumUAV.getText().equals("")) {
 					Integer.parseInt(enterNumUAV.getText());
+					if (Integer.parseInt(enterNumUAV.getText()) == 0) {
+						enterNumUAV.setText("");
+					}
 				}
 			}catch (Exception e) {
 				enterNumUAV.setText("");
 			}
 		});
-		
-		
+
+
 		Button enter = new Button("Enter");
 		vbox.getChildren().addAll(askForMissionName,enterMissionName,askForMissionID,enterMissionID,askForNumUAV,enterNumUAV,enter);
 
@@ -53,10 +56,10 @@ public class CreateNewMission extends MenuItem {
 			missionCharts.refresh();
 			stage.close();
 		});
-		
+
 		Scene scene = new Scene(vbox);
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+
 }

@@ -7,11 +7,11 @@ public class SensorPackageDataSave extends Thread{
 
 	private File file;
 	private UavMission mission;
-	private DataFormat sendThedata;
-	public SensorPackageDataSave(UavMission mission, File selectedFile) {
+	private SensorDataFormat sendThedata;
+	public SensorPackageDataSave(UavMission mission, File selectedFile, int UAVNumber) {
 		this.mission = mission;
 		this.file = selectedFile;
-		sendThedata = new DataFormat();
+		sendThedata = new SensorDataFormat(UAVNumber);
 		this.start();
 	}
 	@Override

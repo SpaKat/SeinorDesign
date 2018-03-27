@@ -40,6 +40,8 @@ public class MissionSelect extends Menu {
 			e.printStackTrace();
 		}catch (IOException e) {
 			e.printStackTrace();
+		}catch (Exception e) {
+			
 		}
 	}
 	private void SaveMissionFile() {
@@ -47,7 +49,7 @@ public class MissionSelect extends Menu {
 			BufferedWriter wr = new BufferedWriter(new FileWriter(missionsFile));
 			selectThemission.forEach(mission ->{
 				try {
-					wr.write(mission.getName() +","+mission.getID());
+					wr.write(mission.getName() +","+mission.getID()+","+mission.getNumberUAVS());
 					wr.newLine();
 				} catch (IOException e) {
 					e.printStackTrace();

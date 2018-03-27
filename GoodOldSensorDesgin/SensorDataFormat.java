@@ -2,12 +2,13 @@
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DataFormat {
+public class SensorDataFormat {
 	public static final String SPLIT = ",";
 	private SensorData sensorData = new SensorData();
 	private Map<String,SensorMap> sensorMap = new TreeMap<String,SensorMap>();
-	public DataFormat() {
-		setMaps();
+	
+	public SensorDataFormat(int intUAVNumber) {
+		setMaps(intUAVNumber);
 	}
 	public void enterMessage(String messageString) {
 		String[] messageFormat = messageString.split(SPLIT);
@@ -18,13 +19,13 @@ public class DataFormat {
 			//catch the starting nothing string 
 		}
 	}
-	private void setMaps() {
+	private void setMaps(int intUAVNumber) {
 		// adds the key of the Map and object of the map to the hashmap 
-		sensorMap.put(Names.tempertureMapname, new TempertureSensorMap(sensorData,Names.temperture));
-		sensorMap.put(Names.HumdityMapname, new HumiditySensorMap(sensorData, Names.Humdity));
-		sensorMap.put(Names.pressureMapname, new PressureSensorMap(sensorData,Names.pressure));
-		sensorMap.put(Names.windVectorMapname, new WindVectorSensorMap(sensorData, Names.windVector));
-		sensorMap.put(Names.mavlinkGlobalPositionMapName, new MavLinkgpsSensorMap(sensorData, Names.mavlinkGlobalPosition));
+		sensorMap.put(Names.tempertureMapname, new TempertureSensorMap(sensorData,Names.temperture,intUAVNumber));
+		sensorMap.put(Names.HumdityMapname, new HumiditySensorMap(sensorData, Names.Humdity,intUAVNumber));
+		sensorMap.put(Names.pressureMapname, new PressureSensorMap(sensorData,Names.pressure,intUAVNumber));
+		sensorMap.put(Names.windVectorMapname, new WindVectorSensorMap(sensorData, Names.windVector,intUAVNumber));
+		sensorMap.put(Names.mavlinkGlobalPositionMapName, new MavLinkgpsSensorMap(sensorData, Names.mavlinkGlobalPosition,intUAVNumber));
 		startMapThreads();
 	}
 	public void endMaps(){

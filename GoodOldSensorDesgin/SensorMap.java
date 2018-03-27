@@ -4,13 +4,15 @@ public class SensorMap extends Thread{
 	private String mapName;
 	private double GPSlat = 29.2108;
 	private double GPSLong = -81.0228;
+	private int UAVNumber = 0;
 	private SensorData sensorData;
 	private long time = System.currentTimeMillis();
 	private boolean running = true;
 
-	public SensorMap(SensorData sensorData, String mapName) {
+	public SensorMap(SensorData sensorData, String mapName, int intUAVNumber) {
 		this.sensorData = sensorData;
 		this.mapName = mapName; 
+		this.UAVNumber = intUAVNumber;
 		System.out.println("HELLO From : " +mapName );
 	}
 	
@@ -48,9 +50,13 @@ public class SensorMap extends Thread{
 	}
 
 
+	public int getUAVNumber() {
+		return UAVNumber;
+	}
 
-
-
+	public void setUAVNumber(int uAVNumber) {
+		UAVNumber = uAVNumber;
+	}
 	public void setGPSLong(double gPSLong) {
 		GPSLong = gPSLong;
 	}

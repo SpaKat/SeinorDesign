@@ -26,15 +26,28 @@ public class CreateNewMission extends MenuItem {
 		
 		Text askForMissionName = new Text("Enter the Mission Name");
 		Text askForMissionID = new Text("Enter the Mission ID");
+		Text askForNumUAV = new Text("Enter the Number of UAVs");
 		
 		TextField enterMissionName = new TextField();
 		TextField enterMissionID = new TextField();
+		TextField enterNumUAV = new TextField();
+		
+		enterNumUAV.textProperty().addListener(wholeNumbers->{
+			try {
+				if(!enterNumUAV.getText().equals("")) {
+					Integer.parseInt(enterNumUAV.getText());
+				}
+			}catch (Exception e) {
+				enterNumUAV.setText("");
+			}
+		});
+		
 		
 		Button enter = new Button("Enter");
-		vbox.getChildren().addAll(askForMissionName,enterMissionName,askForMissionID,enterMissionID,enter);
+		vbox.getChildren().addAll(askForMissionName,enterMissionName,askForMissionID,enterMissionID,askForNumUAV,enterNumUAV,enter);
 
 		enter.setOnAction(ent ->{
-			UavMission uavMission = new UavMission(enterMissionName.getText(), enterMissionID.getText());
+			UavMission uavMission = new UavMission(enterMissionName.getText(), enterMissionID.getText(),Integer.parseInt(enterNumUAV.getText()));
 			selectThemission.add(uavMission);
 			missionCharts.setUavMission(uavMission);
 			missionCharts.refresh();

@@ -1,9 +1,11 @@
-Mission test,test
-Mission 1,1
-Mission 2,2
-Mission 3,3
-Mission 4,4
-Gucci,Gucci
-SWAg,Holla
-MissionName,MissName
-Mission 1,Miss1
+Mission test,test,1
+Mission 1,1,2
+Mission 2,2,1
+Mission 3,3,1
+Mission 4,4,1
+Gucci,Gucci,2
+SWAg,Holla,1
+MissionName,MissName,1
+Mission 1,Miss1,1
+TEst,NumberUAVS,1
+TESTUAVNUMZZZ,TestUAVNUM,5

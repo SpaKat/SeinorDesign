@@ -7,15 +7,14 @@ public class SensorGraphGUILoad extends Thread{
 
 	private ReadInData readin;
 	private File file;
-	public SensorGraphGUILoad(String name) {
-		file = new File(MissionStats.missionID +"_" +name + "_DATA.csv");
+	public SensorGraphGUILoad(String name,int UAVnum) {
+		file = new File(MissionStats.missionID +"_"+UAVnum+"_" +name + "_DATA.csv");
 		System.out.println(file.getName());
 		this.start();
 	}
 	public SensorGraphGUILoad() {
 		
 	}
-	
 	@Override
 	public void run() {
 		load();

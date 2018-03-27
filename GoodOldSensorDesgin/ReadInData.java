@@ -24,7 +24,7 @@ public class ReadInData {
 			String currentLine;
 			while((currentLine = br.readLine()) != null ){
 				try{
-					String[] strarray = currentLine.split(DataFormat.SPLIT);
+					String[] strarray = currentLine.split(SensorDataFormat.SPLIT);
 					DataPoints dp = new DataPoints(
 							strarray[0], 
 							strarray[2], 
@@ -33,6 +33,7 @@ public class ReadInData {
 					dp.setTime(Math.abs(Long.parseLong(strarray[1])));
 					data.add(dp);
 				}catch(Exception e){
+					//e.printStackTrace();
 					System.err.println("FAILIN------------------------------------------------------" + file.getName());
 				}
 			}

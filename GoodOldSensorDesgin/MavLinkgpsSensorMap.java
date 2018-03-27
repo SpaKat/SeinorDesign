@@ -3,8 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class MavLinkgpsSensorMap extends SensorMap {
-	public MavLinkgpsSensorMap(SensorData sensorData, String mavlinkglobalposition) {
-		super(sensorData, mavlinkglobalposition);
+	public MavLinkgpsSensorMap(SensorData sensorData, String mavlinkglobalposition, int intUAVNumber) {
+		super(sensorData, mavlinkglobalposition,intUAVNumber);
 		this.start();
 	}
 	@Override
@@ -17,13 +17,13 @@ public class MavLinkgpsSensorMap extends SensorMap {
 				if (getSensorData().getData().size()>0) {
 					bw = new BufferedWriter(new FileWriter(fileData, true));
 					String string = getSensorData().remove();
-					String[] strArray = string.split(DataFormat.SPLIT);
+					String[] strArray = string.split(SensorDataFormat.SPLIT);
 					if(strArray[0].toUpperCase().equals(Names.mavlinkGlobalPositionMapName)){
 						String str = strArray[0];
-						for (int i = 1; i < strArray.length; str += DataFormat.SPLIT + strArray[i++]);
+						for (int i = 1; i < strArray.length; str += SensorDataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
-							System.out.println(MissionStats.missionID + DataFormat.SPLIT+ System.currentTimeMillis() + DataFormat.SPLIT + str);
+							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
+							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
 							bw.newLine();
 							bw.close();
 						} catch (Exception e) {

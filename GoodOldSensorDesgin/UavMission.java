@@ -6,16 +6,22 @@ public class UavMission {
 	String name;
 	String ID;
 	GPSLocation GpsLocation = new GPSLocation();
+	int numberUAVS;
 	public UavMission(String name) {
 		String[] nameArray = name.split(",");
 		setName(nameArray[0]);
 		setID(nameArray[1]);
+		setNumberUAVS(Integer.parseInt(nameArray[2]));
 	}
 	public UavMission(String missionName, String ID) {
 		this.name = missionName;
 		this.ID = ID;
 	}
 
+	public UavMission(String missionName, String ID, int numberUAVS) {
+		this(missionName,ID);
+		this.numberUAVS = numberUAVS;
+	}
 	@Override
 	public String toString() {
 		return getName() + " (ID:" +getID()+ ")";
@@ -35,6 +41,12 @@ public class UavMission {
 	}
 	public GPSLocation getGpsLocation() {
 		return GpsLocation;
+	}
+	public int getNumberUAVS() {
+		return numberUAVS;
+	}
+	public void setNumberUAVS(int numberUAVS) {
+		this.numberUAVS = numberUAVS;
 	}
 	public void loadNewGPSLocation() {
 			double avgLat =0;

@@ -1,18 +1,24 @@
 /*Pulls data from the sensor */
 public class SensorComData extends Thread{
 	SensorCom sensorComm;
-	DataFormat data;
+	SensorDataFormat data;
 	private boolean running = true;
 	public SensorComData() {
 		sensorComm = new SensorCom();
 		sensorComm.initialize();
-		data = new DataFormat();
+		data = new SensorDataFormat(0);
 	}
 
 	public SensorComData(SensorCom sensorCom) {
 		this.sensorComm = sensorCom;
 		sensorComm.initialize();
-		data = new DataFormat();
+		data = new SensorDataFormat(0);
+	}
+
+	public SensorComData(SensorCom sensorCom, int intUAVNumber) {
+		this.sensorComm = sensorCom;
+		sensorComm.initialize();
+		data = new SensorDataFormat(intUAVNumber);
 	}
 
 	@Override

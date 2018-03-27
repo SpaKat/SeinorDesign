@@ -15,6 +15,7 @@ public class UAVtoMissionData extends MenuItem {
 	Stage stage; 
 	MavLinkComLog comLog;
 	ComboBox<UavMission> TheUAVMissions;
+	ComboBox<Integer> TheUAVnum;
 	public UAVtoMissionData() {
 		missionLog = new uavMissionLog();
 		setText("UAV data to Mission");
@@ -35,16 +36,23 @@ public class UAVtoMissionData extends MenuItem {
 	
 		
 		TheUAVMissions = new ComboBox<UavMission>();
+		TheUAVnum = new ComboBox<Integer>();
 		VBox vbox = new VBox();
+		TheUAVMissions.setOnAction(e ->{
+			TheUAVnum.getItems().clear();
+			for (int i = 0; i <TheUAVMissions.getValue().getNumberUAVS(); i++) {
+				TheUAVnum.getItems().add(Integer.valueOf(i));
+			}
+		});
 		missionLog.getMissions().forEach(mission ->{
 			TheUAVMissions.getItems().add(mission);
 		});
 		Button enter = new Button("Enter");
 		enter.setOnAction(e-> {
-			SaveMavLinkToUavMission saveMavlinkUav = new SaveMavLinkToUavMission(TheUAVMissions.getValue(),comLog);
+			SaveMavLinkToUavMission saveMavlinkUav = new SaveMavLinkToUavMission(TheUAVMissions.getValue(),comLog,TheUAVnum.getValue().intValue());
 			stage.close();
 		});
-		vbox.getChildren().addAll(TheUAVMissions,enter);
+		vbox.getChildren().addAll(TheUAVMissions,TheUAVnum,enter);
 		Scene scene = new Scene(vbox);
 		stage = new Stage();
 		stage.setScene(scene);

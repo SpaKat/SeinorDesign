@@ -5,11 +5,11 @@ import java.io.IOException;
 
 public class SaveMavLinkToUavMission {
 
-	public SaveMavLinkToUavMission(UavMission mission, MavLinkComLog comLog) {
+	public SaveMavLinkToUavMission(UavMission mission, MavLinkComLog comLog, int uavNum) {
 		
 		comLog.getMavLinkComs().forEach( (commandName,commandObject) ->{
 			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(mission.getID()+"_"+commandObject.getSaveId()+"_DATA.csv")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(mission.getID()+"_"+uavNum+"_"+commandObject.getSaveId()+"_DATA.csv")));
 				commandObject.getUavData().forEach(commandData ->{
 					try {
 						bw.write(commandData.toString());

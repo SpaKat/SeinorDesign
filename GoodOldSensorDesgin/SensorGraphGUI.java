@@ -1,5 +1,8 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -8,7 +11,10 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -16,33 +22,48 @@ import javafx.stage.Stage;
 
 public class SensorGraphGUI{
 	private String sensorFileName;
-	private SensorGraphGUILoad sensorFileLoad;
-	private Set<DataPoints> data;
+	private ArrayList<SensorGraphGUILoad> sensorFileLoad;
+	private ArrayList<Set<DataPoints>> AllUavData;
 	private Stage stage = new Stage();
 	private BorderPane borderPane = new BorderPane();
 	private int limit = 10000;
 	private int currentCount = 0;
+	private UavMission uavMission;
+	private boolean average = false;
+	private  boolean add = true;
 	public SensorGraphGUI() {
-		
+
 	}
-	public SensorGraphGUI(String sensorFileName) {
+	public SensorGraphGUI(String sensorFileName, UavMission uavMission) {
 		this.sensorFileName = sensorFileName;
-		sensorFileLoad = new SensorGraphGUILoad(sensorFileName);
+		this.uavMission = uavMission;
+		sensorFileLoad = new ArrayList<>();
+		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
+			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i));
+		}
+		AllUavData = new ArrayList<Set<DataPoints>>();
 	}
 	public void ready() {
-		try {
-			sensorFileLoad.join();
-		} catch (InterruptedException e) {
-			System.err.println("Sensor File Load failed " + sensorFileName + "\n");
-		}
-		data = sensorFileLoad.getData(limit);
+		sensorFileLoad.forEach(wait ->{
+			try {
+				wait.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+
+		sensorFileLoad.forEach(data ->{
+			AllUavData.add(data.getData(limit));
+		});
 	}
 	protected void makeSensorFileLoad() {
-		sensorFileLoad = new SensorGraphGUILoad(sensorFileName);
+		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
+			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i));
+		}
 	}
 	public void show() {
 		VBox vbox = new VBox();
-		
+
 		Slider scrollwheel = new Slider(0, 10, limit/1000);
 		scrollwheel.valueProperty().addListener(new ChangeListener<Number>() {
 			@Override
@@ -53,15 +74,23 @@ public class SensorGraphGUI{
 				borderPane.setCenter(setGraph());
 				System.out.println(limit);
 			}
-
-
 		});
 		scrollwheel.setSnapToTicks(true);
 		scrollwheel.setShowTickMarks(true);
 		scrollwheel.setShowTickLabels(true);
 		scrollwheel.setMajorTickUnit(1);
 		scrollwheel.setBlockIncrement(1);
-		vbox.getChildren().add(scrollwheel);
+
+		CheckBox toggleAVG = new CheckBox("Toggle Average");
+		toggleAVG.selectedProperty().addListener((obs,oldval, newval)->{
+			average = newval;
+			limit = (int) (1000*scrollwheel.getValue());
+			makeSensorFileLoad();
+			ready();
+			borderPane.setCenter(setGraph());
+			System.out.println(limit);
+		});
+		vbox.getChildren().addAll(scrollwheel,toggleAVG);
 		borderPane.setBottom(vbox);
 		borderPane.setCenter(setGraph());
 		Scene scene = new Scene(borderPane);
@@ -69,6 +98,7 @@ public class SensorGraphGUI{
 		stage.setTitle(sensorFileName);
 		stage.show();
 	}
+
 	public LineChart<String, Number> setGraph() {
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
@@ -78,16 +108,51 @@ public class SensorGraphGUI{
 		yAxis.setLabel("Value"); // enter via constructor
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");
-		Series<String, Number> series = new XYChart.Series<String, Number>();
-		series.setName("Trend");
+		if (average) {
+			final Series<String, Number> series = new XYChart.Series<String, Number>();
+			
+			series.setName("Avg of " + uavMission.getNumberUAVS() + " UAVs");
+			ArrayList<DataPoints> avgData = new ArrayList<>();
+			AllUavData.forEach(Uavdata->{
+				Uavdata.forEach((datapoint) -> {
+					if(avgData.isEmpty()) {
+						avgData.add(datapoint);
+					}
+					add = true;
+					avgData.forEach(temp ->{
+						if(Math.abs(temp.getTime() - datapoint.getTime())<=limit ) {
+							add = false;
+							temp.setSensordata((temp.getSensordata() + datapoint.getSensordata())/2);
+						}
+					});
+					if (add) {
+						avgData.add(datapoint);
+					}
+					
+				});
+			});
+			avgData.forEach(datapoint ->{
+				System.out.println(datapoint.getTime() + "_"+ datapoint.getSensordata());
+				series.getData().add(new XYChart.Data<>(new Date(datapoint.getTime()).toString(),datapoint.getSensordata()));
+			});
 
-		data.forEach((data) -> {
-			series.getData().add(new XYChart.Data<>(new Date(data.getTime()).toString(),data.getSensordata()));
-		});	
-		lineChart.getData().add(series);
+
+			avgData.clear();
+			lineChart.getData().add(series);
+		}else {
+			AllUavData.forEach(Uavdata->{
+				final Series<String, Number> series = new XYChart.Series<String, Number>();
+				series.setName("UAV " + AllUavData.indexOf(Uavdata));
+				Uavdata.forEach((datapoint) -> {
+					series.getData().add(new XYChart.Data<>(new Date(datapoint.getTime()).toString(),datapoint.getSensordata()));
+				});
+				lineChart.getData().add(series);
+			});
+		}
 		xAxis.autosize();
 		yAxis.autosize();
-		data.clear();
+		AllUavData.clear();
+		sensorFileLoad.clear();
 		return lineChart;
 	}
 	public int getLimit() {
@@ -102,22 +167,54 @@ public class SensorGraphGUI{
 	public String getSensorFileName() {
 		return sensorFileName;
 	}
-	public SensorGraphGUILoad getSensorFileLoad() {
-		return sensorFileLoad;
-	}
-	public Set<DataPoints> getData() {
-		return data;
-	}
 	public void setSensorFileName(String sensorFileName) {
 		this.sensorFileName = sensorFileName;
 	}
-	public void setSensorFileLoad(SensorGraphGUILoad sensorFileLoad) {
+	public ArrayList<SensorGraphGUILoad> getSensorFileLoad() {
+		return sensorFileLoad;
+	}
+	public ArrayList<Set<DataPoints>> getAllUavData() {
+		return AllUavData;
+	}
+	public Stage getStage() {
+		return stage;
+	}
+	public BorderPane getBorderPane() {
+		return borderPane;
+	}
+	public UavMission getUavMission() {
+		return uavMission;
+	}
+	public boolean isAverage() {
+		return average;
+	}
+	public boolean isAdd() {
+		return add;
+	}
+	public void setSensorFileLoad(ArrayList<SensorGraphGUILoad> sensorFileLoad) {
 		this.sensorFileLoad = sensorFileLoad;
 	}
-	public void setData(Set<DataPoints> data) {
-		this.data = data;
+	public void setAllUavData(ArrayList<Set<DataPoints>> allUavData) {
+		AllUavData = allUavData;
 	}
-
-
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	public void setBorderPane(BorderPane borderPane) {
+		this.borderPane = borderPane;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	public void setUavMission(UavMission uavMission) {
+		this.uavMission = uavMission;
+	}
+	public void setAverage(boolean average) {
+		this.average = average;
+	}
+	public void setAdd(boolean add) {
+		this.add = add;
+	}
+	
 }
 

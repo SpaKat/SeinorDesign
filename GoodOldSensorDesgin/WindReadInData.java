@@ -14,7 +14,7 @@ public class WindReadInData extends ReadInData {
 			String currentLine;
 			while((currentLine = br.readLine()) != null ){
 				try{
-					String[] strarray = currentLine.split(DataFormat.SPLIT);
+					String[] strarray = currentLine.split(SensorDataFormat.SPLIT);
 					DataPoints dp = new WindDataPoints(
 							strarray[0], 
 							strarray[1]

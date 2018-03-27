@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -7,16 +9,22 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 
 public class SensorWindGraphGUI extends SensorGraphGUI {
-
-	public SensorWindGraphGUI(String sensorFileName) {
+	private int count = 0;
+	public SensorWindGraphGUI(String sensorFileName, UavMission uavMission) {
 		super();
 		setSensorFileName(sensorFileName);
-		setSensorFileName(sensorFileName);
-		setSensorFileLoad(new WindGraphGUILoad(sensorFileName));
+		setUavMission(uavMission);
+		setSensorFileLoad(new ArrayList<>());
+		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
+			getSensorFileLoad().add(new WindGraphGUILoad(sensorFileName,i));
+		}
+		setAllUavData(new ArrayList<Set<DataPoints>>());
 	}
 	@Override
 	protected void makeSensorFileLoad() {
-		setSensorFileLoad(new WindGraphGUILoad(getSensorFileName()));
+		for (int i = 0; i < getUavMission().getNumberUAVS(); i++) {
+			getSensorFileLoad().add(new SensorGraphGUILoad(getSensorFileName(),i));
+		}
 	}
 	@SuppressWarnings("unchecked")
 	@Override
@@ -26,34 +34,41 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 		xAxis.setLabel("Date");
 		yAxis.setLabel("Value"); 
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
+		
+		getAllUavData().forEach((Uavdata) -> {
+			lineChart.getData().addAll(setXseries(Uavdata,count),setYseries(Uavdata,count),setZseries(Uavdata,count));
+			count++;
+		});
 		xAxis.autosize();
 		yAxis.autosize();
-		lineChart.getData().addAll(setXseries(),setYseries(),setZseries());
+		
 		return lineChart;
 	}
-	private Series<String, Number> setXseries() {
+	private Series<String, Number> setXseries(Set<DataPoints> uavdata, int count) {
 		Series<String, Number> series = new XYChart.Series<String, Number>();
-		series.setName("X vector");
-		getData().forEach((data) -> {
-			series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString() ,((WindDataPoints) data).getX()));
+		series.setName("Uav " + count + "X");
+		
+		uavdata.forEach((data) -> {
+				series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString() ,((WindDataPoints) data).getX()));
 		});
 		return series;
 	}
-	private Series<String, Number> setYseries() {
+	private Series<String, Number> setYseries(Set<DataPoints> uavdata, int count) {
 		Series<String, Number> series = new XYChart.Series<String, Number>();
-		series.setName("Y vector");
-		getData().forEach((data) -> {
-			series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString() ,((WindDataPoints) data).getY()));
-		});
+		series.setName("Uav " + count + "Y");
+		uavdata.forEach((data) -> {
+				series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString() ,((WindDataPoints) data).getY()));
+			});
+		
 		return series;
 	}
-	private Series<String, Number> setZseries() {
+	private Series<String, Number> setZseries(Set<DataPoints> uavdata, int count) {
 		Series<String, Number> series = new XYChart.Series<String, Number>();
-		series.setName("Z vector");
-		getData().forEach((data) -> {
-			series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString(),((WindDataPoints) data).getZ()));
-		});
+		series.setName("Uav " + count + "Z");
+		uavdata.forEach((data) -> {
+				series.getData().add(new XYChart.Data<>((new Date(data.getTime())).toString(),((WindDataPoints) data).getZ()));
+			});
 		return series;
 	}
-	
+
 }

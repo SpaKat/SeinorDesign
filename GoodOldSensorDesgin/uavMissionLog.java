@@ -12,8 +12,8 @@ public class uavMissionLog {
 			String currentLine;
 			while ((currentLine = br.readLine()) != null) {
 				//String[] str = currentLine.split(",");
-			//	missions.add(new UavMission(str[0],str[1]));
-				missions.add(new UavMission(currentLine));
+				//	missions.add(new UavMission(str[0],str[1]));
+					missions.add(new UavMission(currentLine));
 			}
 			br.close();
 		} catch (Exception e) {

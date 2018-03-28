@@ -15,7 +15,9 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,6 +33,7 @@ public class SensorGraphGUI{
 	private UavMission uavMission;
 	private boolean average = false;
 	private  boolean add = true;
+	private Label Pointderection = new Label("INFO");
 	public SensorGraphGUI() {
 
 	}
@@ -81,12 +84,11 @@ public class SensorGraphGUI{
 		scrollwheel.setMajorTickUnit(1);
 		scrollwheel.setBlockIncrement(1);
 		VBox control = ControlPanel(scrollwheel);
-		vbox.getChildren().addAll(scrollwheel,control);
+		vbox.getChildren().addAll(scrollwheel,control,Pointderection);
 		
 		borderPane.setBottom(vbox);
 		borderPane.setCenter(setGraph());
 		Scene scene = new Scene(borderPane);
-		scrollwheel.setValue(limit/1000+100);
 		stage.setScene(scene);
 		stage.setTitle(sensorFileName);
 		stage.show();
@@ -115,6 +117,7 @@ public class SensorGraphGUI{
 		yAxis.setLabel("Value"); // enter via constructor
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");
+		
 		if (average) {
 			final Series<String, Number> series = new XYChart.Series<String, Number>();
 			
@@ -144,6 +147,7 @@ public class SensorGraphGUI{
 			});
 			avgData.clear();
 			lineChart.getData().add(series);
+			
 		}else {
 			AllUavData.forEach(Uavdata->{
 				final Series<String, Number> series = new XYChart.Series<String, Number>();
@@ -154,6 +158,17 @@ public class SensorGraphGUI{
 				lineChart.getData().add(series);
 			});
 		}
+		
+		lineChart.getData().forEach(series ->{
+			
+			series.getData().forEach(node ->{
+				final String info  = "Time: " +node.getXValue()+ "\nSensorValue: "+node.getYValue().doubleValue();
+				Tooltip.install(node.getNode(), new Tooltip(info));
+				node.getNode().setOnMouseClicked(click ->{
+					Pointderection.setText(info);
+				});
+			});
+		});
 		xAxis.autosize();
 		yAxis.autosize();
 		AllUavData.clear();
@@ -220,6 +235,11 @@ public class SensorGraphGUI{
 	public void setAdd(boolean add) {
 		this.add = add;
 	}
-	
+	public Label getPointderection() {
+		return Pointderection;
+	}
+	public void setPointderection(Label pointderection) {
+		Pointderection = pointderection;
+	}
 }
 

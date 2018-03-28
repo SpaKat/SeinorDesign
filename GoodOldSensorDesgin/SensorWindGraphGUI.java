@@ -61,7 +61,7 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 			Task<Void> task = new Task<Void>() {
 				@Override
 				protected Void call()  {
-					System.out.println(this.isRunning());
+					
 						setActionsPerlist(setSpeedSeries, data);
 					return null;
 				}

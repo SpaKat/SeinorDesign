@@ -112,6 +112,7 @@ public class SensorGraphGUI{
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
+		
 		xAxis.setLabel("Date");
 		xAxis.setLabel("Time");
 		yAxis.setLabel("Value"); // enter via constructor
@@ -160,7 +161,6 @@ public class SensorGraphGUI{
 		}
 		
 		lineChart.getData().forEach(series ->{
-			
 			series.getData().forEach(node ->{
 				final String info  = "Time: " +node.getXValue()+ "\nSensorValue: "+node.getYValue().doubleValue();
 				Tooltip.install(node.getNode(), new Tooltip(info));

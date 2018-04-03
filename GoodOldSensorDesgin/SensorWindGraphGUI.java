@@ -47,7 +47,9 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 			//lineChart.getData().addAll(setXseries(Uavdata,count),setYseries(Uavdata,count),setZseries(Uavdata,count));
 			Series<String, Number> speedChart = setSpeedSeries(Uavdata,count);
 			lineChart.getData().add(speedChart);
-			setActions(speedChart,Uavdata);
+			if (getLimit() > 5000) {
+				setActions(speedChart,Uavdata);
+			}
 			count++;
 		});
 		xAxis.autosize();
@@ -57,75 +59,85 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 		return lineChart;
 	}
 	private void setActions(Series<String, Number> setSpeedSeries, Set<DataPoints> uavdata) {
-		uavdata.forEach(data->{
-			Task<Void> task = new Task<Void>() {
-				@Override
-				protected Void call()  {
-					
-						setActionsPerlist(setSpeedSeries, data);
-					return null;
-				}
-			};
-			Thread th = new Thread(task);
-			th.setDaemon(true);
-			th.start();
-		});
-	}
-	protected void setActionsPerlist(Series<String, Number> setSpeedSeries, DataPoints data) {
-		setSpeedSeries.getData().forEach(node ->{
-			double speed = windSpeed( ((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ());
-			if(node.getYValue().doubleValue() == speed) {
 
-				double mag = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[0];
-				double angle = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[1];
-				angle = angle * 180 /Math.PI;
-				double testang = angle;
-				String heading = "";
-				if(((int) angle) % 360  >0 && ((int) angle) % 360  <180 && ((int) angle) % 360  != 90) {
-					heading = "N";
-					if (((int) angle) % 360 > 90) {
-						heading += "W";
-						angle =(180-angle+270);
-					}else {
-						heading += "E";
-						angle = 90 - angle;
+		Task<Void> task = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						uavdata.forEach(data->{
+							setActionsPerlist(setSpeedSeries, data);
+						});
 					}
-
-				}else if (((int) angle) % 360  >180 && ((int) angle) % 360  <360 && ((int) angle) % 360  != 270) {
-					heading = "S";
-					if (((int) angle) % 360 < 270) {
-						heading += "W";
-						angle = 270-angle;
-					}else {
-						heading += "E";
-						angle = (360 - angle + 90);
-					}
-				}else {
-					if (((int) angle) % 360  ==0 ) {
-						heading = "E";
-						angle = 90;
-					}
-					if (((int) angle) % 360  ==180) {
-						heading = "W";
-						angle = 270;
-					}
-					if(((int) angle) % 360  ==90) {
-						heading = "N";
-						angle = 0;
-					}
-					if (((int) angle) % 360  ==270) {
-						heading = "S";
-						angle = 180;
-					}
-				}
-				String info = "Time: " + node.getXValue()+"\nSpeed: " + speed +"m/s\nMagitude: "+mag + "\nHeading: "+ heading +"\nAngle: "+ angle; //+ "\ntestnag: " + testang;
-				Tooltip.install(node.getNode(), new Tooltip(info));
-				node.getNode().setOnMouseClicked(hold ->{
-					getPointderection().setText(info);
 				});
+				return null;
 			}
-		});
-		System.out.println("DONE ACTIONS");
+		};
+		Thread th = new Thread(task);
+		th.setDaemon(true);
+		th.start();
+
+	}
+
+	protected void setActionsPerlist(Series<String, Number> setSpeedSeries, DataPoints data) {
+		double speed = windSpeed( ((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ());
+		try {
+			setSpeedSeries.getData().forEach(node ->{
+				if(node.getYValue().doubleValue() == speed) {
+
+					double mag = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[0];
+					double angle = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[1];
+					angle = angle * 180 /Math.PI;
+					double testang = angle;
+					String heading = "";
+					if(((int) angle) % 360  >0 && ((int) angle) % 360  <180 && ((int) angle) % 360  != 90) {
+						heading = "N";
+						if (((int) angle) % 360 > 90) {
+							heading += "W";
+							angle =(180-angle+270);
+						}else {
+							heading += "E";
+							angle = 90 - angle;
+						}
+
+					}else if (((int) angle) % 360  >180 && ((int) angle) % 360  <360 && ((int) angle) % 360  != 270) {
+						heading = "S";
+						if (((int) angle) % 360 < 270) {
+							heading += "W";
+							angle = 270-angle;
+						}else {
+							heading += "E";
+							angle = (360 - angle + 90);
+						}
+					}else {
+						if (((int) angle) % 360  ==0 ) {
+							heading = "E";
+							angle = 90;
+						}
+						if (((int) angle) % 360  ==180) {
+							heading = "W";
+							angle = 270;
+						}
+						if(((int) angle) % 360  ==90) {
+							heading = "N";
+							angle = 0;
+						}
+						if (((int) angle) % 360  ==270) {
+							heading = "S";
+							angle = 180;
+						}
+					}
+					String info = "Time: " + node.getXValue()+"\nSpeed: " + String.format("%.3f", speed) +"m/s\nMagitude: "+ String.format("%.3f", mag) + "\nHeading: "+ heading +"\nAngle: "+ String.format("%.3f", angle); //+ "\ntestnag: " + testang;
+					Tooltip.install(node.getNode(), new Tooltip(info));
+					node.getNode().setOnMouseClicked(hold ->{
+						getPointderection().setText(info);
+					});
+				}
+			});
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	@Override
 	protected VBox ControlPanel(Slider scrollwheel) {

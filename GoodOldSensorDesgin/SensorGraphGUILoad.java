@@ -12,7 +12,7 @@ public class SensorGraphGUILoad extends Thread{
 	public SensorGraphGUILoad(String name,int UAVnum, int limit) {
 		this.setLimit(limit);
 		file = new File(MissionStats.missionID +"_"+UAVnum+"_" +name + "_DATA.csv");
-		System.out.println(file.getName());
+		//System.out.println(file.getName());
 		setTempTreeSet(new TreeSet<DataPoints>(new AverageTime(limit)));
 		this.start();
 	}
@@ -25,7 +25,7 @@ public class SensorGraphGUILoad extends Thread{
 	public void run() {
 		load();
 		getTempTreeSet().addAll(readin.getData());
-		System.out.println("DONE");
+		//System.out.println("DONE");
 	}
 	public void load(){
 		readin = new ReadInData(file);

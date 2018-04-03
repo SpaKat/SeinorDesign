@@ -26,6 +26,7 @@ public class SensorDataFormat {
 		sensorMap.put(Names.pressureMapname, new PressureSensorMap(sensorData,Names.pressure,intUAVNumber));
 		sensorMap.put(Names.windVectorMapname, new WindVectorSensorMap(sensorData, Names.windVector,intUAVNumber));
 		sensorMap.put(Names.mavlinkGlobalPositionMapName, new MavLinkgpsSensorMap(sensorData, Names.mavlinkGlobalPosition,intUAVNumber));
+		sensorMap.put(Names.mavlinkSystemStatusMapName, new MavLinkSystemStatusSensorMap(sensorData, Names.mavlinkSystemStatus,intUAVNumber));
 		startMapThreads();
 	}
 	public void endMaps(){

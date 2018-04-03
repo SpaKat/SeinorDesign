@@ -49,7 +49,7 @@ public class UAVtoMissionData extends MenuItem {
 		});
 		Button enter = new Button("Enter");
 		enter.setOnAction(e-> {
-			SaveMavLinkToUavMission saveMavlinkUav = new SaveMavLinkToUavMission(TheUAVMissions.getValue(),comLog,TheUAVnum.getValue().intValue());
+			new SaveMavLinkToUavMission(TheUAVMissions.getValue(),comLog,TheUAVnum.getValue().intValue());
 			stage.close();
 		});
 		vbox.getChildren().addAll(TheUAVMissions,TheUAVnum,enter);

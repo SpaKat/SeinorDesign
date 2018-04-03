@@ -112,6 +112,7 @@ public class SensorGraphGUI{
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
+		
 		xAxis.setLabel("Date");
 		xAxis.setLabel("Time");
 		yAxis.setLabel("Value"); // enter via constructor

@@ -112,6 +112,4 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 			stage.close();
 		});
 	}
-
-
 }

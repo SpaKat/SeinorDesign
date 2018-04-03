@@ -70,7 +70,7 @@ public class OfflineMapGUI extends BorderPane{
 		          @Override
 		          public void handle(MouseEvent e) {
 		            humidMap.setEffect(shadow);}});
-		    humidMap.addEventHandler(MouseEvent.MOUSE_EXITED,
+		    	humidMap.addEventHandler(MouseEvent.MOUSE_EXITED,
 		        new EventHandler<MouseEvent>() {
 		          @Override
 		          public void handle(MouseEvent e) {

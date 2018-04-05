@@ -42,20 +42,25 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		Button exit = new Button("Exit");
 		Button findcoms = new Button("Find COM Ports");
 		Label ErrorText = new Label("");
-		
+		Text askUAVmission = new Text("Enter the Uav Mission");
+		Text EnterUAVID = new Text("Enter the UAV ID of the select Mission");
+		Text askComport = new Text("Use Find COM Ports to quickly select the comport");
 		ErrorText.setTextFill(Color.RED);
 		stop.setDisable(true);
 		
 		gridpane.addRow(0, askCOMports);
 		gridpane.addRow(1, enterCOMports);
-		gridpane.addRow(2, TheUAVMissions);
-		gridpane.addRow(3, ComPorts);
-		gridpane.addRow(4, UAVID);
+		gridpane.addRow(2, askUAVmission);
+		gridpane.addRow(3, TheUAVMissions);
+		gridpane.addRow(4, askComport);
+		gridpane.addRow(5, ComPorts);
+		gridpane.addRow(6, EnterUAVID);
+		gridpane.addRow(7, UAVID);
 		
 		gridpane.addRow(1, start);
-		gridpane.addRow(2, stop);
-		gridpane.addRow(3, findcoms);
-		gridpane.addRow(4, exit);
+		gridpane.addRow(1, stop);
+		gridpane.addRow(5, findcoms);
+		gridpane.addRow(7, exit);
 		
 		gridpane.addRow(8, ErrorText);
 		sensorCom = new SensorCom();

@@ -21,6 +21,7 @@ public class Names {
 	public static final String mavlinkcommadsystemstatus = "mavlink_sys_status_t";
 	public static final String mavlinkSystemStatusMapName = "System Status";
 	public static final String mavlinkSystemStatus = "SS";
+	public static final String UAVGraph = "UAV Data";
 	
 	
 }

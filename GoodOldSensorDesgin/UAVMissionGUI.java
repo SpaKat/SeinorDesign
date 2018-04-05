@@ -41,6 +41,7 @@ public class UAVMissionGUI{
 		graphs.add(new SensorGraphGUI(Names.pressure,uavMission));
 		graphs.add(new SensorGraphGUI(Names.Humdity,uavMission));
 		graphs.add(new SensorWindGraphGUI(Names.windVector,uavMission));
+		graphs.add(new UavGraphGUI(Names.UAVGraph,uavMission));
 	}
 	private void readyGraphs() {
 		graphs.forEach(graph ->{

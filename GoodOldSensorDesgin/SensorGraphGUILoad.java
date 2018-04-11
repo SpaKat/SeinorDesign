@@ -19,7 +19,7 @@ public class SensorGraphGUILoad extends Thread{
 	
 	public SensorGraphGUILoad() {
 		// TODO Auto-generated constructor stub
-	}
+	} 
 
 	@Override
 	public void run() {

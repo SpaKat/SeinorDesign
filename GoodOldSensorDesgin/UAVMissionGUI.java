@@ -33,7 +33,6 @@ public class UAVMissionGUI{
 		.title(uavMission.getName());
 		System.out.println("\t" + uavMission.getName() );
 		marker = new Marker( markerOptions );
-
 	}
 
 	private void loadGraphs() {
@@ -41,7 +40,8 @@ public class UAVMissionGUI{
 		graphs.add(new SensorGraphGUI(Names.pressure,uavMission));
 		graphs.add(new SensorGraphGUI(Names.Humdity,uavMission));
 		graphs.add(new SensorWindGraphGUI(Names.windVector,uavMission));
-		graphs.add(new UavGraphGUI(Names.UAVGraph,uavMission));
+		graphs.add(new UavSystemGraphGUI(Names.mavlinkSystemStatus,uavMission));
+		graphs.add(new UavPostionGraphGUI(Names.mavlinkGlobalPosition,uavMission));
 	}
 	private void readyGraphs() {
 		graphs.forEach(graph ->{
@@ -58,7 +58,7 @@ public class UAVMissionGUI{
 		graphs.forEach(graph ->{
 			graph.show();
 		});
-	}
+	} 
 	public void showGraph(String graphName) {
 		graphs.forEach(graph ->{
 			if(graph.getSensorFileName() == graphName) {

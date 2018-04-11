@@ -3,7 +3,6 @@ public class DataPoints{
 	private String sensorID;
 	private String missionID;
 	private double sensordata;
-	private double elevation; 
 	private long time;
 	
 	public DataPoints(String missionID,String sensorID,double sensordata) {
@@ -15,6 +14,9 @@ public class DataPoints{
 		this.missionID = missionID;
 		this.sensorID = sensorID;
 	}
+	public DataPoints() {
+		
+	}
 	public String getSensorID() {
 		return sensorID;
 	}
@@ -24,9 +26,7 @@ public class DataPoints{
 	public double getSensordata() {
 		return sensordata;
 	}
-	public double getElevation() {
-		return elevation;
-	}
+
 	public long getTime() {
 		return time;
 	}
@@ -39,9 +39,7 @@ public class DataPoints{
 	public void setSensordata(double sensordata) {
 		this.sensordata = sensordata;
 	}
-	public void setElevation(double elevation) {
-		this.elevation = elevation;
-	}
+
 	public void setTime(long time) {
 		this.time = time;
 	}

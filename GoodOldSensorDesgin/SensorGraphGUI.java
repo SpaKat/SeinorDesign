@@ -63,7 +63,7 @@ public class SensorGraphGUI{
 		for (int i = 0; i < uavMission.getNumberUAVS(); i++) {
 			sensorFileLoad.add(new SensorGraphGUILoad(sensorFileName,i,limit));
 		}
-	}
+	} 
 	public void show() {
 		VBox vbox = new VBox();
 		borderPane = new BorderPane();
@@ -113,8 +113,7 @@ public class SensorGraphGUI{
 		NumberAxis yAxis = new NumberAxis();
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		
-		xAxis.setLabel("Date");
-		xAxis.setLabel("Time");
+		xAxis.setLabel("Date & Time");
 		yAxis.setLabel("Value"); // enter via constructor
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");

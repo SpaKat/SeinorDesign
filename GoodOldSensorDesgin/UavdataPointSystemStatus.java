@@ -18,6 +18,7 @@ public class UavdataPointSystemStatus extends UavDataPoint {
 	
 	public UavdataPointSystemStatus(String str,String split) {
 		String[] strArray = str.split(split);
+		DateInlong(strArray[0]);
 		onboard_control_sensors_present = Integer.parseInt(strArray[11]);
 		onboard_control_sensors_enabled= Integer.parseInt(strArray[13]);
 		onboard_control_sensors_health= Integer.parseInt(strArray[15]);
@@ -36,9 +37,71 @@ public class UavdataPointSystemStatus extends UavDataPoint {
 			
 		}
 	}
+	public UavdataPointSystemStatus(String str) {
+		String[] strArray = str.split(",");
+		
+		setTime(Long.parseLong((strArray[0])));
+		onboard_control_sensors_present = Integer.parseInt(strArray[1]);
+		onboard_control_sensors_enabled= Integer.parseInt(strArray[2]);
+		onboard_control_sensors_health= Integer.parseInt(strArray[3]);
+		load= Integer.parseInt(strArray[4]);
+		voltage_battery= Integer.parseInt(strArray[5]);
+		current_battery= Integer.parseInt(strArray[6]); 
+		drop_rate_comm= Integer.parseInt(strArray[7]);
+		errors_comm= Integer.parseInt(strArray[8]);
+		errors_count1 = Integer.parseInt(strArray[9]);
+		errors_count2 = Integer.parseInt(strArray[10]);
+		errors_count3 = Integer.parseInt(strArray[11]);
+		errors_count4 = Integer.parseInt(strArray[12]);
+		battery_remaining = Integer.parseInt(strArray[13]);
+		if (battery_remaining == 255) {
+			battery_remaining = -1;
+			
+		}
+	}
 	@Override
 	public String toString() {
-		return onboard_control_sensors_present+","+ onboard_control_sensors_enabled+","+ onboard_control_sensors_health + ","+ load +","+ voltage_battery 
+		return getTime() + "," + onboard_control_sensors_present+","+ onboard_control_sensors_enabled+","+ onboard_control_sensors_health + ","+ load +","+ voltage_battery 
 				+ ","+current_battery + ","+ drop_rate_comm+ ","+ errors_comm + ","+ errors_count1 +","+ errors_count2 +","+ errors_count3  +","+errors_count4 +","+ battery_remaining;
 	}
+	public int getOnboard_control_sensors_present() {
+		return onboard_control_sensors_present;
+	}
+	public int getOnboard_control_sensors_enabled() {
+		return onboard_control_sensors_enabled;
+	}
+	public int getOnboard_control_sensors_health() {
+		return onboard_control_sensors_health;
+	}
+	public int getLoad() {
+		return load;
+	}
+	public int getVoltage_battery() {
+		return voltage_battery;
+	}
+	public int getCurrent_battery() {
+		return current_battery;
+	}
+	public int getDrop_rate_comm() {
+		return drop_rate_comm;
+	}
+	public int getErrors_comm() {
+		return errors_comm;
+	}
+	public int getErrors_count1() {
+		return errors_count1;
+	}
+	public int getErrors_count2() {
+		return errors_count2;
+	}
+	public int getErrors_count3() {
+		return errors_count3;
+	}
+	public int getErrors_count4() {
+		return errors_count4;
+	}
+	public int getBattery_remaining() {
+		return battery_remaining;
+	}
+	
 }

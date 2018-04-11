@@ -30,7 +30,7 @@ public class OfflineMapGUI extends BorderPane{
 
 		DataLog.setFont(new Font("Times New Roman", 16));
 		DataLog.setStyle("-fx-fill: #FFFFFF; -fx-font-weight: bold");
-		GridPane.setConstraints(DataLog, 1, 7);
+		GridPane.setConstraints(DataLog, 1, 9);
 
 		Button tempMap = new Button("Temperature");
 		tempMap.setStyle("-fx-border-color:black; -fx-background-color: #202020; -fx-text-fill: #FF69B4");
@@ -48,8 +48,16 @@ public class OfflineMapGUI extends BorderPane{
 		humidMap.setStyle("-fx-border-color: black;-fx-background-color: #202020; -fx-text-fill: #B0C4DE");
 		humidMap.setFont(new Font("Arial", 14));
 		GridPane.setConstraints(humidMap, 1, 5);
-
-		tempMap.setText("Temperature"); presMap.setText("Pressure"); windMap.setText("Wind"); humidMap.setText("Humidity");
+		Button systemStat = new Button("System Status");
+		systemStat.setStyle("-fx-border-color: black;-fx-background-color: #202020; -fx-text-fill:#9370DB ");
+		systemStat.setFont(new Font("Arial", 14));
+		GridPane.setConstraints(systemStat, 1, 6);
+		Button globPos = new Button("Global Position");
+		globPos.setStyle("-fx-border-color: black;-fx-background-color: #202020; -fx-text-fill:#98FB98");
+		globPos.setFont(new Font("Arial", 14));
+		GridPane.setConstraints(globPos, 1, 7);
+		
+		globPos.setText("Global Position");systemStat.setText("System Status");tempMap.setText("Temperature"); presMap.setText("Pressure"); windMap.setText("Wind"); humidMap.setText("Humidity");
 
 		humidMap.addEventHandler(MouseEvent.MOUSE_ENTERED,
 				new EventHandler<MouseEvent>() {
@@ -93,6 +101,26 @@ public class OfflineMapGUI extends BorderPane{
 			@Override
 			public void handle(MouseEvent e) {
 				presMap.setEffect(null);}});
+		systemStat.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				systemStat.setEffect(shadow);}});
+		systemStat.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				systemStat.setEffect(null);}});
+		globPos.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				globPos.setEffect(shadow);}});
+		globPos.addEventHandler(MouseEvent.MOUSE_EXITED,
+				new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				globPos.setEffect(null);}});
 
 		tempMap.setOnAction(e ->{
 			missionGUI.showGraph(Names.temperture);});
@@ -102,8 +130,14 @@ public class OfflineMapGUI extends BorderPane{
 			missionGUI.showGraph(Names.windVector);});
 		presMap.setOnAction(e ->{
 			missionGUI.showGraph(Names.pressure);});
+		globPos.setOnAction(e ->{
+			missionGUI.showGraph(Names.mavlinkGlobalPosition);
+		});
+		systemStat.setOnAction(e ->{
+			missionGUI.showGraph(Names.mavlinkSystemStatus);
+		});
 
-		gridPane.getChildren().addAll( tempMap, presMap, windMap, humidMap, label, DataLog);
+		gridPane.getChildren().addAll(globPos, tempMap, presMap, windMap, humidMap, label, DataLog, systemStat);
 		setCenter(gridPane);
 		gridPane.setAlignment(Pos.CENTER);
 		gridPane.setHgap(10);
@@ -119,6 +153,8 @@ public class OfflineMapGUI extends BorderPane{
 		tempMap.setMaxWidth(Double.MAX_VALUE);
 		presMap.setMaxWidth(Double.MAX_VALUE);
 		windMap.setMaxWidth(Double.MAX_VALUE);
+		systemStat.setMaxWidth(Double.MAX_VALUE);
+		globPos.setMaxWidth(Double.MAX_VALUE);
 		gridPane.setPadding(new Insets(20, 20, 20, 20));
 
 		theCurrentMission.loadNewGPSLocation();

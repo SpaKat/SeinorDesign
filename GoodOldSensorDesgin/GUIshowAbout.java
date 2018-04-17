@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class GUIshowAbout extends Stage {
 
-	final String aboutText = "This program was written so we could do weather stuff and hopefully get a good grade";
+	final String aboutText = "This program is intended to serve as a ground station to UAV. Functionality includes saving UAV/sensor data, creating/opening/saving missions, connecting to Mavlink, and more. This program is property of the UAV Storm Chasers. ";
 
 	public GUIshowAbout() {
 			Label aboutLabel = new Label();		//create new label

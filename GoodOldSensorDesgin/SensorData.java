@@ -15,13 +15,11 @@ public class SensorData {
 	public synchronized Set<String> getData() {
 		return data;
 	}
-	public synchronized void remove(String string) {
-		data.remove(string);
-	}
 	public synchronized String remove() throws Exception{
 		String s = ((TreeSet<String>) data).first();
-		remove(s);
+		data.remove(s);
 		return s;
 	}
+	
 
 }

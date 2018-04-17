@@ -31,6 +31,7 @@ public class ReadInData {
 							Double.parseDouble(strarray[3])
 							);
 					dp.setTime(Math.abs(Long.parseLong(strarray[1])));
+					System.out.println(currentLine); 
 					data.add(dp);
 				}catch(Exception e){
 					//e.printStackTrace();

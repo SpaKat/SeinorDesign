@@ -28,6 +28,7 @@ public class SensorCommInterface implements EventHandler<ActionEvent> {
 		initGridPane();
 		Scene scene = new Scene(gridpane);
 		stage.setScene(scene);
+		stage.setTitle("Sensor Communication");
 		stage.show();
 	}
 	private ArrayList<UavMission> getAllMissions() {

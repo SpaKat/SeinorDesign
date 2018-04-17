@@ -4,8 +4,8 @@ import java.io.FileWriter;
 
 public class MavLinkSystemStatusSensorMap extends SensorMap {
 
-	public MavLinkSystemStatusSensorMap(SensorData sensorData, String mapName, int intUAVNumber) {
-		super(sensorData, mapName, intUAVNumber);
+	public MavLinkSystemStatusSensorMap(SensorData sensorData, String mapName, int intUAVNumber, SensorDataTime sensorDataTime) {
+		super(sensorData, mapName, intUAVNumber, sensorDataTime);
 		this.start();
 	}
 
@@ -24,8 +24,8 @@ public class MavLinkSystemStatusSensorMap extends SensorMap {
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += SensorDataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
-							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
+							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ getTime() + SensorDataFormat.SPLIT + str);
+							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ getTime() + SensorDataFormat.SPLIT + str);
 							bw.newLine();
 							bw.close();
 						} catch (Exception e) {

@@ -19,13 +19,13 @@ public class UavDataPoint extends DataPoints {
 		String[] time = day_time[1].split(":");
 		date.setHours(Integer.parseInt(time[0]));
 		date.setMinutes(Integer.parseInt(time[1]));
-			double secNmil = Double.parseDouble(time[2]);
-			int sec = (int) secNmil;
-			int mil =(int) ((secNmil-sec)*1000);
-		
+		double secNmil = Double.parseDouble(time[2]);
+		int sec = (int) secNmil;
+		int mil =(int) ((secNmil-sec)*1000);
+
 		date.setSeconds(sec);
 		setTime(date.getTime() + mil);
-		
+
 	}
-	
+
 }

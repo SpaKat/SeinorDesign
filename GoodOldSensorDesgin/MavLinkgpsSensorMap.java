@@ -3,8 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class MavLinkgpsSensorMap extends SensorMap {
-	public MavLinkgpsSensorMap(SensorData sensorData, String mavlinkglobalposition, int intUAVNumber) {
-		super(sensorData, mavlinkglobalposition,intUAVNumber);
+	public MavLinkgpsSensorMap(SensorData sensorData, String mavlinkglobalposition, int intUAVNumber, SensorDataTime time) {
+		super(sensorData, mavlinkglobalposition,intUAVNumber, time);
 		this.start();
 	}
 	@Override
@@ -22,8 +22,8 @@ public class MavLinkgpsSensorMap extends SensorMap {
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += SensorDataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
-							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
+							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ getTime() + SensorDataFormat.SPLIT + str);
+							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+getTime()+ SensorDataFormat.SPLIT + str);
 							bw.newLine();
 							bw.close();
 						} catch (Exception e) {

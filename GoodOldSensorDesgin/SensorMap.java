@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 //TEMP(ID),<Value>,(GPS)<long>,(GPS)<lat>
 public class SensorMap extends Thread{
 
@@ -6,16 +8,30 @@ public class SensorMap extends Thread{
 	private double GPSLong = -81.0228;
 	private int UAVNumber = 0;
 	private SensorData sensorData;
-	private long time = System.currentTimeMillis();
+	private SensorDataTime time;
 	private boolean running = true;
-
-	public SensorMap(SensorData sensorData, String mapName, int intUAVNumber) {
+	private ArrayList<Long> offSet = new ArrayList<>();
+	public SensorMap(SensorData sensorData, String mapName, int intUAVNumber,SensorDataTime time) {
 		this.sensorData = sensorData;
 		this.mapName = mapName; 
 		this.UAVNumber = intUAVNumber;
-		System.out.println("HELLO From : " +mapName );
+		this.time = time;
+		//this.time = StartTime;
+		//System.out.println("HELLO From : " +mapName );
 	}
-	
+	public long getTime() {
+		return time.getTime()+getOffSet();
+	}
+	public void addOffSet(long offSet) {
+		this.offSet.add(Long.valueOf(offSet));
+	}
+	public long getOffSet() {
+		try {
+			return offSet.remove(0);
+		}catch (Exception e) {
+			return 0;
+		}
+	}
 	public String getMapName() {
 		return mapName;
 	}
@@ -67,9 +83,7 @@ public class SensorMap extends Thread{
 	public synchronized SensorData getSensorData() {
 		return sensorData;
 	}
-	public long startTime() {
-		return time;
-	}
+	
 	@Override
 	public void interrupt() {
 		setRunning(false);

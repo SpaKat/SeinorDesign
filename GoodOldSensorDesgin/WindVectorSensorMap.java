@@ -4,8 +4,8 @@ import java.io.FileWriter;
 
 public class WindVectorSensorMap extends SensorMap {
 
-	public WindVectorSensorMap(SensorData sensorData, String name, int intUAVNumber) {
-		super(sensorData,name,intUAVNumber);
+	public WindVectorSensorMap(SensorData sensorData, String name, int intUAVNumber,SensorDataTime time) {
+		super(sensorData,name,intUAVNumber, time);
 		this.start();
 	}
 
@@ -15,7 +15,7 @@ public class WindVectorSensorMap extends SensorMap {
 	}
 	@Override
 	public void run() {
-		File fileData = new File(MissionStats.missionID  + "_" +getMapName() +"_DATA.csv");
+		File fileData = new File(MissionStats.missionID  +"_"+getUAVNumber()+ "_" +getMapName() +"_DATA.csv");
 		System.out.println(getMapName() + "=" + fileData.getName());
 		BufferedWriter bw = null;
 		while(isRunning()){	
@@ -23,14 +23,15 @@ public class WindVectorSensorMap extends SensorMap {
 				if (getSensorData().getData().size()>0) {
 					bw = new BufferedWriter(new FileWriter(fileData, true));
 					String string = getSensorData().remove();
+				//	System.out.println(string);
 					String[] strArray = string.split(SensorDataFormat.SPLIT);
-					if(strArray[0].toUpperCase().equals("WIND")){
+					if(strArray[0].toUpperCase().equals(Names.windVectorMapname)){
 						String str = strArray[0];
 						for (int i = 1; i < strArray.length; str += SensorDataFormat.SPLIT + strArray[i++]);
 						try {
-							bw.write(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
+							bw.write(getUAVNumber() + SensorDataFormat.SPLIT+ getTime() + SensorDataFormat.SPLIT + str);
 							bw.newLine();
-							System.out.println(MissionStats.missionID + SensorDataFormat.SPLIT+ getUAVNumber() + SensorDataFormat.SPLIT+ System.currentTimeMillis() + SensorDataFormat.SPLIT + str);
+							System.out.println(getUAVNumber() + SensorDataFormat.SPLIT+ getTime() + SensorDataFormat.SPLIT + str);
 							bw.close();
 						} catch (Exception e) {
 						//	e.printStackTrace();

@@ -40,7 +40,7 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 		CategoryAxis xAxis = new CategoryAxis();
 		NumberAxis yAxis = new NumberAxis();
 		xAxis.setLabel("Date");
-		yAxis.setLabel("Value"); 
+		yAxis.setLabel("Speed in m/s"); 
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		count = 0;
 		getAllUavData().forEach((Uavdata) -> {
@@ -52,6 +52,9 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 			}
 			count++;
 		});
+		xAxis.setStyle("-fx-font-size: 25");
+		yAxis.setStyle("-fx-font-size: 25");
+		xAxis.setTickLabelRotation(Math.PI);
 		xAxis.autosize();
 		yAxis.autosize();
 		getSensorFileLoad().clear();
@@ -89,7 +92,6 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 					double mag = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[0];
 					double angle = windDirection(((WindDataPoints) data).getX(), ((WindDataPoints) data).getY(), ((WindDataPoints) data).getZ())[1];
 					angle = angle * 180 /Math.PI;
-					double testang = angle;
 					String heading = "";
 					if(((int) angle) % 360  >0 && ((int) angle) % 360  <180 && ((int) angle) % 360  != 90) {
 						heading = "N";
@@ -149,6 +151,8 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 			makeSensorFileLoad();
 			ready();
 			getBorderPane().setCenter(setGraph());
+			
+			
 		});
 
 		control.getChildren().addAll(toggleAVG);
@@ -197,7 +201,7 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
     A = np.sqrt(2)*(np.abs(dp1) + np.abs(dp2) + np.abs(dp3))
     # A in m/s
     A = np.sqrt(2 * rho * A)*/
-		double rho = 1.2;
+		double rho = 966;
 		speed = Math.sqrt(2)*(Math.abs(x) + Math.abs(y) + Math.abs(z));
 		speed = Math.sqrt(2 * rho * speed);
 		return speed;
@@ -228,11 +232,12 @@ public class SensorWindGraphGUI extends SensorGraphGUI {
 		double g1 = s2/s1;
 		double g2 = 1/g1;
 		if(Math.abs(g1)< (3*b/2)) {
-			MagAngle[0] = 2*Math.sqrt(1-g1+g1*2);
-			MagAngle[1] = Math.PI/4+Math.atan((2*g1-1)/Math.sqrt(3)) - (Math.sin(s2)-1)*Math.PI/2;
+			
+			MagAngle[1] = Math.PI/4+Math.atan((2*g1-1)/Math.sqrt(3)) - (Math.sin(s1)-1)*Math.PI/2;
 		}else {
-			MagAngle[1] = Math.PI/2+Math.atan((2*g1-1)/Math.sqrt(3)) - (Math.sin(s2)-1)*Math.PI/2;
+			MagAngle[1] = Math.PI/2+Math.atan((2*g2-1)/Math.sqrt(3)) - (Math.sin(s2)-1)*Math.PI/2;
 		}
+		MagAngle[0] = 2*Math.sqrt(1-g1+Math.pow(g1,2));
 		return MagAngle;
 	}
 }

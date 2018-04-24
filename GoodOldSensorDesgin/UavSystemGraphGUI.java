@@ -57,7 +57,6 @@ public class UavSystemGraphGUI extends UavGraphGUI {
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		
 		xAxis.setLabel("Date & Time");
-		yAxis.setLabel("Value"); // enter via constructor
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");
 		AllUavData.forEach(Uavdata->{
@@ -67,7 +66,7 @@ public class UavSystemGraphGUI extends UavGraphGUI {
 			if (currentCheckButton.isSelected()) {
 					Current(lineChart, Uavdata);
 			}
-		
+		yAxis.setLabel("See Series for unit");
 			
 		});
 		lineChart.getData().forEach(series ->{
@@ -81,6 +80,8 @@ public class UavSystemGraphGUI extends UavGraphGUI {
 		});
 		xAxis.autosize();
 		yAxis.autosize();
+		xAxis.setStyle("-fx-font-size: 25");
+		yAxis.setStyle("-fx-font-size: 25");
 		AllUavData.clear();
 		getSensorFileLoad().clear();
 		return lineChart;

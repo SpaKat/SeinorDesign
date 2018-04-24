@@ -57,7 +57,7 @@ public class UavPostionGraphGUI extends SensorGraphGUI {
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 
 		xAxis.setLabel("Date & Time");
-		yAxis.setLabel("Value"); // enter via constructor
+		yAxis.setLabel("Position in Meters"); // enter via constructor
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");
 		AllUavData.forEach(Uavdata->{

@@ -83,6 +83,7 @@ public class SensorGraphGUI{
 		scrollwheel.setShowTickLabels(true);
 		scrollwheel.setMajorTickUnit(1);
 		scrollwheel.setBlockIncrement(1);
+		scrollwheel.setStyle("-fx-font-size: 25");
 		VBox control = ControlPanel(scrollwheel);
 		vbox.getChildren().addAll(scrollwheel,control,Pointderection);
 		
@@ -114,7 +115,15 @@ public class SensorGraphGUI{
 		LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis,yAxis);
 		
 		xAxis.setLabel("Date & Time");
-		yAxis.setLabel("Value"); // enter via constructor
+		if(sensorFileName == Names.pressure) {
+			yAxis.setLabel("Pressure in mBars");
+		}else if (sensorFileName == Names.Humdity) {
+			yAxis.setLabel("Humidity in %");
+		}else if(sensorFileName == Names.temperture) {
+			yAxis.setLabel("Temperture in C");
+		}else {
+			yAxis.setLabel("Value"); // enter via constructor
+		}
 		lineChart.setStyle("-fx-background-color:  transparent;-fx-text-fill: #4682b4;\r\n" + 
 				"  -fx-font-size: 14;");
 		
@@ -170,6 +179,8 @@ public class SensorGraphGUI{
 		});
 		xAxis.autosize();
 		yAxis.autosize();
+		xAxis.setStyle("-fx-font-size: 25");
+		yAxis.setStyle("-fx-font-size: 25");
 		AllUavData.clear();
 		sensorFileLoad.clear();
 		return lineChart;
